@@ -1,62 +1,110 @@
 "use client"
 
 import type React from "react"
-import { useState } from "react"
-import { Search, MapPin, Globe, CalendarDays, Users, DoorClosed } from "lucide-react"
+import { useEffect, useRef, useState } from "react"
+import { Search, MapPin, CalendarDays, Users, ChevronLeft, ChevronRight } from "lucide-react"
 
 const BASE_URL = "https://luxbnb.guestybookings.com/en/properties"
 
-// Countries we operate in.
-const COUNTRIES = ["United Arab Emirates"]
+// The company only operates in the UAE, so the country is always fixed.
+const COUNTRY = "United Arab Emirates"
 
 type FieldErrors = {
   city?: string
-  country?: string
-  checkIn?: string
-  checkOut?: string
+  dates?: string
   adults?: string
 }
 
-function todayISO() {
-  const now = new Date()
-  const tzOffset = now.getTimezoneOffset() * 60000
-  return new Date(now.getTime() - tzOffset).toISOString().slice(0, 10)
+function toISO(d: Date) {
+  const tzOffset = d.getTimezoneOffset() * 60000
+  return new Date(d.getTime() - tzOffset).toISOString().slice(0, 10)
+}
+
+function startOfDay(d: Date) {
+  return new Date(d.getFullYear(), d.getMonth(), d.getDate())
+}
+
+function sameDay(a: Date | null, b: Date | null) {
+  return !!a && !!b && a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate()
+}
+
+const MONTHS = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+]
+const WEEKDAYS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
+
+function formatDisplay(d: Date | null) {
+  if (!d) return null
+  return d.toLocaleDateString("en-US", { day: "numeric", month: "short" })
 }
 
 export function PropertySearch() {
   const [city, setCity] = useState("")
-  const [country, setCountry] = useState(COUNTRIES[0])
-  const [checkIn, setCheckIn] = useState("")
-  const [checkOut, setCheckOut] = useState("")
   const [adults, setAdults] = useState(1)
-  const [rooms, setRooms] = useState<string>("")
+  const [from, setFrom] = useState<Date | null>(null)
+  const [to, setTo] = useState<Date | null>(null)
   const [errors, setErrors] = useState<FieldErrors>({})
+  const [calendarOpen, setCalendarOpen] = useState(false)
 
-  const minDate = todayISO()
+  const today = startOfDay(new Date())
+  const [viewMonth, setViewMonth] = useState(new Date(today.getFullYear(), today.getMonth(), 1))
+
+  const calendarRef = useRef<HTMLDivElement>(null)
+
+  // Close the calendar when clicking outside of it.
+  useEffect(() => {
+    if (!calendarOpen) return
+    function onPointerDown(e: MouseEvent) {
+      if (calendarRef.current && !calendarRef.current.contains(e.target as Node)) {
+        setCalendarOpen(false)
+      }
+    }
+    document.addEventListener("mousedown", onPointerDown)
+    return () => document.removeEventListener("mousedown", onPointerDown)
+  }, [calendarOpen])
+
+  function handleDayClick(day: Date) {
+    if (!from || (from && to)) {
+      // Start a new range.
+      setFrom(day)
+      setTo(null)
+      return
+    }
+    // We have a "from" but no "to".
+    if (day <= from) {
+      setFrom(day)
+      return
+    }
+    setTo(day)
+    setErrors((prev) => ({ ...prev, dates: undefined }))
+  }
 
   function validate(): FieldErrors {
     const next: FieldErrors = {}
-
     if (!city.trim()) {
       next.city = "Please enter a destination city."
     }
-    if (!country.trim()) {
-      next.country = "Please select a country."
-    }
-    if (!checkIn) {
-      next.checkIn = "Select a check-in date."
-    } else if (checkIn < minDate) {
-      next.checkIn = "Check-in cannot be in the past."
-    }
-    if (!checkOut) {
-      next.checkOut = "Select a check-out date."
-    } else if (checkIn && checkOut <= checkIn) {
-      next.checkOut = "Check-out must be after check-in."
+    if (!from || !to) {
+      next.dates = "Select your stay dates."
+    } else if (from < today) {
+      next.dates = "Check-in cannot be in the past."
+    } else if (to <= from) {
+      next.dates = "Check-out must be after check-in."
     }
     if (!adults || adults < 1) {
       next.adults = "At least 1 adult is required."
     }
-
     return next
   }
 
@@ -69,27 +117,39 @@ export function PropertySearch() {
     // URLSearchParams handles encoding of spaces and non-Latin characters.
     const params = new URLSearchParams()
     params.set("city", city.trim())
-    params.set("country", country)
+    params.set("country", COUNTRY)
     params.set("minOccupancy", String(adults))
-    params.set("checkIn", checkIn)
-    params.set("checkOut", checkOut)
+    params.set("checkIn", toISO(from as Date))
+    params.set("checkOut", toISO(to as Date))
     params.set("adults", String(adults))
-
-    const roomsValue = rooms.trim()
-    if (roomsValue !== "") {
-      params.set("rooms", roomsValue)
-    }
 
     window.location.href = `${BASE_URL}?${params.toString()}`
   }
+
+  // Build the grid of days for the current view month.
+  const firstOfMonth = new Date(viewMonth.getFullYear(), viewMonth.getMonth(), 1)
+  const daysInMonth = new Date(viewMonth.getFullYear(), viewMonth.getMonth() + 1, 0).getDate()
+  const leadingBlanks = firstOfMonth.getDay()
+  const cells: (Date | null)[] = []
+  for (let i = 0; i < leadingBlanks; i++) cells.push(null)
+  for (let d = 1; d <= daysInMonth; d++) cells.push(new Date(viewMonth.getFullYear(), viewMonth.getMonth(), d))
+
+  const canGoPrev = viewMonth > new Date(today.getFullYear(), today.getMonth(), 1)
+
+  const dateLabel =
+    from && to
+      ? `${formatDisplay(from)} – ${formatDisplay(to)}`
+      : from
+        ? `${formatDisplay(from)} – …`
+        : "Add dates"
 
   return (
     <form
       onSubmit={handleSubmit}
       noValidate
-      className="mx-auto mt-12 max-w-4xl rounded-md border border-border/70 bg-card/80 p-3 text-left backdrop-blur-md"
+      className="mx-auto mt-12 max-w-3xl rounded-md border border-border/70 bg-card/80 p-3 text-left backdrop-blur-md"
     >
-      <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-[1.4fr_1.2fr_1fr_1fr_0.8fr_0.8fr_auto]">
+      <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-[1.4fr_1.2fr_0.9fr_auto]">
         <FieldShell icon={MapPin} label="Destination" error={errors.city}>
           <input
             type="text"
@@ -102,45 +162,113 @@ export function PropertySearch() {
           />
         </FieldShell>
 
-        <FieldShell icon={Globe} label="Country" error={errors.country}>
-          <select
-            value={country}
-            onChange={(e) => setCountry(e.target.value)}
-            aria-label="Country"
-            aria-invalid={!!errors.country}
-            className="w-full bg-transparent text-sm text-foreground focus:outline-none [&>option]:bg-card [&>option]:text-foreground"
+        <div className="relative flex flex-col" ref={calendarRef}>
+          <button
+            type="button"
+            onClick={() => setCalendarOpen((v) => !v)}
+            aria-haspopup="dialog"
+            aria-expanded={calendarOpen}
+            aria-invalid={!!errors.dates}
+            className={`flex items-center gap-3 rounded-sm px-4 py-3 text-left transition-colors ${
+              errors.dates ? "ring-1 ring-destructive" : "hover:bg-secondary/60"
+            }`}
           >
-            {COUNTRIES.map((c) => (
-              <option key={c} value={c}>
-                {c}
-              </option>
-            ))}
-          </select>
-        </FieldShell>
+            <CalendarDays className="size-5 shrink-0 text-gold" />
+            <div className="min-w-0 flex-1">
+              <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Dates</p>
+              <p className={`truncate text-sm ${from ? "text-foreground" : "text-muted-foreground/60"}`}>{dateLabel}</p>
+            </div>
+          </button>
 
-        <FieldShell icon={CalendarDays} label="Check-in" error={errors.checkIn}>
-          <input
-            type="date"
-            value={checkIn}
-            min={minDate}
-            onChange={(e) => setCheckIn(e.target.value)}
-            aria-label="Check-in date"
-            aria-invalid={!!errors.checkIn}
-            className="w-full bg-transparent text-sm text-foreground focus:outline-none [color-scheme:dark]"
-          />
-        </FieldShell>
+          {calendarOpen ? (
+            <div
+              role="dialog"
+              aria-label="Select stay dates"
+              className="absolute left-0 top-full z-30 mt-2 w-[19rem] rounded-md border border-border bg-popover p-4 shadow-2xl shadow-black/40"
+            >
+              <div className="mb-3 flex items-center justify-between">
+                <button
+                  type="button"
+                  onClick={() => setViewMonth(new Date(viewMonth.getFullYear(), viewMonth.getMonth() - 1, 1))}
+                  disabled={!canGoPrev}
+                  aria-label="Previous month"
+                  className="inline-flex size-8 items-center justify-center rounded-sm text-foreground transition-colors hover:bg-secondary disabled:cursor-not-allowed disabled:opacity-30"
+                >
+                  <ChevronLeft className="size-4" />
+                </button>
+                <p className="text-sm font-medium text-foreground">
+                  {MONTHS[viewMonth.getMonth()]} {viewMonth.getFullYear()}
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setViewMonth(new Date(viewMonth.getFullYear(), viewMonth.getMonth() + 1, 1))}
+                  aria-label="Next month"
+                  className="inline-flex size-8 items-center justify-center rounded-sm text-foreground transition-colors hover:bg-secondary"
+                >
+                  <ChevronRight className="size-4" />
+                </button>
+              </div>
 
-        <FieldShell icon={CalendarDays} label="Check-out" error={errors.checkOut}>
-          <input
-            type="date"
-            value={checkOut}
-            min={checkIn || minDate}
-            onChange={(e) => setCheckOut(e.target.value)}
-            aria-label="Check-out date"
-            aria-invalid={!!errors.checkOut}
-            className="w-full bg-transparent text-sm text-foreground focus:outline-none [color-scheme:dark]"
-          />
-        </FieldShell>
+              <div className="mb-1 grid grid-cols-7 gap-1">
+                {WEEKDAYS.map((w) => (
+                  <div key={w} className="text-center text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
+                    {w}
+                  </div>
+                ))}
+              </div>
+
+              <div className="grid grid-cols-7 gap-1">
+                {cells.map((day, i) => {
+                  if (!day) return <div key={`blank-${i}`} />
+                  const isPast = day < today
+                  const isFrom = sameDay(day, from)
+                  const isTo = sameDay(day, to)
+                  const inRange = from && to && day > from && day < to
+                  const isEndpoint = isFrom || isTo
+                  return (
+                    <button
+                      key={toISO(day)}
+                      type="button"
+                      disabled={isPast}
+                      onClick={() => handleDayClick(day)}
+                      aria-label={day.toDateString()}
+                      className={`inline-flex size-9 items-center justify-center rounded-sm text-sm transition-colors disabled:cursor-not-allowed disabled:text-muted-foreground/30 ${
+                        isEndpoint
+                          ? "bg-gold font-semibold text-gold-foreground"
+                          : inRange
+                            ? "bg-gold/20 text-foreground"
+                            : "text-foreground hover:bg-secondary"
+                      }`}
+                    >
+                      {day.getDate()}
+                    </button>
+                  )
+                })}
+              </div>
+
+              <div className="mt-3 flex items-center justify-between border-t border-border pt-3">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setFrom(null)
+                    setTo(null)
+                  }}
+                  className="text-xs text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  Clear
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setCalendarOpen(false)}
+                  disabled={!from || !to}
+                  className="rounded-sm bg-gold px-4 py-1.5 text-xs font-semibold text-gold-foreground transition-opacity hover:opacity-90 disabled:opacity-40"
+                >
+                  Done
+                </button>
+              </div>
+            </div>
+          ) : null}
+        </div>
 
         <FieldShell icon={Users} label="Adults" error={errors.adults}>
           <input
@@ -154,18 +282,6 @@ export function PropertySearch() {
           />
         </FieldShell>
 
-        <FieldShell icon={DoorClosed} label="Rooms">
-          <input
-            type="number"
-            min={1}
-            value={rooms}
-            onChange={(e) => setRooms(e.target.value)}
-            placeholder="Any"
-            aria-label="Number of rooms (optional)"
-            className="w-full bg-transparent text-sm text-foreground placeholder:text-muted-foreground/60 focus:outline-none"
-          />
-        </FieldShell>
-
         <button
           type="submit"
           className="inline-flex items-center justify-center gap-2 rounded-sm bg-gold px-6 py-4 text-sm font-semibold tracking-wide text-gold-foreground transition-opacity hover:opacity-90"
@@ -174,6 +290,12 @@ export function PropertySearch() {
           Search
         </button>
       </div>
+
+      {errors.dates ? (
+        <p role="alert" className="mt-1 px-4 text-[11px] leading-tight text-destructive">
+          {errors.dates}
+        </p>
+      ) : null}
     </form>
   )
 }
