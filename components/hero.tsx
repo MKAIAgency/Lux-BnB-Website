@@ -4,11 +4,16 @@ export function Hero() {
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden">
       <div className="absolute inset-0">
-        <img
-          src="/images/hero-dubai-skyline.jpeg"
-          alt="Dubai skyline at dusk featuring the Burj Khalifa and the Address Residences towers against a deep blue sky"
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          poster="/images/hero-dubai-skyline.jpeg"
           className="size-full object-cover"
-        />
+        >
+          <source src="/videos/hero-dubai.mp4" type="video/mp4" />
+        </video>
         <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/40 to-background" />
       </div>
 
