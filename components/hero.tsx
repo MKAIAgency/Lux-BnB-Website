@@ -5,8 +5,8 @@ export function Hero() {
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden">
       <div className="absolute inset-0">
         <img
-          src="/images/hero-villa.png"
-          alt="Luxury Dubai villa with an infinity pool overlooking the skyline at dusk"
+          src="/images/hero-dubai-skyline.jpeg"
+          alt="Dubai skyline at dusk featuring the Burj Khalifa and the Address Residences towers against a deep blue sky"
           className="size-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/40 to-background" />
