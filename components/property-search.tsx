@@ -2,12 +2,26 @@
 
 import type React from "react"
 import { useEffect, useRef, useState } from "react"
-import { Search, CalendarDays, Users, ChevronLeft, ChevronRight } from "lucide-react"
+import { Search, CalendarDays, Users, MapPin, ChevronLeft, ChevronRight, ChevronDown } from "lucide-react"
 
 const BASE_URL = "https://luxbnb.guestybookings.com/en/properties"
 
 // The company only operates in the UAE, so the country is always fixed.
 const COUNTRY = "United Arab Emirates"
+
+// Destinations the company operates in. Selecting one is optional; it simply
+// adds a `city` filter to the search.
+const DESTINATIONS = [
+  "Business Bay",
+  "Downtown",
+  "Dubai",
+  "Dubai Creek Harbour",
+  "Greens & Views",
+  "JBR",
+  "JVC",
+  "Palm Jumeirah",
+  "دبي",
+]
 
 type FieldErrors = {
   dates?: string
