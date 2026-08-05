@@ -2,7 +2,7 @@
 
 import type React from "react"
 import { useEffect, useRef, useState } from "react"
-import { Search, MapPin, CalendarDays, Users, ChevronLeft, ChevronRight } from "lucide-react"
+import { Search, CalendarDays, Users, ChevronLeft, ChevronRight } from "lucide-react"
 
 const BASE_URL = "https://luxbnb.guestybookings.com/en/properties"
 
@@ -10,7 +10,6 @@ const BASE_URL = "https://luxbnb.guestybookings.com/en/properties"
 const COUNTRY = "United Arab Emirates"
 
 type FieldErrors = {
-  city?: string
   dates?: string
   adults?: string
 }
@@ -50,7 +49,6 @@ function formatDisplay(d: Date | null) {
 }
 
 export function PropertySearch() {
-  const [city, setCity] = useState("")
   const [adults, setAdults] = useState(1)
   const [from, setFrom] = useState<Date | null>(null)
   const [to, setTo] = useState<Date | null>(null)
@@ -92,9 +90,6 @@ export function PropertySearch() {
 
   function validate(): FieldErrors {
     const next: FieldErrors = {}
-    if (!city.trim()) {
-      next.city = "Please enter a destination city."
-    }
     if (!from || !to) {
       next.dates = "Select your stay dates."
     } else if (from < today) {
@@ -116,7 +111,6 @@ export function PropertySearch() {
 
     // URLSearchParams handles encoding of spaces and non-Latin characters.
     const params = new URLSearchParams()
-    params.set("city", city.trim())
     params.set("country", COUNTRY)
     params.set("minOccupancy", String(adults))
     params.set("checkIn", toISO(from as Date))
@@ -149,19 +143,7 @@ export function PropertySearch() {
       noValidate
       className="mx-auto mt-12 max-w-3xl rounded-md border border-border/70 bg-card/80 p-3 text-left backdrop-blur-md"
     >
-      <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-[1.4fr_1.2fr_0.9fr_auto]">
-        <FieldShell icon={MapPin} label="Destination" error={errors.city}>
-          <input
-            type="text"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-            placeholder="Downtown Dubai"
-            aria-label="Destination city"
-            aria-invalid={!!errors.city}
-            className="w-full bg-transparent text-sm text-foreground placeholder:text-muted-foreground/60 focus:outline-none"
-          />
-        </FieldShell>
-
+      <div className="grid grid-cols-1 gap-2 md:grid-cols-[1.4fr_0.9fr_auto]">
         <div className="relative flex flex-col" ref={calendarRef}>
           <button
             type="button"
