@@ -1,4 +1,5 @@
 import { Star } from "lucide-react"
+import { Reveal } from "@/components/reveal"
 
 const testimonials = [
   {

@@ -26,7 +26,7 @@ export function Hero() {
           style={{ animationDelay: "0.15s" }}
         >
           Beautiful Homes for{" "}
-          <span className="text-gold">Inspired Vacations</span>
+          <span className="text-shimmer">Inspired Vacations</span>
         </h1>
         <p
           className="luxe-reveal mx-auto mt-6 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg"
@@ -41,6 +41,18 @@ export function Hero() {
           <PropertySearch />
         </div>
       </div>
+
+      <a
+        href="#residences"
+        aria-label="Scroll to residences"
+        className="luxe-reveal absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 text-muted-foreground transition-colors hover:text-gold"
+        style={{ animationDelay: "0.9s" }}
+      >
+        <span className="text-[10px] uppercase tracking-[0.3em]">Discover</span>
+        <span className="flex h-10 w-6 items-start justify-center rounded-full border border-current p-1.5">
+          <span className="size-1.5 animate-bounce rounded-full bg-current" />
+        </span>
+      </a>
     </section>
   )
 }
