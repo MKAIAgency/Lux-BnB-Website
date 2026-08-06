@@ -1,40 +1,32 @@
 import { BedDouble, Bath, Maximize, MapPin } from "lucide-react"
 import { getProperties, type Property } from "@/lib/store"
-import { Reveal } from "@/components/reveal"
-import { SpotlightCard } from "@/components/spotlight-card"
 
 export async function FeaturedProperties() {
   const properties = await getProperties()
 
   return (
-    <section id="residences" className="section-light">
-      <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
-        <div className="mb-14 flex flex-col items-end justify-between gap-6 md:flex-row">
-          <Reveal>
-            <p className="mb-4 text-xs uppercase tracking-[0.4em] text-gold">
-              The Collection
-            </p>
-            <h2 className="max-w-xl text-balance font-serif text-4xl font-medium leading-tight text-foreground sm:text-5xl">
-              Signature residences, handpicked for the discerning
-            </h2>
-          </Reveal>
-          <Reveal delay={150}>
-            <a
-              href="#contact"
-              className="shrink-0 border-b border-gold/50 pb-1 text-sm tracking-wide text-gold transition-colors hover:border-gold"
-            >
-              View all residences
-            </a>
-          </Reveal>
+    <section id="residences" className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
+      <div className="mb-14 flex flex-col items-end justify-between gap-6 md:flex-row">
+        <div>
+          <p className="mb-4 text-xs uppercase tracking-[0.4em] text-gold">
+            The Collection
+          </p>
+          <h2 className="max-w-xl text-balance font-serif text-4xl font-medium leading-tight text-foreground sm:text-5xl">
+            Signature residences, handpicked for the discerning
+          </h2>
         </div>
+        <a
+          href="#contact"
+          className="shrink-0 border-b border-gold/50 pb-1 text-sm tracking-wide text-gold transition-colors hover:border-gold"
+        >
+          View all residences
+        </a>
+      </div>
 
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {properties.map((property, i) => (
-            <Reveal key={property.id} variant="blur" delay={(i % 3) * 140}>
-              <PropertyCard property={property} />
-            </Reveal>
-          ))}
-        </div>
+      <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        {properties.map((property) => (
+          <PropertyCard key={property.id} property={property} />
+        ))}
       </div>
     </section>
   )
@@ -42,8 +34,7 @@ export async function FeaturedProperties() {
 
 function PropertyCard({ property }: { property: Property }) {
   return (
-    <SpotlightCard className="h-full">
-      <article className="relative z-10 h-full overflow-hidden rounded-md border border-border/60 bg-card transition-all duration-500 ease-luxe hover:border-gold/50 hover:shadow-[0_30px_60px_-25px_rgba(0,0,0,0.35)]">
+    <article className="group overflow-hidden rounded-md border border-border/60 bg-card transition-all duration-500 ease-luxe hover:-translate-y-1.5 hover:border-gold/50 hover:shadow-[0_24px_50px_-20px_rgba(0,0,0,0.6)]">
       <div className="relative aspect-[4/3] overflow-hidden">
         <img
           src={property.image || "/placeholder.svg"}
@@ -88,7 +79,6 @@ function PropertyCard({ property }: { property: Property }) {
           </a>
         </div>
       </div>
-      </article>
-    </SpotlightCard>
+    </article>
   )
 }
