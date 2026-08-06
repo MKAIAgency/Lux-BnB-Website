@@ -198,43 +198,60 @@ export function PropertySearch() {
           </button>
 
           {destOpen ? (
-            <ul
-              role="listbox"
-              aria-label="Select a destination"
-              className="absolute left-0 bottom-full z-30 mb-2 max-h-72 w-full min-w-[15rem] overflow-y-auto rounded-md border border-border bg-popover p-1.5 shadow-2xl shadow-black/40"
-            >
-              <li role="option" aria-selected={destination === ""}>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setDestination("")
-                    setDestOpen(false)
-                  }}
-                  className={`flex w-full items-center rounded-sm px-3 py-2 text-left text-sm transition-colors hover:bg-secondary ${
-                    destination === "" ? "text-gold" : "text-muted-foreground"
-                  }`}
-                >
-                  Anywhere in Dubai
-                </button>
-              </li>
-              {DESTINATIONS.map((d) => (
-                <li key={d} role="option" aria-selected={destination === d}>
+            <div className="absolute left-0 bottom-full z-30 mb-3 w-full min-w-[17rem] overflow-hidden rounded-lg border border-gold/25 bg-popover/95 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7),0_0_0_1px_rgba(0,0,0,0.2)] ring-1 ring-inset ring-white/5 backdrop-blur-xl">
+              <div className="border-b border-border/60 px-4 pb-2.5 pt-3">
+                <p className="font-serif text-sm italic text-gold">Choose your destination</p>
+              </div>
+              <ul
+                role="listbox"
+                aria-label="Select a destination"
+                className="max-h-64 overflow-y-auto p-2"
+              >
+                <li role="option" aria-selected={destination === ""}>
                   <button
                     type="button"
                     onClick={() => {
-                      setDestination(d)
+                      setDestination("")
                       setDestOpen(false)
                     }}
-                    className={`flex w-full flex-col rounded-sm px-3 py-2 text-left transition-colors hover:bg-secondary ${
-                      destination === d ? "bg-secondary/60" : ""
+                    className={`group flex w-full items-center gap-2.5 rounded-md px-3 py-2.5 text-left text-sm transition-colors hover:bg-gold/10 ${
+                      destination === "" ? "text-gold" : "text-muted-foreground"
                     }`}
                   >
-                    <span className={`text-sm ${destination === d ? "text-gold" : "text-foreground"}`}>{d}</span>
-                    <span className="text-[11px] text-muted-foreground">Dubai, United Arab Emirates</span>
+                    <MapPin className="size-4 shrink-0 opacity-60" />
+                    Anywhere in Dubai
                   </button>
                 </li>
-              ))}
-            </ul>
+                {DESTINATIONS.map((d) => (
+                  <li key={d} role="option" aria-selected={destination === d}>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setDestination(d)
+                        setDestOpen(false)
+                      }}
+                      className={`group flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-left transition-colors hover:bg-gold/10 ${
+                        destination === d ? "bg-gold/10" : ""
+                      }`}
+                    >
+                      <span
+                        className={`flex size-8 shrink-0 items-center justify-center rounded-full border transition-colors ${
+                          destination === d
+                            ? "border-gold/50 bg-gold/15 text-gold"
+                            : "border-border/70 text-muted-foreground group-hover:border-gold/40 group-hover:text-gold"
+                        }`}
+                      >
+                        <MapPin className="size-4" />
+                      </span>
+                      <span className="flex min-w-0 flex-col">
+                        <span className={`text-sm ${destination === d ? "text-gold" : "text-foreground"}`}>{d}</span>
+                        <span className="text-[11px] text-muted-foreground">Dubai, United Arab Emirates</span>
+                      </span>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
           ) : null}
         </div>
 
@@ -260,76 +277,85 @@ export function PropertySearch() {
             <div
               role="dialog"
               aria-label="Select stay dates"
-              className="absolute left-0 bottom-full z-30 mb-2 w-[19rem] rounded-md border border-border bg-popover p-4 shadow-2xl shadow-black/40"
+              className="absolute left-0 bottom-full z-30 mb-3 w-[20rem] overflow-hidden rounded-lg border border-gold/25 bg-popover/95 p-5 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7),0_0_0_1px_rgba(0,0,0,0.2)] ring-1 ring-inset ring-white/5 backdrop-blur-xl"
             >
-              <div className="mb-3 flex items-center justify-between">
+              <p className="mb-3 font-serif text-sm italic text-gold">Select your stay</p>
+              <div className="mb-4 flex items-center justify-between">
                 <button
                   type="button"
                   onClick={() => setViewMonth(new Date(viewMonth.getFullYear(), viewMonth.getMonth() - 1, 1))}
                   disabled={!canGoPrev}
                   aria-label="Previous month"
-                  className="inline-flex size-8 items-center justify-center rounded-sm text-foreground transition-colors hover:bg-secondary disabled:cursor-not-allowed disabled:opacity-30"
+                  className="inline-flex size-8 items-center justify-center rounded-full border border-border/70 text-foreground transition-colors hover:border-gold/40 hover:text-gold disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:border-border/70 disabled:hover:text-foreground"
                 >
                   <ChevronLeft className="size-4" />
                 </button>
-                <p className="text-sm font-medium text-foreground">
-                  {MONTHS[viewMonth.getMonth()]} {viewMonth.getFullYear()}
+                <p className="font-serif text-base text-foreground">
+                  {MONTHS[viewMonth.getMonth()]} <span className="text-gold">{viewMonth.getFullYear()}</span>
                 </p>
                 <button
                   type="button"
                   onClick={() => setViewMonth(new Date(viewMonth.getFullYear(), viewMonth.getMonth() + 1, 1))}
                   aria-label="Next month"
-                  className="inline-flex size-8 items-center justify-center rounded-sm text-foreground transition-colors hover:bg-secondary"
+                  className="inline-flex size-8 items-center justify-center rounded-full border border-border/70 text-foreground transition-colors hover:border-gold/40 hover:text-gold"
                 >
                   <ChevronRight className="size-4" />
                 </button>
               </div>
 
-              <div className="mb-1 grid grid-cols-7 gap-1">
+              <div className="mb-2 grid grid-cols-7 gap-1">
                 {WEEKDAYS.map((w) => (
-                  <div key={w} className="text-center text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
+                  <div key={w} className="text-center text-[10px] font-medium uppercase tracking-[0.15em] text-gold/60">
                     {w}
                   </div>
                 ))}
               </div>
 
-              <div className="grid grid-cols-7 gap-1">
+              <div className="grid grid-cols-7 gap-y-1">
                 {cells.map((day, i) => {
                   if (!day) return <div key={`blank-${i}`} />
                   const isPast = day < today
                   const isFrom = sameDay(day, from)
                   const isTo = sameDay(day, to)
-                  const inRange = from && to && day > from && day < to
+                  const inRange = !!(from && to && day > from && day < to)
                   const isEndpoint = isFrom || isTo
+                  // Connected range background: fill the cell edges so highlights join up.
+                  const rangeBg = isEndpoint || inRange
                   return (
-                    <button
+                    <div
                       key={toISO(day)}
-                      type="button"
-                      disabled={isPast}
-                      onClick={() => handleDayClick(day)}
-                      aria-label={day.toDateString()}
-                      className={`inline-flex size-9 items-center justify-center rounded-sm text-sm transition-colors disabled:cursor-not-allowed disabled:text-muted-foreground/30 ${
-                        isEndpoint
-                          ? "bg-gold font-semibold text-gold-foreground"
-                          : inRange
-                            ? "bg-gold/20 text-foreground"
-                            : "text-foreground hover:bg-secondary"
-                      }`}
+                      className={`relative flex items-center justify-center ${
+                        rangeBg ? "bg-gold/12" : ""
+                      } ${isFrom ? "rounded-l-full" : ""} ${isTo ? "rounded-r-full" : ""}`}
                     >
-                      {day.getDate()}
-                    </button>
+                      <button
+                        type="button"
+                        disabled={isPast}
+                        onClick={() => handleDayClick(day)}
+                        aria-label={day.toDateString()}
+                        className={`inline-flex size-9 items-center justify-center rounded-full text-sm transition-colors disabled:cursor-not-allowed disabled:text-muted-foreground/25 ${
+                          isEndpoint
+                            ? "bg-gold font-semibold text-gold-foreground shadow-[0_2px_10px_-2px_rgba(0,0,0,0.5)]"
+                            : inRange
+                              ? "text-gold"
+                              : "text-foreground hover:bg-gold/15 hover:text-gold"
+                        }`}
+                      >
+                        {day.getDate()}
+                      </button>
+                    </div>
                   )
                 })}
               </div>
 
-              <div className="mt-3 flex items-center justify-between border-t border-border pt-3">
+              <div className="mt-4 flex items-center justify-between border-t border-border/60 pt-4">
                 <button
                   type="button"
                   onClick={() => {
                     setFrom(null)
                     setTo(null)
                   }}
-                  className="text-xs text-muted-foreground transition-colors hover:text-foreground"
+                  className="text-xs uppercase tracking-[0.15em] text-muted-foreground transition-colors hover:text-foreground"
                 >
                   Clear
                 </button>
@@ -337,7 +363,7 @@ export function PropertySearch() {
                   type="button"
                   onClick={() => setCalendarOpen(false)}
                   disabled={!from || !to}
-                  className="rounded-sm bg-gold px-4 py-1.5 text-xs font-semibold text-gold-foreground transition-opacity hover:opacity-90 disabled:opacity-40"
+                  className="rounded-sm bg-gold px-5 py-2 text-xs font-semibold uppercase tracking-[0.15em] text-gold-foreground transition-opacity hover:opacity-90 disabled:opacity-40"
                 >
                   Done
                 </button>
