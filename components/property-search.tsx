@@ -174,7 +174,7 @@ export function PropertySearch() {
     <form
       onSubmit={handleSubmit}
       noValidate
-      className="mx-auto mt-12 max-w-3xl rounded-md border border-border/70 bg-card/80 p-3 text-left backdrop-blur-md"
+      className="mx-auto mt-8 max-w-3xl rounded-md border border-border/70 bg-card/80 p-3 text-left backdrop-blur-md"
     >
       <div className="grid grid-cols-1 gap-2 md:grid-cols-[1.3fr_1.3fr_0.8fr_auto]">
         <div className="relative flex flex-col" ref={destRef}>
@@ -277,10 +277,10 @@ export function PropertySearch() {
             <div
               role="dialog"
               aria-label="Select stay dates"
-              className="absolute left-0 top-full z-30 mt-3 w-[20rem] overflow-hidden rounded-lg border border-gold/25 bg-popover/95 p-5 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7),0_0_0_1px_rgba(0,0,0,0.2)] ring-1 ring-inset ring-white/5 backdrop-blur-xl"
+              className="absolute left-0 top-full z-30 mt-3 w-[20rem] overflow-hidden rounded-lg border border-gold/25 bg-popover/95 p-4 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7),0_0_0_1px_rgba(0,0,0,0.2)] ring-1 ring-inset ring-white/5 backdrop-blur-xl"
             >
-              <p className="mb-3 text-sm text-gold">Select your stay</p>
-              <div className="mb-4 flex items-center justify-between">
+              <p className="mb-2 text-sm text-gold">Select your stay</p>
+              <div className="mb-3 flex items-center justify-between">
                 <button
                   type="button"
                   onClick={() => setViewMonth(new Date(viewMonth.getFullYear(), viewMonth.getMonth() - 1, 1))}
@@ -333,7 +333,7 @@ export function PropertySearch() {
                         disabled={isPast}
                         onClick={() => handleDayClick(day)}
                         aria-label={day.toDateString()}
-                        className={`inline-flex size-9 items-center justify-center rounded-full text-sm transition-colors disabled:cursor-not-allowed disabled:text-muted-foreground/25 ${
+                        className={`inline-flex size-8 items-center justify-center rounded-full text-sm transition-colors disabled:cursor-not-allowed disabled:text-muted-foreground/25 ${
                           isEndpoint
                             ? "bg-gold font-semibold text-gold-foreground shadow-[0_2px_10px_-2px_rgba(0,0,0,0.5)]"
                             : inRange
@@ -348,7 +348,7 @@ export function PropertySearch() {
                 })}
               </div>
 
-              <div className="mt-4 flex items-center justify-between border-t border-border/60 pt-4">
+              <div className="mt-3 flex items-center justify-between border-t border-border/60 pt-3">
                 <button
                   type="button"
                   onClick={() => {
