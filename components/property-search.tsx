@@ -198,9 +198,9 @@ export function PropertySearch() {
           </button>
 
           {destOpen ? (
-            <div className="absolute left-0 bottom-full z-30 mb-3 w-full min-w-[17rem] overflow-hidden rounded-lg border border-gold/25 bg-popover/95 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7),0_0_0_1px_rgba(0,0,0,0.2)] ring-1 ring-inset ring-white/5 backdrop-blur-xl">
+            <div className="absolute left-0 top-full z-30 mt-3 w-full min-w-[17rem] overflow-hidden rounded-lg border border-gold/25 bg-popover/95 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7),0_0_0_1px_rgba(0,0,0,0.2)] ring-1 ring-inset ring-white/5 backdrop-blur-xl">
               <div className="border-b border-border/60 px-4 pb-2.5 pt-3">
-                <p className="font-serif text-sm italic text-gold">Choose your destination</p>
+                <p className="text-sm text-gold">Choose your destination</p>
               </div>
               <ul
                 role="listbox"
@@ -277,9 +277,9 @@ export function PropertySearch() {
             <div
               role="dialog"
               aria-label="Select stay dates"
-              className="absolute left-0 bottom-full z-30 mb-3 w-[20rem] overflow-hidden rounded-lg border border-gold/25 bg-popover/95 p-5 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7),0_0_0_1px_rgba(0,0,0,0.2)] ring-1 ring-inset ring-white/5 backdrop-blur-xl"
+              className="absolute left-0 top-full z-30 mt-3 w-[20rem] overflow-hidden rounded-lg border border-gold/25 bg-popover/95 p-5 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7),0_0_0_1px_rgba(0,0,0,0.2)] ring-1 ring-inset ring-white/5 backdrop-blur-xl"
             >
-              <p className="mb-3 font-serif text-sm italic text-gold">Select your stay</p>
+              <p className="mb-3 text-sm text-gold">Select your stay</p>
               <div className="mb-4 flex items-center justify-between">
                 <button
                   type="button"
