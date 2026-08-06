@@ -19,15 +19,16 @@ export function Hero() {
 
       <div className="relative z-10 mx-auto max-w-4xl px-6 pt-24 text-center">
         <p className="mb-6 text-xs uppercase tracking-[0.45em] text-gold">
-          Curated Private Residences
+          LUX BNB Vacation Homes
         </p>
         <h1 className="text-balance font-serif text-5xl font-medium leading-[1.05] text-foreground sm:text-6xl lg:text-7xl">
-          Live the Golden Standard of{" "}
-          <span className="text-gold">Dubai Living</span>
+          Beautiful Homes for{" "}
+          <span className="text-gold">Inspired Vacations</span>
         </h1>
         <p className="mx-auto mt-6 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">
-          An exclusive collection of villas, penthouses and sky residences,
-          each paired with bespoke concierge service for a flawless stay.
+          A handpicked collection of premium apartments and penthouses across
+          Dubai&apos;s most sought-after addresses, paired with attentive
+          guest service for a flawless stay.
         </p>
 
         <PropertySearch />

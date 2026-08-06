@@ -17,9 +17,9 @@ const cormorant = Cormorant_Garamond({
 })
 
 export const metadata: Metadata = {
-  title: 'Maison Doré | Luxury Vacation Homes in Dubai',
+  title: 'LUX BNB Vacation Homes | Luxury Holiday Rentals in Dubai',
   description:
-    'Discover an exclusive collection of Dubai\u2019s finest private villas, penthouses and sky residences. Bespoke stays with white-glove concierge service.',
+    'LUX BNB Vacation Homes \u2014 beautiful homes for inspired vacations. A curated collection of premium Dubai apartments and penthouses with attentive guest service.',
   generator: 'v0.app',
 }
 

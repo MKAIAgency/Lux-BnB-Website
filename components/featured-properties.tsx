@@ -1,83 +1,69 @@
-import { BedDouble, Bath, Users, MapPin, Star } from "lucide-react"
+import { BedDouble, Bath, Maximize, MapPin } from "lucide-react"
 
 type Property = {
   name: string
   location: string
   image: string
-  price: string
-  beds: number
-  baths: number
-  guests: number
-  rating: string
+  beds: string
+  baths: string
+  sqft: string
   tag: string
 }
 
 const properties: Property[] = [
   {
-    name: "Skyline Penthouse",
-    location: "Downtown Dubai",
-    image: "/images/property-penthouse.png",
-    price: "AED 12,500",
-    beds: 4,
-    baths: 5,
-    guests: 8,
-    rating: "4.98",
-    tag: "Burj Khalifa View",
-  },
-  {
-    name: "Palm Beach Villa",
-    location: "Palm Jumeirah",
+    name: "The Address",
+    location: "Jumeirah Beach Residences",
     image: "/images/property-beach-villa.png",
-    price: "AED 24,000",
-    beds: 6,
-    baths: 7,
-    guests: 12,
-    rating: "5.0",
-    tag: "Private Beach",
+    beds: "3.5",
+    baths: "4",
+    sqft: "2,000",
+    tag: "Palm & Sea Views",
   },
   {
-    name: "Marina Terrace Residence",
+    name: "Penthouse",
+    location: "Jumeirah Beach Residences",
+    image: "/images/property-skyvilla.png",
+    beds: "4",
+    baths: "4",
+    sqft: "6,000",
+    tag: "Private Pool · Ocean Views",
+  },
+  {
+    name: "Princess Tower",
     location: "Dubai Marina",
     image: "/images/property-marina.png",
-    price: "AED 9,800",
-    beds: 3,
-    baths: 4,
-    guests: 6,
-    rating: "4.95",
-    tag: "Rooftop Jacuzzi",
+    beds: "3",
+    baths: "3",
+    sqft: "2,100",
+    tag: "Ocean & Palm Views",
   },
   {
-    name: "Golden Dunes Retreat",
-    location: "Al Barari",
+    name: "Opera Grand",
+    location: "Dubai Opera · Downtown",
+    image: "/images/property-penthouse.png",
+    beds: "3.5",
+    baths: "4.5",
+    sqft: "2,000",
+    tag: "Burj Khalifa & Fountain Views",
+  },
+  {
+    name: "Anantara Residences",
+    location: "Palm Jumeirah",
     image: "/images/property-desert.png",
-    price: "AED 18,400",
-    beds: 5,
-    baths: 6,
-    guests: 10,
-    rating: "4.97",
-    tag: "Desert Escape",
+    beds: "1.5",
+    baths: "1.5",
+    sqft: "1,100",
+    tag: "Palm & Sea Views",
   },
   {
-    name: "The Gold Suite",
-    location: "Jumeirah",
+    name: "29 BLVD",
+    location: "Downtown",
     image: "/images/property-bedroom.png",
-    price: "AED 7,200",
-    beds: 2,
-    baths: 2,
-    guests: 4,
-    rating: "4.92",
-    tag: "Couples Favourite",
-  },
-  {
-    name: "Azure Sky Villa",
-    location: "Business Bay",
-    image: "/images/property-skyvilla.png",
-    price: "AED 15,600",
-    beds: 4,
-    baths: 4,
-    guests: 8,
-    rating: "4.99",
-    tag: "Infinity Pool",
+    beds: "1",
+    baths: "1",
+    sqft: "850",
+    tag: "Burj Khalifa Views",
   },
 ]
 
@@ -123,10 +109,6 @@ function PropertyCard({ property }: { property: Property }) {
         <span className="absolute left-4 top-4 rounded-sm bg-background/80 px-3 py-1 text-[11px] uppercase tracking-[0.15em] text-gold backdrop-blur-sm">
           {property.tag}
         </span>
-        <div className="absolute right-4 top-4 flex items-center gap-1 rounded-sm bg-background/80 px-2.5 py-1 text-xs text-foreground backdrop-blur-sm">
-          <Star className="size-3.5 fill-gold text-gold" />
-          {property.rating}
-        </div>
       </div>
 
       <div className="p-6">
@@ -140,26 +122,22 @@ function PropertyCard({ property }: { property: Property }) {
 
         <div className="mt-5 flex items-center gap-5 border-t border-border/60 pt-5 text-sm text-muted-foreground">
           <span className="flex items-center gap-1.5">
-            <BedDouble className="size-4 text-gold" /> {property.beds}
+            <BedDouble className="size-4 text-gold" /> {property.beds} Bed
           </span>
           <span className="flex items-center gap-1.5">
-            <Bath className="size-4 text-gold" /> {property.baths}
+            <Bath className="size-4 text-gold" /> {property.baths} Bath
           </span>
           <span className="flex items-center gap-1.5">
-            <Users className="size-4 text-gold" /> {property.guests}
+            <Maximize className="size-4 text-gold" /> {property.sqft} sq.ft.
           </span>
         </div>
 
-        <div className="mt-5 flex items-end justify-between">
-          <p className="text-foreground">
-            <span className="font-serif text-2xl text-gold">{property.price}</span>
-            <span className="text-sm text-muted-foreground"> / night</span>
-          </p>
+        <div className="mt-5 flex items-center justify-end">
           <a
             href="#contact"
             className="rounded-sm border border-border px-4 py-2 text-xs uppercase tracking-[0.15em] text-foreground transition-colors hover:border-gold hover:text-gold"
           >
-            Reserve
+            Enquire
           </a>
         </div>
       </div>

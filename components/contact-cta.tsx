@@ -1,4 +1,4 @@
-import { Phone, Mail } from "lucide-react"
+import { Phone, Mail, MapPin } from "lucide-react"
 
 export function ContactCta() {
   return (
@@ -29,17 +29,22 @@ export function ContactCta() {
 
             <div className="mt-10 space-y-4">
               <a
-                href="tel:+97140000000"
+                href="tel:+97143955536"
                 className="flex items-center gap-3 text-foreground transition-colors hover:text-gold"
               >
-                <Phone className="size-5 text-gold" /> +971 4 000 0000
+                <Phone className="size-5 text-gold" /> +971 4 395 5536
               </a>
               <a
-                href="mailto:stay@maisondore.ae"
+                href="mailto:guestrelations@luxtravels.com"
                 className="flex items-center gap-3 text-foreground transition-colors hover:text-gold"
               >
-                <Mail className="size-5 text-gold" /> stay@maisondore.ae
+                <Mail className="size-5 text-gold" /> guestrelations@luxtravels.com
               </a>
+              <p className="flex items-start gap-3 text-muted-foreground">
+                <MapPin className="mt-0.5 size-5 shrink-0 text-gold" />
+                Concord Tower, Unit 1405, Floor 14, Dubai Media City,
+                Dubai&nbsp;&ndash;&nbsp;450116, U.A.E.
+              </p>
             </div>
           </div>
 
