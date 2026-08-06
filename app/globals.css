@@ -129,4 +129,40 @@
   body {
     @apply bg-background text-foreground;
   }
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* A refined, slightly weighted easing curve used across the site for a
+   luxurious, unhurried feel. */
+@theme inline {
+  --ease-luxe: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Gentle upward reveal for hero copy and section entrances. */
+@keyframes luxe-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.luxe-reveal {
+  opacity: 0;
+  animation: luxe-fade-up 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .luxe-reveal {
+    opacity: 1;
+    animation: none;
+  }
 }
