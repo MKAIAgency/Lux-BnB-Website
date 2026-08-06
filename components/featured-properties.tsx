@@ -1,73 +1,9 @@
 import { BedDouble, Bath, Maximize, MapPin } from "lucide-react"
+import { getProperties, type Property } from "@/lib/store"
 
-type Property = {
-  name: string
-  location: string
-  image: string
-  beds: string
-  baths: string
-  sqft: string
-  tag: string
-}
+export async function FeaturedProperties() {
+  const properties = await getProperties()
 
-const properties: Property[] = [
-  {
-    name: "The Address",
-    location: "Jumeirah Beach Residences",
-    image: "/images/property-beach-villa.png",
-    beds: "3.5",
-    baths: "4",
-    sqft: "2,000",
-    tag: "Palm & Sea Views",
-  },
-  {
-    name: "Penthouse",
-    location: "Jumeirah Beach Residences",
-    image: "/images/property-skyvilla.png",
-    beds: "4",
-    baths: "4",
-    sqft: "6,000",
-    tag: "Private Pool · Ocean Views",
-  },
-  {
-    name: "Princess Tower",
-    location: "Dubai Marina",
-    image: "/images/property-marina.png",
-    beds: "3",
-    baths: "3",
-    sqft: "2,100",
-    tag: "Ocean & Palm Views",
-  },
-  {
-    name: "Opera Grand",
-    location: "Dubai Opera · Downtown",
-    image: "/images/property-penthouse.png",
-    beds: "3.5",
-    baths: "4.5",
-    sqft: "2,000",
-    tag: "Burj Khalifa & Fountain Views",
-  },
-  {
-    name: "Anantara Residences",
-    location: "Palm Jumeirah",
-    image: "/images/property-desert.png",
-    beds: "1.5",
-    baths: "1.5",
-    sqft: "1,100",
-    tag: "Palm & Sea Views",
-  },
-  {
-    name: "29 BLVD",
-    location: "Downtown",
-    image: "/images/property-bedroom.png",
-    beds: "1",
-    baths: "1",
-    sqft: "850",
-    tag: "Burj Khalifa Views",
-  },
-]
-
-export function FeaturedProperties() {
   return (
     <section id="residences" className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
       <div className="mb-14 flex flex-col items-end justify-between gap-6 md:flex-row">
@@ -89,7 +25,7 @@ export function FeaturedProperties() {
 
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {properties.map((property) => (
-          <PropertyCard key={property.name} property={property} />
+          <PropertyCard key={property.id} property={property} />
         ))}
       </div>
     </section>
@@ -134,7 +70,9 @@ function PropertyCard({ property }: { property: Property }) {
 
         <div className="mt-5 flex items-center justify-end">
           <a
-            href="#contact"
+            href={property.enquireLink || "#contact"}
+            target={property.enquireLink ? "_blank" : undefined}
+            rel={property.enquireLink ? "noreferrer" : undefined}
             className="rounded-sm border border-border px-4 py-2 text-xs uppercase tracking-[0.15em] text-foreground transition-colors hover:border-gold hover:text-gold"
           >
             Enquire
