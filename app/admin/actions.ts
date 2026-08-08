@@ -6,6 +6,7 @@ import {
   createProperty,
   updateProperty,
   deleteProperty,
+  saveSlideshow,
   verifyPassword,
   changePassword,
   type PropertyInput,
@@ -75,6 +76,14 @@ export async function deletePropertyAction(formData: FormData): Promise<void> {
     revalidatePath("/admin")
     revalidatePath("/")
   }
+}
+
+export async function saveSlideshowAction(formData: FormData): Promise<void> {
+  if (!(await isAuthenticated())) return
+  const ids = formData.getAll("propertyId").map(String).filter(Boolean)
+  await saveSlideshow(ids)
+  revalidatePath("/admin")
+  revalidatePath("/")
 }
 
 export async function changePasswordAction(

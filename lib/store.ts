@@ -48,6 +48,36 @@ export async function getProperties(): Promise<Property[]> {
   return rows.map(toProperty)
 }
 
+const SLIDESHOW_SETTING = "slideshow_property_ids"
+
+export async function getSlideshowProperties(): Promise<Property[]> {
+  const properties = await getProperties()
+  const configured = await getSetting(SLIDESHOW_SETTING)
+  if (!configured) return properties
+
+  try {
+    const ids = JSON.parse(configured) as string[]
+    const byId = new Map(properties.map((property) => [property.id, property]))
+    return ids.map((id) => byId.get(id)).filter((property): property is Property => Boolean(property))
+  } catch {
+    return properties
+  }
+}
+
+export async function saveSlideshow(ids: string[]): Promise<void> {
+  await setSetting(SLIDESHOW_SETTING, JSON.stringify(ids))
+}
+
+export async function getSlideshowIds(): Promise<string[]> {
+  const configured = await getSetting(SLIDESHOW_SETTING)
+  if (!configured) return (await getProperties()).map((property) => property.id)
+  try {
+    return JSON.parse(configured) as string[]
+  } catch {
+    return []
+  }
+}
+
 export async function getProperty(id: string): Promise<Property | undefined> {
   const rows = await db.select().from(luxProperties).where(eq(luxProperties.id, id)).limit(1)
   return rows[0] ? toProperty(rows[0]) : undefined
