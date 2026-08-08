@@ -17,7 +17,7 @@ export function Hero() {
         <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/40 to-background" />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-4xl px-6 pt-32 text-center sm:pt-36 lg:pt-40">
+      <div className="relative z-10 mx-auto max-w-4xl px-6 pt-44 text-center sm:pt-48 lg:pt-56">
         <p className="luxe-reveal mb-6 text-xs uppercase tracking-[0.45em] text-gold">
           LUX BNB Vacation Homes
         </p>
