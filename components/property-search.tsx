@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react"
 import { Search, CalendarDays, Users, MapPin, ChevronLeft, ChevronRight, ChevronDown } from "lucide-react"
 
 const BASE_URL = "https://luxbnb.guestybookings.com/en/properties"
+const MIN_NIGHTS = 3
 
 // The company only operates in the UAE, so the country is always fixed.
 const COUNTRY = "United Arab Emirates"
@@ -125,6 +126,11 @@ export function PropertySearch() {
       next.dates = "Check-in cannot be in the past."
     } else if (to <= from) {
       next.dates = "Check-out must be after check-in."
+    } else {
+      const nights = Math.round((to.getTime() - from.getTime()) / 86400000)
+      if (nights < MIN_NIGHTS) {
+        next.dates = `A minimum stay of ${MIN_NIGHTS} nights is required.`
+      }
     }
     if (!adults || adults < 1) {
       next.adults = "At least 1 adult is required."
@@ -268,7 +274,7 @@ export function PropertySearch() {
           >
             <CalendarDays className="size-5 shrink-0 text-gold" />
             <div className="min-w-0 flex-1">
-              <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Dates</p>
+              <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Dates · 3 night minimum</p>
               <p className={`truncate text-sm ${from ? "text-foreground" : "text-muted-foreground/60"}`}>{dateLabel}</p>
             </div>
           </button>

@@ -3,6 +3,8 @@
 import { useState } from "react"
 import { Menu, X } from "lucide-react"
 
+const BOOKING_URL = "https://luxbnb.guestybookings.com/en/properties?minOccupancy=1&adults=1"
+
 const navLinks = [
   { label: "Residences", href: "#residences" },
   { label: "Experiences", href: "#experiences" },
@@ -38,7 +40,9 @@ export function SiteHeader() {
         </nav>
 
         <a
-          href="#contact"
+          href={BOOKING_URL}
+          target="_blank"
+          rel="noreferrer"
           className="hidden rounded-sm border border-gold/60 px-6 py-2.5 text-sm font-medium tracking-wide text-gold transition-colors hover:bg-gold hover:text-gold-foreground md:inline-flex"
         >
           Book a Stay
@@ -69,7 +73,9 @@ export function SiteHeader() {
               </a>
             ))}
             <a
-              href="#contact"
+              href={BOOKING_URL}
+              target="_blank"
+              rel="noreferrer"
               onClick={() => setOpen(false)}
               className="mt-2 inline-flex justify-center rounded-sm border border-gold/60 px-6 py-3 text-sm font-medium tracking-wide text-gold"
             >
