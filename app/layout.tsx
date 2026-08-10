@@ -21,6 +21,11 @@ export const metadata: Metadata = {
   description:
     'LUX BNB Vacation Homes \u2014 beautiful homes for inspired vacations. A curated collection of premium Dubai apartments and penthouses with attentive guest service.',
   generator: 'v0.app',
+  icons: {
+    icon: '/luxbnb.png',
+    shortcut: '/luxbnb.png',
+    apple: '/luxbnb.png',
+  },
 }
 
 export const viewport: Viewport = {
