@@ -25,12 +25,12 @@ export async function loginAction(
     return { error: "Incorrect password. Please try again." }
   }
   await createSession()
-  redirect("/admin")
+  redirect("/luxbnb/admin")
 }
 
 export async function logoutAction(): Promise<void> {
   await destroySession()
-  redirect("/admin/login")
+  redirect("/luxbnb/admin/login")
 }
 
 function parseProperty(formData: FormData): PropertyInput {

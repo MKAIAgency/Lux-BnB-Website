@@ -13,7 +13,7 @@ export const metadata = {
 
 export default async function AdminPage() {
   if (!(await isAuthenticated())) {
-    redirect("/admin/login")
+    redirect("/luxbnb/admin/login")
   }
   const properties = await getProperties()
   const slideshowIds = await getSlideshowIds()

@@ -9,7 +9,7 @@ export const metadata = {
 
 export default async function LoginPage() {
   if (await isAuthenticated()) {
-    redirect("/admin")
+    redirect("/luxbnb/admin")
   }
   return (
     <main className="flex min-h-screen items-center justify-center bg-background px-6">
