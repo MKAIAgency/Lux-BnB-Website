@@ -12,7 +12,7 @@ export function PropertySlideshow({ slides }: { slides: Property[] }) {
     if (paused || slides.length < 2) return
     const timer = window.setInterval(() => {
       setActive((current) => (current + 1) % slides.length)
-    }, 4000)
+    }, 2500)
     return () => window.clearInterval(timer)
   }, [paused, slides.length])
 
