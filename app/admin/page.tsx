@@ -32,7 +32,7 @@ export default async function AdminPage() {
           </div>
           <div className="flex items-center gap-4">
             <a
-              href="/"
+              href="/luxbnb/"
               target="_blank"
               rel="noreferrer"
               className="text-xs uppercase tracking-[0.15em] text-muted-foreground transition-colors hover:text-foreground"

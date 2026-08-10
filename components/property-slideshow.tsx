@@ -40,7 +40,7 @@ export function PropertySlideshow({ slides }: { slides: Property[] }) {
         <div className="relative overflow-hidden rounded-md border border-border/70 bg-card">
           <div className="grid min-h-[28rem] grid-cols-1 lg:grid-cols-[1.25fr_0.75fr]">
             <div className="relative min-h-[20rem] overflow-hidden lg:min-h-[30rem]">
-              {slides.map((slide, index) => <img key={slide.id} src={slide.image || "/placeholder.svg"} alt={`${slide.name} in ${slide.location}`} className={`absolute inset-0 size-full object-cover transition-all duration-1000 ease-luxe ${index === active ? "scale-100 opacity-100" : "scale-105 opacity-0"}`} />)}
+              {slides.map((slide, index) => <img key={slide.id} src={slide.image?.startsWith("/") ? `/luxbnb${slide.image}` : slide.image || "/luxbnb/placeholder.svg"} alt={`${slide.name} in ${slide.location}`} className={`absolute inset-0 size-full object-cover transition-all duration-1000 ease-luxe ${index === active ? "scale-100 opacity-100" : "scale-105 opacity-0"}`} />)}
               <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:via-transparent lg:to-background" />
             </div>
             <div className="flex flex-col justify-between p-7 sm:p-10 lg:p-12">

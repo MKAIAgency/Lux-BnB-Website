@@ -45,7 +45,7 @@ export function SlideshowManager({ properties, selectedIds }: { properties: Prop
           <div className="overflow-hidden rounded-lg border border-border/60">
             {selectedProperties.length ? selectedProperties.map((property, index) => (
               <div key={property.id} className="flex items-center gap-3 border-b border-border/60 p-3 last:border-0">
-                <img src={property.image || "/placeholder.svg"} alt="" className="size-14 rounded-sm object-cover" />
+                <img src={property.image?.startsWith("/") ? `/luxbnb${property.image}` : property.image || "/luxbnb/placeholder.svg"} alt="" className="size-14 rounded-sm object-cover" />
                 <div className="min-w-0 flex-1"><p className="truncate font-serif text-base text-foreground">{property.name}</p><p className="truncate text-xs text-muted-foreground">{property.location}</p></div>
                 <button type="button" onClick={() => move(property.id, -1)} disabled={index === 0} aria-label={`Move ${property.name} up`} className="rounded-sm border border-border p-2 text-muted-foreground transition-colors hover:border-gold hover:text-gold disabled:opacity-30"><ArrowUp className="size-3.5" /></button>
                 <button type="button" onClick={() => move(property.id, 1)} disabled={index === selectedProperties.length - 1} aria-label={`Move ${property.name} down`} className="rounded-sm border border-border p-2 text-muted-foreground transition-colors hover:border-gold hover:text-gold disabled:opacity-30"><ArrowDown className="size-3.5" /></button>
