@@ -18,13 +18,12 @@ export function SiteHeader() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-background/70 backdrop-blur-md">
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-10">
-        <a href="#" className="flex flex-col leading-none">
-          <span className="font-serif text-2xl font-semibold tracking-wide text-foreground">
-            LUX <span className="text-gold">BNB</span>
-          </span>
-          <span className="text-[10px] uppercase tracking-[0.35em] text-muted-foreground">
-            Vacation Homes
-          </span>
+        <a href="#" className="flex items-center" aria-label="Luxbnb home">
+          <img
+            src="/luxbnb/luxbnb-wordmark.png"
+            alt="Luxbnb — Beautiful Homes for Inspired Vacations"
+            className="h-12 w-auto max-w-[220px] object-contain"
+          />
         </a>
 
         <nav className="hidden items-center gap-10 md:flex">
