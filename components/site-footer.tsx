@@ -4,7 +4,7 @@ const footerLinks = [
     links: [
       { label: "Residences", href: "#residences" },
       { label: "Experiences", href: "#experiences" },
-      { label: "Concierge", href: "#concierge" },
+      { label: "About Us", href: "#about" },
       { label: "Contact", href: "#contact" },
     ],
   },

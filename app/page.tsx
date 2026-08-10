@@ -4,7 +4,7 @@ import { FeaturedProperties } from "@/components/featured-properties"
 import { PropertySlideshow } from "@/components/property-slideshow"
 import { getSlideshowProperties } from "@/lib/store"
 import { Experiences } from "@/components/experiences"
-import { Concierge } from "@/components/concierge"
+import { About } from "@/components/about"
 import { Testimonials } from "@/components/testimonials"
 import { ContactCta } from "@/components/contact-cta"
 import { SiteFooter } from "@/components/site-footer"
@@ -20,7 +20,7 @@ export default async function Page() {
         <PropertySlideshow slides={slideshowProperties} />
         <FeaturedProperties />
         <Experiences />
-        <Concierge />
+        <About />
         <Testimonials />
         <ContactCta />
       </main>

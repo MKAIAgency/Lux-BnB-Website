@@ -8,7 +8,7 @@ const BOOKING_URL = "https://luxbnb.guestybookings.com/en/properties?minOccupanc
 const navLinks = [
   { label: "Residences", href: "#residences" },
   { label: "Experiences", href: "#experiences" },
-  { label: "Concierge", href: "#concierge" },
+  { label: "About Us", href: "#about" },
   { label: "Contact", href: "#contact" },
 ]
 
