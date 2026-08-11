@@ -30,7 +30,7 @@ export function PropertySlideshow({ slides }: { slides: Property[] }) {
   const current = slides[safeActive]
 
   return (
-    <section aria-label="Featured residences" className="border-b border-border/60 bg-background px-6 py-16 lg:px-10 lg:py-24" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
+    <section aria-label="Featured residences" className="border-b border-border/60 bg-background px-6 py-16 lg:px-10 lg:py-24">
       <div className="mx-auto max-w-7xl">
         <div className="mb-8 flex items-end justify-between gap-6">
           <div>
