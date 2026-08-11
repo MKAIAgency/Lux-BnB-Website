@@ -14,8 +14,9 @@ export default async function Page() {
 
   return (
     <>
+      <a href="#main-content" className="skip-link">Skip to main content</a>
       <SiteHeader />
-      <main>
+      <main id="main-content" tabIndex={-1}>
         <Hero />
         <PropertySlideshow slides={slideshowProperties} />
         <FeaturedProperties />

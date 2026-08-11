@@ -10,7 +10,7 @@ export function Hero() {
           muted
           playsInline
           poster="/luxbnb/images/hero-dubai-skyline.jpeg"
-          className="size-full object-cover"
+          className="hero-video size-full object-cover"
         >
           <source src="/luxbnb/videos/hero-dubai.mp4" type="video/mp4" />
         </video>
@@ -25,7 +25,7 @@ export function Hero() {
           className="luxe-reveal text-balance font-serif text-5xl font-medium leading-[1.05] text-foreground sm:text-6xl lg:text-7xl"
           style={{ animationDelay: "0.15s" }}
         >
-          Beautiful Homes for{" "}
+          {"Beautiful Homes for "}
           <span className="text-gold">Inspired Vacations</span>
         </h1>
         <p

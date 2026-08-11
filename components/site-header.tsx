@@ -26,7 +26,7 @@ export function SiteHeader() {
           />
         </a>
 
-        <nav className="hidden items-center gap-10 md:flex">
+        <nav aria-label="Primary navigation" className="hidden items-center gap-10 md:flex">
           {navLinks.map((link) => (
             <a
               key={link.href}
@@ -53,13 +53,14 @@ export function SiteHeader() {
           className="text-foreground md:hidden"
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
+          aria-controls="mobile-navigation"
         >
           {open ? <X className="size-6" /> : <Menu className="size-6" />}
         </button>
       </div>
 
       {open && (
-        <div className="border-t border-border/60 bg-background/95 px-6 py-6 md:hidden">
+        <div id="mobile-navigation" className="border-t border-border/60 bg-background/95 px-6 py-6 md:hidden">
           <nav className="flex flex-col gap-5">
             {navLinks.map((link) => (
               <a

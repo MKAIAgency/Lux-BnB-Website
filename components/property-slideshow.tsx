@@ -1,20 +1,29 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react"
+import { ArrowUpRight, ChevronLeft, ChevronRight, Pause, Play } from "lucide-react"
 import type { Property } from "@/lib/store"
 
 export function PropertySlideshow({ slides }: { slides: Property[] }) {
   const [active, setActive] = useState(0)
   const [paused, setPaused] = useState(false)
+  const [reducedMotion, setReducedMotion] = useState(false)
 
   useEffect(() => {
-    if (paused || slides.length < 2) return
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
+    const update = () => setReducedMotion(mediaQuery.matches)
+    update()
+    mediaQuery.addEventListener("change", update)
+    return () => mediaQuery.removeEventListener("change", update)
+  }, [])
+
+  useEffect(() => {
+    if (paused || reducedMotion || slides.length < 2) return
     const timer = window.setInterval(() => {
       setActive((current) => (current + 1) % slides.length)
     }, 2500)
     return () => window.clearInterval(timer)
-  }, [paused, slides.length])
+  }, [paused, reducedMotion, slides.length])
 
   if (!slides.length) return null
   const safeActive = active % slides.length
@@ -28,7 +37,10 @@ export function PropertySlideshow({ slides }: { slides: Property[] }) {
             <p className="mb-3 text-xs uppercase tracking-[0.4em] text-gold">A glimpse inside</p>
             <h2 className="font-serif text-3xl text-foreground sm:text-4xl">Stay somewhere extraordinary</h2>
           </div>
-          {slides.length > 1 ? <div className="hidden items-center gap-2 sm:flex">
+          {slides.length > 1 ? <div className="flex items-center gap-2">
+            <button type="button" onClick={() => setPaused((value) => !value)} aria-label={paused ? "Resume featured residences" : "Pause featured residences"} className="flex size-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-gold hover:text-gold">
+              {paused ? <Play aria-hidden="true" /> : <Pause aria-hidden="true" />}
+            </button>
             <button type="button" onClick={() => setActive((active - 1 + slides.length) % slides.length)} aria-label="Previous featured property" className="flex size-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-gold hover:text-gold"><ChevronLeft className="size-4" /></button>
             <button type="button" onClick={() => setActive((active + 1) % slides.length)} aria-label="Next featured property" className="flex size-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-gold hover:text-gold"><ChevronRight className="size-4" /></button>
           </div> : null}
@@ -44,6 +56,7 @@ export function PropertySlideshow({ slides }: { slides: Property[] }) {
               <div>
                 <p className="text-xs uppercase tracking-[0.3em] text-gold">Featured residence</p>
                 <p className="mt-8 text-xs uppercase tracking-[0.2em] text-muted-foreground">{current.location}</p>
+                <p className="sr-only" aria-live="polite">Showing featured residence {safeActive + 1} of {slides.length}: {current.name}</p>
                 <h3 className="mt-3 font-serif text-4xl leading-tight text-foreground sm:text-5xl">{current.name}</h3>
                 <p className="mt-5 text-sm tracking-wide text-muted-foreground">{current.tag}</p>
               </div>
