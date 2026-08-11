@@ -11,7 +11,7 @@ const footerLinks = [
   {
     title: "Support",
     links: [
-      { label: "Terms & Conditions", href: "#" },
+      { label: "Terms & Conditions", href: "/luxbnb/terms-and-conditions" },
       { label: "Privacy Policy", href: "/luxbnb/privacy-policy" },
     ],
   },
