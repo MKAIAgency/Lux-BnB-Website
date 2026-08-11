@@ -30,7 +30,7 @@ export function Testimonials() {
             Guest Stories
           </p>
           <h2 className="text-balance font-serif text-4xl font-medium leading-tight text-foreground sm:text-5xl">
-            Trusted by the world's most discerning travellers
+            Trusted by the world&apos;s most discerning travellers
           </h2>
         </div>
 

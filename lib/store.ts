@@ -113,24 +113,46 @@ async function setSetting(key: string, value: string): Promise<void> {
   })
 }
 
+function hashPassword(password: string, salt = crypto.randomBytes(16).toString("hex")): string {
+  const hash = crypto.scryptSync(password, salt, 64).toString("hex")
+  return `scrypt:${salt}:${hash}`
+}
+
+function checkPassword(password: string, stored: string): boolean {
+  const [algorithm, salt, expected] = stored.split(":")
+  if (algorithm !== "scrypt" || !salt || !expected) return stored === password
+  const actual = crypto.scryptSync(password, salt, 64).toString("hex")
+  const actualBuffer = Buffer.from(actual, "hex")
+  const expectedBuffer = Buffer.from(expected, "hex")
+  return actualBuffer.length === expectedBuffer.length && crypto.timingSafeEqual(actualBuffer, expectedBuffer)
+}
+
 export async function verifyPassword(password: string): Promise<boolean> {
   let stored = await getSetting("admin_password")
   if (!stored) {
-    stored = DEFAULT_PASSWORD
+    stored = hashPassword(DEFAULT_PASSWORD)
     await setSetting("admin_password", stored)
   }
-  return stored === password
+  const valid = checkPassword(password, stored)
+  if (valid && !stored.startsWith("scrypt:")) await setSetting("admin_password", hashPassword(password))
+  return valid
 }
 
 export async function changePassword(next: string): Promise<void> {
-  await setSetting("admin_password", next)
+  await setSetting("admin_password", hashPassword(next))
 }
 
 export async function getSessionToken(): Promise<string> {
   let token = await getSetting(SESSION_KEY)
   if (!token) {
-    token = crypto.randomUUID()
+    token = crypto.randomBytes(32).toString("hex")
     await setSetting(SESSION_KEY, token)
   }
+  return token
+}
+
+export async function rotateSessionToken(): Promise<string> {
+  const token = crypto.randomBytes(32).toString("hex")
+  await setSetting(SESSION_KEY, token)
   return token
 }
