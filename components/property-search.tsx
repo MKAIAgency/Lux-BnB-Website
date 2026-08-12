@@ -180,7 +180,7 @@ export function PropertySearch() {
     <form
       onSubmit={handleSubmit}
       noValidate
-      className="mx-auto mt-8 max-w-3xl rounded-md border border-border/80 bg-card/95 p-3 text-left shadow-xl"
+      className="relative z-50 mx-auto mt-8 max-w-3xl rounded-md border border-border/80 bg-card p-3 text-left shadow-xl"
     >
       <div className="grid grid-cols-1 gap-2 md:grid-cols-[1.3fr_1.3fr_0.8fr_auto]">
         <div className="relative flex flex-col" ref={destRef}>
@@ -204,7 +204,7 @@ export function PropertySearch() {
           </button>
 
           {destOpen ? (
-            <div className="absolute left-0 top-full z-30 mt-3 w-full min-w-[17rem] origin-top overflow-hidden rounded-lg border border-gold/25 bg-popover/95 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7),0_0_0_1px_rgba(0,0,0,0.2)] ring-1 ring-inset ring-white/5 backdrop-blur-xl animate-in fade-in-0 zoom-in-95 slide-in-from-top-2 duration-500 ease-luxe">
+            <div className="absolute left-0 top-full z-[60] mt-3 w-full min-w-[17rem] origin-top overflow-hidden rounded-lg border border-gold/25 bg-popover shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7),0_0_0_1px_rgba(0,0,0,0.2)] animate-in fade-in-0 zoom-in-95 slide-in-from-top-2 duration-300 ease-luxe">
               <div className="border-b border-border/60 px-4 pb-2.5 pt-3">
                 <p className="text-sm text-gold">Choose your destination</p>
               </div>
@@ -283,7 +283,7 @@ export function PropertySearch() {
             <div
               role="dialog"
               aria-label="Select stay dates"
-              className="absolute left-0 top-full z-30 mt-3 w-[20rem] origin-top overflow-hidden rounded-lg border border-gold/25 bg-popover/95 p-4 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7),0_0_0_1px_rgba(0,0,0,0.2)] ring-1 ring-inset ring-white/5 backdrop-blur-xl animate-in fade-in-0 zoom-in-95 slide-in-from-top-2 duration-500 ease-luxe"
+              className="absolute left-0 top-full z-[60] mt-3 w-[20rem] origin-top overflow-hidden rounded-lg border border-gold/25 bg-popover p-4 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7),0_0_0_1px_rgba(0,0,0,0.2)] animate-in fade-in-0 zoom-in-95 slide-in-from-top-2 duration-300 ease-luxe"
             >
               <p className="mb-2 text-sm text-gold">Select your stay</p>
               <div className="mb-3 flex items-center justify-between">
