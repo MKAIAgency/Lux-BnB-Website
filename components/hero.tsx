@@ -14,7 +14,7 @@ export function Hero() {
           className="hero-video size-full object-cover"
           aria-hidden="true"
         >
-          <source src="/luxbnb/videos/hero-dubai.mp4" type="video/mp4" />
+          <source src="/luxbnb-hero.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-gradient-to-b from-foreground/35 via-foreground/10 to-background/85" />
       </div>
@@ -24,14 +24,14 @@ export function Hero() {
           LUX BNB Vacation Homes
         </p>
         <h1
-          className="luxe-reveal text-balance font-serif text-5xl font-medium leading-[1.05] text-foreground sm:text-6xl lg:text-7xl"
+          className="luxe-reveal text-balance font-serif text-5xl font-medium leading-[1.05] text-background sm:text-6xl lg:text-7xl"
           style={{ animationDelay: "0.15s" }}
         >
           {"Beautiful Homes for "}
           <span className="text-gold">Inspired Vacations</span>
         </h1>
         <p
-          className="luxe-reveal mx-auto mt-6 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg"
+          className="luxe-reveal mx-auto mt-6 max-w-xl text-pretty text-base leading-relaxed text-background/90 sm:text-lg"
           style={{ animationDelay: "0.3s" }}
         >
           A handpicked collection of premium apartments and penthouses across
