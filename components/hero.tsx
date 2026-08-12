@@ -11,7 +11,7 @@ export function Hero() {
           playsInline
           preload="auto"
           poster="/luxbnb/luxbnb-hero-poster.jpg"
-          className="hero-video size-full object-cover"
+          className="hero-video size-full object-cover object-center"
           aria-hidden="true"
         >
           <source src="/luxbnb/luxbnb-hero.mp4?v=2" type="video/mp4" />
