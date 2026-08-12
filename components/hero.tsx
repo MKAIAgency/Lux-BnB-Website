@@ -1,12 +1,46 @@
+"use client"
+
+import { useEffect, useState } from "react"
 import { PropertySearch } from "@/components/property-search"
 
 export function Hero() {
+  const [videoRequested, setVideoRequested] = useState(false)
+  const [videoReady, setVideoReady] = useState(false)
+
+  useEffect(() => {
+    const requestVideo = () => setVideoRequested(true)
+    if ("requestIdleCallback" in window) {
+      const idleId = window.requestIdleCallback(requestVideo, { timeout: 1800 })
+      return () => window.cancelIdleCallback(idleId)
+    }
+    const timeoutId = globalThis.setTimeout(requestVideo, 800)
+    return () => globalThis.clearTimeout(timeoutId)
+  }, [])
+
   return (
     <section className="relative flex min-h-screen items-start justify-center overflow-visible bg-foreground">
-      <video autoPlay loop muted playsInline preload="auto" className="absolute inset-0 size-full object-cover" aria-hidden="true">
-        <source src="/luxbnb/luxbnb-hero.mp4?v=20260812" type="video/mp4" />
-      </video>
-      <div className="absolute inset-0 bg-foreground/45" aria-hidden="true" />
+      <div className="absolute inset-0 overflow-hidden bg-foreground" aria-hidden="true">
+        <img
+          src="/luxbnb/luxbnb-hero-poster.jpg"
+          alt=""
+          fetchPriority="high"
+          className={`absolute inset-0 size-full object-cover transition-opacity duration-700 ${videoReady ? "opacity-0" : "opacity-100"}`}
+        />
+        {videoRequested && (
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+            onCanPlay={() => setVideoReady(true)}
+            className={`absolute inset-0 size-full object-cover transition-opacity duration-700 ${videoReady ? "opacity-100" : "opacity-0"}`}
+          >
+            <source src="/luxbnb/luxbnb-hero.mp4?v=optimized-1" type="video/mp4" />
+          </video>
+        )}
+        <div className="absolute inset-0 bg-foreground/45" />
+      </div>
       <div className="relative z-10 mx-auto max-w-4xl px-6 pt-44 text-center sm:pt-48 lg:pt-56">
         <p className="luxe-reveal mb-6 text-xs uppercase tracking-[0.45em] text-background drop-shadow-[0_2px_10px_rgb(0_0_0_/_0.8)]">
           LUX BNB Vacation Homes
