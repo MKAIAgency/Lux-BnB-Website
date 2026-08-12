@@ -40,7 +40,6 @@ export default function RootLayout({
   return (
     <html lang="en" className={`bg-background ${inter.variable} ${cormorant.variable}`}>
       <body className="font-sans antialiased">
-        <link rel="preload" as="image" href="/luxbnb/luxbnb-hero-poster.png" />
         {children}
       </body>
     </html>
