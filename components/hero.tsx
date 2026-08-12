@@ -2,12 +2,7 @@ import { PropertySearch } from "@/components/property-search"
 
 export function Hero() {
   return (
-    <section className="relative flex min-h-screen items-start justify-center overflow-hidden bg-foreground">
-      <video autoPlay loop muted playsInline preload="metadata" className="absolute inset-0 size-full object-cover" aria-hidden="true">
-        <source src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/te-fw22whGwr6P89XVNHwrTZ1Yczb3ftD.mov" type="video/quicktime" />
-        Your browser does not support this video format.
-      </video>
-      <div className="absolute inset-0 bg-foreground/45" aria-hidden="true" />
+    <section className="relative flex min-h-screen items-start justify-center bg-background">
       <div className="relative z-10 mx-auto max-w-4xl px-6 pt-44 text-center sm:pt-48 lg:pt-56">
         <p className="luxe-reveal mb-6 text-xs uppercase tracking-[0.45em] text-background drop-shadow-[0_2px_10px_rgb(0_0_0_/_0.8)]">
           LUX BNB Vacation Homes
