@@ -2,7 +2,7 @@ import { PropertySearch } from "@/components/property-search"
 
 export function Hero() {
   return (
-    <section className="relative flex min-h-screen items-start justify-center overflow-visible bg-foreground">
+    <section className="hero-enter relative flex min-h-screen items-start justify-center overflow-visible bg-foreground">
       <video
         autoPlay
         loop

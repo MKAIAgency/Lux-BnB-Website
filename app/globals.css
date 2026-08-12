@@ -159,6 +159,21 @@
 }
 
 /* Gentle upward reveal for hero copy and section entrances. */
+@keyframes hero-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(7vh);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-enter {
+  animation: hero-slide-up 900ms var(--ease-luxe) both;
+}
+
 @keyframes luxe-fade-up {
   from {
     opacity: 0;
@@ -179,6 +194,7 @@
   html {
     scroll-behavior: auto;
   }
+  .hero-enter,
   .luxe-reveal {
     opacity: 1;
     animation: none;
