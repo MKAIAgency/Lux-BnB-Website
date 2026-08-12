@@ -3,8 +3,8 @@ import { PropertySearch } from "@/components/property-search"
 export function Hero() {
   return (
     <section className="relative flex min-h-screen items-start justify-center overflow-hidden bg-foreground">
-      <video autoPlay loop muted playsInline preload="metadata" className="absolute inset-0 size-full object-cover" aria-hidden="true">
-        <source src="/luxbnb/luxbnb-hero.mp4" type="video/mp4" />
+      <video autoPlay loop muted playsInline preload="auto" className="absolute inset-0 size-full object-cover" aria-hidden="true">
+        <source src="/luxbnb/luxbnb-hero.mp4?v=20260812" type="video/mp4" />
       </video>
       <div className="absolute inset-0 bg-foreground/45" aria-hidden="true" />
       <div className="relative z-10 mx-auto max-w-4xl px-6 pt-44 text-center sm:pt-48 lg:pt-56">
