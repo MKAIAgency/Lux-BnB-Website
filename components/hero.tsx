@@ -4,7 +4,8 @@ export function Hero() {
   return (
     <section className="relative flex min-h-screen items-start justify-center overflow-hidden bg-foreground">
       <video autoPlay loop muted playsInline preload="metadata" className="absolute inset-0 size-full object-cover" aria-hidden="true">
-        <source src="/luxbnb/luxbnb-hero.mov" type="video/quicktime" />
+        <source src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/te-fw22whGwr6P89XVNHwrTZ1Yczb3ftD.mov" type="video/quicktime" />
+        Your browser does not support this video format.
       </video>
       <div className="absolute inset-0 bg-foreground/45" aria-hidden="true" />
       <div className="relative z-10 mx-auto max-w-4xl px-6 pt-44 text-center sm:pt-48 lg:pt-56">
