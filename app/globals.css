@@ -51,9 +51,9 @@
 
 :root {
   color-scheme: light;
-  --background: oklch(0.975 0.012 82);
-  --foreground: oklch(0.22 0.018 65);
-  --card: oklch(0.995 0.006 82);
+  --background: oklch(0.91 0.025 78);
+  --foreground: oklch(0.19 0.02 62);
+  --card: oklch(0.95 0.018 78);
   --card-foreground: oklch(0.22 0.018 65);
   --popover: oklch(0.995 0.006 82);
   --popover-foreground: oklch(0.22 0.018 65);
@@ -89,9 +89,9 @@
 
 .dark {
   color-scheme: light;
-  --background: oklch(0.975 0.012 82);
-  --foreground: oklch(0.22 0.018 65);
-  --card: oklch(0.995 0.006 82);
+  --background: oklch(0.91 0.025 78);
+  --foreground: oklch(0.19 0.02 62);
+  --card: oklch(0.95 0.018 78);
   --card-foreground: oklch(0.22 0.018 65);
   --popover: oklch(0.995 0.006 82);
   --popover-foreground: oklch(0.22 0.018 65);

@@ -14,7 +14,7 @@ export function Hero() {
         >
           <source src="/luxbnb/videos/hero-dubai.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/40 to-background" />
+        <div className="absolute inset-0 bg-gradient-to-b from-foreground/35 via-foreground/10 to-background/85" />
       </div>
 
       <div className="relative z-10 mx-auto max-w-4xl px-6 pt-44 text-center sm:pt-48 lg:pt-56">
