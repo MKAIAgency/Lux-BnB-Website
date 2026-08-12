@@ -1,3 +1,5 @@
+"use client"
+
 import { PropertySearch } from "@/components/property-search"
 
 export function Hero() {
@@ -12,6 +14,11 @@ export function Hero() {
           playsInline
           preload="auto"
           poster="/images/hero-dubai-skyline.jpeg"
+          onEnded={(event) => {
+            const video = event.currentTarget
+            video.currentTime = 0
+            void video.play()
+          }}
           className="size-full object-cover object-center"
         >
           <source src="/videos/hero-dubai.mp4" type="video/mp4" />
