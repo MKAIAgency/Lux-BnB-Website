@@ -2,12 +2,7 @@ import { PropertySearch } from "@/components/property-search"
 
 export function Hero() {
   return (
-    <section className="relative flex min-h-screen items-start justify-center overflow-hidden bg-foreground">
-      <div className="absolute inset-0">
-        <img src="/luxbnb/luxbnb-hero.gif" alt="Dubai skyline with the Burj Khalifa and palm trees at night" className="size-full object-contain object-center" />
-        <div className="absolute inset-0 bg-foreground/45" />
-        <div className="absolute inset-0 bg-gradient-to-b from-foreground/20 via-foreground/25 to-foreground/75" />
-      </div>
+    <section className="relative flex min-h-screen items-start justify-center bg-background">
       <div className="relative z-10 mx-auto max-w-4xl px-6 pt-44 text-center sm:pt-48 lg:pt-56">
         <p className="luxe-reveal mb-6 text-xs uppercase tracking-[0.45em] text-background drop-shadow-[0_2px_10px_rgb(0_0_0_/_0.8)]">
           LUX BNB Vacation Homes
