@@ -9,7 +9,8 @@ export function Hero() {
           loop
           muted
           playsInline
-          preload="metadata"
+          preload="auto"
+          poster="/luxbnb/images/hero-dubai-skyline.jpeg"
           className="hero-video size-full object-cover"
           aria-hidden="true"
         >

@@ -28,8 +28,8 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  colorScheme: 'dark',
-  themeColor: '#241d12',
+  colorScheme: 'light',
+  themeColor: '#fbfaf7',
 }
 
 export default function RootLayout({
@@ -40,8 +40,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={`bg-background ${inter.variable} ${cormorant.variable}`}>
       <body className="font-sans antialiased">
+        <link rel="preload" as="image" href="/luxbnb/images/hero-dubai-skyline.jpeg" />
         {children}
-
       </body>
     </html>
   )
