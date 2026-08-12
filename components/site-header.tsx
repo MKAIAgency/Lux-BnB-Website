@@ -16,7 +16,7 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false)
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-background/70 backdrop-blur-md">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-foreground/95 text-background shadow-sm">
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-10">
         <a href="#" className="flex items-center" aria-label="Luxbnb home">
           <img
@@ -31,7 +31,7 @@ export function SiteHeader() {
             <a
               key={link.href}
               href={link.href}
-              className="text-sm tracking-wide text-muted-foreground transition-colors hover:text-gold"
+              className="text-sm tracking-wide text-background/85 transition-colors hover:text-gold"
             >
               {link.label}
             </a>

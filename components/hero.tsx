@@ -9,8 +9,10 @@ export function Hero() {
           loop
           muted
           playsInline
+          preload="metadata"
           poster="/luxbnb/images/hero-dubai-skyline.jpeg"
           className="hero-video size-full object-cover"
+          aria-hidden="true"
         >
           <source src="/luxbnb/videos/hero-dubai.mp4" type="video/mp4" />
         </video>

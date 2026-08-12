@@ -175,6 +175,11 @@
   animation: luxe-fade-up 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
+.hero-video {
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero-video {
     display: none;
