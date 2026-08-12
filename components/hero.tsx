@@ -4,7 +4,7 @@ export function Hero() {
   return (
     <section className="relative flex min-h-screen items-start justify-center overflow-hidden bg-foreground">
       <div className="absolute inset-0">
-        <img src="/luxbnb/luxbnb-hero.gif" alt="Animated Dubai skyline with the Burj Khalifa and palm trees at night" className="size-full object-cover" />
+        <img src="/luxbnb/luxbnb-hero.gif" alt="Dubai skyline with the Burj Khalifa and palm trees at night" className="size-full object-contain object-center" />
         <div className="absolute inset-0 bg-foreground/45" />
         <div className="absolute inset-0 bg-gradient-to-b from-foreground/20 via-foreground/25 to-foreground/75" />
       </div>
