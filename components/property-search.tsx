@@ -180,7 +180,7 @@ export function PropertySearch() {
     <form
       onSubmit={handleSubmit}
       noValidate
-      className="mx-auto mt-8 max-w-3xl rounded-md border border-border/70 bg-card/80 p-3 text-left backdrop-blur-md"
+      className="mx-auto mt-8 max-w-3xl rounded-md border border-border/80 bg-card/95 p-3 text-left shadow-xl"
     >
       <div className="grid grid-cols-1 gap-2 md:grid-cols-[1.3fr_1.3fr_0.8fr_auto]">
         <div className="relative flex flex-col" ref={destRef}>

@@ -16,7 +16,7 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false)
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-background/95 text-foreground shadow-sm">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-background text-foreground shadow-sm">
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-10">
         <a href="#" className="flex items-center" aria-label="Luxbnb home">
           <img
@@ -60,7 +60,7 @@ export function SiteHeader() {
       </div>
 
       {open && (
-        <div id="mobile-navigation" className="border-t border-border/60 bg-background/95 px-6 py-6 md:hidden">
+        <div id="mobile-navigation" className="border-t border-border/60 bg-background px-6 py-6 md:hidden">
           <nav className="flex flex-col gap-5">
             {navLinks.map((link) => (
               <a
