@@ -2,24 +2,7 @@ import { PropertySearch } from "@/components/property-search"
 
 export function Hero() {
   return (
-    <section className="relative flex min-h-screen items-start justify-center">
-      <div className="absolute inset-0 overflow-hidden">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-          poster="/luxbnb/luxbnb-hero-poster.jpg"
-          className="hero-video size-full object-cover object-center"
-          aria-hidden="true"
-        >
-          <source src="/luxbnb/luxbnb-hero.mp4?v=2" type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 bg-gradient-to-b from-foreground/20 via-foreground/10 to-foreground/75" />
-        <div className="absolute inset-y-0 left-0 hidden w-[58%] bg-gradient-to-r from-foreground/65 via-foreground/25 to-transparent lg:block" />
-      </div>
-
+    <section className="relative flex min-h-screen items-start justify-center bg-background">
       <div className="relative z-10 mx-auto max-w-4xl px-6 pt-44 text-center sm:pt-48 lg:pt-56">
         <p className="luxe-reveal mb-6 text-xs uppercase tracking-[0.45em] text-background drop-shadow-[0_2px_10px_rgb(0_0_0_/_0.8)]">
           LUX BNB Vacation Homes
