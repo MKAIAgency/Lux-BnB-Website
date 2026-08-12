@@ -10,6 +10,7 @@ export function Hero() {
           muted
           playsInline
           preload="auto"
+          poster="/luxbnb/luxbnb-hero-poster.jpg"
           className="hero-video size-full object-cover"
           aria-hidden="true"
         >
