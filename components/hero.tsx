@@ -10,11 +10,10 @@ export function Hero() {
           muted
           playsInline
           preload="metadata"
-          poster="/luxbnb/images/hero-dubai-skyline.jpeg"
           className="hero-video size-full object-cover"
           aria-hidden="true"
         >
-          <source src="/luxbnb-hero.mp4" type="video/mp4" />
+          <source src="/luxbnb/luxbnb-hero.mp4?v=2" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-gradient-to-b from-foreground/35 via-foreground/10 to-background/85" />
       </div>
