@@ -2,7 +2,7 @@ import { PropertySearch } from "@/components/property-search"
 
 export function Hero() {
   return (
-    <section className="hero-enter relative flex min-h-screen items-start justify-center overflow-visible bg-foreground">
+    <section className="hero-enter relative flex min-h-screen items-start justify-center overflow-visible bg-background">
       <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
         <video
           autoPlay
@@ -10,6 +10,7 @@ export function Hero() {
           muted
           playsInline
           preload="metadata"
+          poster="/luxbnb/luxbnb-hero-villa.png"
           className="size-full object-cover"
         >
           <source src="/luxbnb/luxbnb-hero.mp4" type="video/mp4" />
