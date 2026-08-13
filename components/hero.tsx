@@ -4,12 +4,16 @@ export function Hero() {
   return (
     <section className="hero-enter relative flex min-h-screen items-start justify-center overflow-visible bg-foreground">
       <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
-        <img
-          src="/luxbnb/luxbnb-hero-villa.png"
-          alt=""
-          fetchPriority="high"
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="metadata"
           className="size-full object-cover"
-        />
+        >
+          <source src="/luxbnb/luxbnb-hero.mp4" type="video/mp4" />
+        </video>
         <div className="absolute inset-0 bg-gradient-to-b from-foreground/20 via-foreground/25 to-foreground/75" />
         <div className="absolute inset-y-0 left-0 hidden w-[62%] bg-gradient-to-r from-foreground/65 via-foreground/25 to-transparent lg:block" />
       </div>
