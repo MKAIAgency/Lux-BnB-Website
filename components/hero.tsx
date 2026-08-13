@@ -1,28 +1,16 @@
-"use client"
-
-import { useState } from "react"
 import { PropertySearch } from "@/components/property-search"
 
 export function Hero() {
-  const [videoReady, setVideoReady] = useState(false)
-
   return (
     <section className="hero-enter relative flex min-h-screen items-start justify-center overflow-visible bg-foreground">
       <div className="absolute inset-0 overflow-hidden bg-foreground" aria-hidden="true">
-        <img
-          src="/luxbnb/luxbnb-hero-villa.png"
-          alt=""
-          fetchPriority="high"
-          className={`absolute inset-0 size-full object-cover transition-opacity duration-700 ${videoReady ? "opacity-0" : "opacity-100"}`}
-        />
         <video
           autoPlay
           loop
           muted
           playsInline
           preload="auto"
-          onCanPlay={() => setVideoReady(true)}
-          className={`absolute inset-0 size-full object-cover transition-opacity duration-700 ${videoReady ? "opacity-100" : "opacity-0"}`}
+          className="absolute inset-0 size-full object-cover"
         >
           <source src="/luxbnb/luxbnb-hero.mp4" type="video/mp4" />
         </video>
