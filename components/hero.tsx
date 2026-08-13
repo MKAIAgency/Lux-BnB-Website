@@ -2,7 +2,17 @@ import { PropertySearch } from "@/components/property-search"
 
 export function Hero() {
   return (
-    <section className="hero-enter relative flex min-h-screen items-start justify-center overflow-visible bg-background">
+    <section className="hero-enter relative flex min-h-screen items-start justify-center overflow-visible bg-foreground">
+      <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
+        <img
+          src="/luxbnb/luxbnb-hero-villa.png"
+          alt=""
+          fetchPriority="high"
+          className="size-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-foreground/20 via-foreground/25 to-foreground/75" />
+        <div className="absolute inset-y-0 left-0 hidden w-[62%] bg-gradient-to-r from-foreground/65 via-foreground/25 to-transparent lg:block" />
+      </div>
       <div className="relative z-10 mx-auto max-w-4xl px-6 pt-44 text-center sm:pt-48 lg:pt-56">
 
         <p className="luxe-reveal mb-6 text-xs uppercase tracking-[0.45em] text-primary">
