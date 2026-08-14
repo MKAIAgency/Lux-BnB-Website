@@ -16,12 +16,11 @@ export function Hero() {
           playsInline
           preload="auto"
           onCanPlay={() => setVideoReady(true)}
-          className={`absolute inset-0 size-full object-cover transition-opacity duration-700 ease-out ${videoReady ? "opacity-100" : "opacity-0"}`}
+          className={`absolute inset-0 size-full object-cover transition-opacity duration-700 ease-in ${videoReady ? "opacity-100" : "opacity-0"}`}
         >
           <source src="/luxbnb/luxbnb-hero.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-gradient-to-b from-foreground/20 via-foreground/25 to-foreground/75" />
-        <div className="absolute inset-y-0 left-0 hidden w-[62%] bg-gradient-to-r from-foreground/65 via-foreground/25 to-transparent lg:block" />
       </div>
       <div className="relative z-10 mx-auto max-w-4xl px-6 pt-44 text-center sm:pt-48 lg:pt-56">
 
