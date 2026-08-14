@@ -1,49 +1,36 @@
-"use client"
-import { useState } from "react"
 import { PropertySearch } from "@/components/property-search"
 
 export function Hero() {
-  const [videoReady, setVideoReady] = useState(false)
-
   return (
-    <section className="relative flex min-h-screen items-start justify-center overflow-visible bg-[#07152e]">
-      <div className="absolute inset-0 overflow-hidden bg-[#07152e]" aria-hidden="true">
+    <section className="relative flex min-h-screen items-center justify-center overflow-hidden">
+      <div className="absolute inset-0">
         <video
           autoPlay
           loop
           muted
           playsInline
-          preload="auto"
-          onCanPlayThrough={() => setVideoReady(true)}
-          className={`absolute inset-0 size-full object-cover transition-opacity duration-700 ease-in ${videoReady ? "opacity-100" : "opacity-0"}`}
+          poster="/images/hero-dubai-skyline.jpeg"
+          className="size-full object-cover"
         >
-          <source src="/luxbnb/luxbnb-hero.mp4" type="video/mp4" />
+          <source src="/videos/hero-dubai.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-b from-foreground/20 via-foreground/25 to-foreground/75" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/40 to-background" />
       </div>
 
-      <div className="hero-enter relative z-10 mx-auto max-w-4xl px-6 pt-44 text-center sm:pt-48 lg:pt-56">
-        <p className="luxe-reveal mb-6 text-xs uppercase tracking-[0.45em] text-background">
-          LUX BNB Vacation Homes
+      <div className="relative z-10 mx-auto max-w-4xl px-6 pt-28 text-center">
+        <p className="mb-6 text-xs uppercase tracking-[0.45em] text-gold">
+          Curated Private Residences
         </p>
-        <h1
-          className="luxe-reveal text-balance font-serif text-5xl font-medium leading-[1.05] text-background drop-shadow-[0_3px_18px_rgb(0_0_0_/_0.55)] sm:text-6xl lg:text-7xl"
-          style={{ animationDelay: "0.15s" }}
-        >
-          {"Beautiful Homes for "}
-          <span className="text-gold drop-shadow-[0_3px_12px_rgb(0_0_0_/_0.9)]">Inspired Vacations</span>
+        <h1 className="text-balance font-serif text-5xl font-medium leading-[1.05] text-foreground sm:text-6xl lg:text-7xl">
+          Live the Golden Standard of{" "}
+          <span className="text-gold">Dubai Living</span>
         </h1>
-        <p
-          className="luxe-reveal mx-auto mt-6 max-w-xl text-pretty text-base leading-relaxed text-background drop-shadow-[0_2px_10px_rgb(0_0_0_/_0.65)] sm:text-lg"
-          style={{ animationDelay: "0.3s" }}
-        >
-          A handpicked collection of premium apartments and penthouses across
-          Dubai&apos;s most sought-after addresses, paired with attentive
-          guest service for a flawless stay.
+        <p className="mx-auto mt-6 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">
+          An exclusive collection of villas, penthouses and sky residences,
+          each paired with bespoke concierge service for a flawless stay.
         </p>
-        <div className="luxe-reveal" style={{ animationDelay: "0.45s" }}>
-          <PropertySearch />
-        </div>
+
+        <PropertySearch />
       </div>
     </section>
   )

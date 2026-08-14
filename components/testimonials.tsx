@@ -3,21 +3,21 @@ import { Star } from "lucide-react"
 const testimonials = [
   {
     quote:
-      "A smooth check in and check out. They serve you Molton Brown soap, and the shower gel and shampoo are amazing.",
-    name: "Verified Guest",
-    detail: "Opera Grand · Burj, Sea & Fountain View",
+      "The most seamless stay we have ever experienced. The villa was flawless and the concierge thought of everything before we did.",
+    name: "Alexandra R.",
+    detail: "Palm Jumeirah · 7 nights",
   },
   {
     quote:
-      "It was a great place to stay — the location is perfect, near everything. The host was a quick responder and flexible.",
-    name: "Verified Guest",
-    detail: "Opera Grand · Downtown",
+      "From the private chef to the yacht sunset, Maison Doré delivered a level of service that redefined luxury for our family.",
+    name: "Khalid M.",
+    detail: "Downtown Dubai · 5 nights",
   },
   {
     quote:
-      "Perfect place! A great apartment with everything you need for a short stay — kitchen, washing machine, and a full view of The Address and the fountain. A definite five-star recommendation.",
-    name: "Verified Guest",
-    detail: "Act One Tower · Dubai Opera",
+      "Impeccable taste and total discretion. Every residence felt like a private world curated exactly to our expectations.",
+    name: "Sofia & James",
+    detail: "Dubai Marina · 10 nights",
   },
 ]
 
@@ -30,7 +30,7 @@ export function Testimonials() {
             Guest Stories
           </p>
           <h2 className="text-balance font-serif text-4xl font-medium leading-tight text-foreground sm:text-5xl">
-            Trusted by the world&apos;s most discerning travellers
+            Trusted by the world's most discerning travellers
           </h2>
         </div>
 

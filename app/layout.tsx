@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { Inter, Cormorant_Garamond } from 'next/font/google'
 import './globals.css'
@@ -16,20 +17,15 @@ const cormorant = Cormorant_Garamond({
 })
 
 export const metadata: Metadata = {
-  title: 'LUX BNB Vacation Homes | Luxury Holiday Rentals in Dubai',
+  title: 'Maison Doré | Luxury Vacation Homes in Dubai',
   description:
-    'LUX BNB Vacation Homes \u2014 beautiful homes for inspired vacations. A curated collection of premium Dubai apartments and penthouses with attentive guest service.',
+    'Discover an exclusive collection of Dubai\u2019s finest private villas, penthouses and sky residences. Bespoke stays with white-glove concierge service.',
   generator: 'v0.app',
-  icons: {
-    icon: '/luxbnb.png',
-    shortcut: '/luxbnb.png',
-    apple: '/luxbnb.png',
-  },
 }
 
 export const viewport: Viewport = {
-  colorScheme: 'light',
-  themeColor: '#fbfaf7',
+  colorScheme: 'dark',
+  themeColor: '#241d12',
 }
 
 export default function RootLayout({
@@ -40,8 +36,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={`bg-background ${inter.variable} ${cormorant.variable}`}>
       <body className="font-sans antialiased">
-        <link rel="preload" as="video" href="/luxbnb/luxbnb-hero.mp4" type="video/mp4" />
         {children}
+        {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
   )
