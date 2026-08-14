@@ -6,7 +6,14 @@ export function SiteLoadingScreen() {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    const handleReady = () => setIsLoading(false)
+    document.documentElement.classList.add("site-loading")
+
+    const handleReady = () => {
+      setIsLoading(false)
+      document.documentElement.classList.remove("site-loading")
+      document.documentElement.classList.add("site-ready")
+    }
+
     window.addEventListener("hero-video-ready", handleReady)
     return () => window.removeEventListener("hero-video-ready", handleReady)
   }, [])

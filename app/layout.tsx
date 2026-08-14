@@ -39,7 +39,7 @@ export default function RootLayout({
       <body className="font-sans antialiased">
         <link rel="preload" as="video" href="/videos/hero-dubai.mp4" type="video/mp4" />
         <SiteLoadingScreen />
-        {children}
+        <div className="site-content-shell">{children}</div>
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>

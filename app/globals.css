@@ -128,7 +128,26 @@
 }
 
 .site-loading-bar {
-  animation: site-loading-bar 1.35s ease-in-out infinite;
+  animation: site-loading-bar 1.5s ease-in-out infinite;
+}
+
+.site-content-shell {
+  opacity: 0.01;
+  transform: translateY(10px) scale(0.995);
+  transform-origin: top center;
+  transition: opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1), transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.site-ready .site-content-shell {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-content-shell {
+    transition: none;
+    transform: none;
+  }
 }
 
 @layer base {
