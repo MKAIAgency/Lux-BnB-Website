@@ -40,7 +40,7 @@ export function Experiences() {
       <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
         <div className="mx-auto max-w-2xl text-center">
           <p className="mb-4 text-xs uppercase tracking-[0.4em] text-gold">
-            Why LUX BNB
+            Why Maison Doré
           </p>
           <h2 className="text-balance font-serif text-4xl font-medium leading-tight text-foreground sm:text-5xl">
             A stay defined by detail and quiet luxury
