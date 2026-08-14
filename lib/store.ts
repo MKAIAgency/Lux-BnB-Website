@@ -43,7 +43,7 @@ function slugify(name: string): string {
   )
 }
 
-export async function getProperties(): Promise<Property[]> {
+export const getProperties = async (): Promise<Property[]> => {
   const rows = await db.select().from(luxProperties).orderBy(asc(luxProperties.createdAt))
   return rows.map(toProperty)
 }
