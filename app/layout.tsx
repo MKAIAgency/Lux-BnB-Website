@@ -36,6 +36,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`bg-background ${inter.variable} ${cormorant.variable}`}>
       <body className="font-sans antialiased">
+        <link rel="preload" as="video" href="/videos/hero-dubai.mp4" type="video/mp4" />
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>

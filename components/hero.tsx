@@ -1,11 +1,8 @@
 "use client"
 
-import { useState } from "react"
 import { PropertySearch } from "@/components/property-search"
 
 export function Hero() {
-  const [videoReady, setVideoReady] = useState(false)
-
   return (
     <section className="relative flex min-h-screen items-start justify-center bg-[#07152e]">
       <div className="absolute inset-0 overflow-hidden bg-[#07152e]">
@@ -15,8 +12,10 @@ export function Hero() {
           muted
           playsInline
           preload="auto"
-          onLoadedData={() => setVideoReady(true)}
-          className={`size-full object-cover transition-opacity duration-700 ease-in ${videoReady ? "opacity-100" : "opacity-0"}`}
+          onCanPlayThrough={(event) => {
+            void event.currentTarget.play()
+          }}
+          className="size-full object-cover opacity-100"
         >
           <source src="/videos/hero-dubai.mp4" type="video/mp4" />
         </video>
