@@ -18,10 +18,10 @@ export function SiteHeader() {
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-10">
         <a href="#" className="flex flex-col leading-none">
           <span className="font-serif text-2xl font-semibold tracking-wide text-foreground">
-            Maison <span className="text-gold">Doré</span>
+            LUX <span className="text-gold">BNB</span>
           </span>
           <span className="text-[10px] uppercase tracking-[0.35em] text-muted-foreground">
-            Dubai
+            Vacation Homes
           </span>
         </a>
 

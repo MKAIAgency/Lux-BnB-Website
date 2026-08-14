@@ -2,12 +2,26 @@
 
 import type React from "react"
 import { useEffect, useRef, useState } from "react"
-import { Search, CalendarDays, Users, ChevronLeft, ChevronRight } from "lucide-react"
+import { Search, CalendarDays, Users, MapPin, ChevronLeft, ChevronRight, ChevronDown } from "lucide-react"
 
 const BASE_URL = "https://luxbnb.guestybookings.com/en/properties"
 
 // The company only operates in the UAE, so the country is always fixed.
 const COUNTRY = "United Arab Emirates"
+
+// Destinations the company operates in. Selecting one is optional; it simply
+// adds a `city` filter to the search.
+const DESTINATIONS = [
+  "Business Bay",
+  "Downtown",
+  "Dubai",
+  "Dubai Creek Harbour",
+  "Greens & Views",
+  "JBR",
+  "JVC",
+  "Palm Jumeirah",
+  "دبي",
+]
 
 type FieldErrors = {
   dates?: string
@@ -49,6 +63,8 @@ function formatDisplay(d: Date | null) {
 }
 
 export function PropertySearch() {
+  const [destination, setDestination] = useState("")
+  const [destOpen, setDestOpen] = useState(false)
   const [adults, setAdults] = useState(1)
   const [from, setFrom] = useState<Date | null>(null)
   const [to, setTo] = useState<Date | null>(null)
@@ -59,6 +75,7 @@ export function PropertySearch() {
   const [viewMonth, setViewMonth] = useState(new Date(today.getFullYear(), today.getMonth(), 1))
 
   const calendarRef = useRef<HTMLDivElement>(null)
+  const destRef = useRef<HTMLDivElement>(null)
 
   // Close the calendar when clicking outside of it.
   useEffect(() => {
@@ -71,6 +88,18 @@ export function PropertySearch() {
     document.addEventListener("mousedown", onPointerDown)
     return () => document.removeEventListener("mousedown", onPointerDown)
   }, [calendarOpen])
+
+  // Close the destination dropdown when clicking outside of it.
+  useEffect(() => {
+    if (!destOpen) return
+    function onPointerDown(e: MouseEvent) {
+      if (destRef.current && !destRef.current.contains(e.target as Node)) {
+        setDestOpen(false)
+      }
+    }
+    document.addEventListener("mousedown", onPointerDown)
+    return () => document.removeEventListener("mousedown", onPointerDown)
+  }, [destOpen])
 
   function handleDayClick(day: Date) {
     if (!from || (from && to)) {
@@ -111,6 +140,10 @@ export function PropertySearch() {
 
     // URLSearchParams handles encoding of spaces and non-Latin characters.
     const params = new URLSearchParams()
+    // Destination is optional; only add a `city` filter when one is selected.
+    if (destination) {
+      params.set("city", destination)
+    }
     params.set("country", COUNTRY)
     params.set("minOccupancy", String(adults))
     params.set("checkIn", toISO(from as Date))
@@ -141,9 +174,87 @@ export function PropertySearch() {
     <form
       onSubmit={handleSubmit}
       noValidate
-      className="mx-auto mt-12 max-w-3xl rounded-md border border-border/70 bg-card/80 p-3 text-left backdrop-blur-md"
+      className="mx-auto mt-8 max-w-3xl rounded-md border border-border/70 bg-card/80 p-3 text-left backdrop-blur-md"
     >
-      <div className="grid grid-cols-1 gap-2 md:grid-cols-[1.4fr_0.9fr_auto]">
+      <div className="grid grid-cols-1 gap-2 md:grid-cols-[1.3fr_1.3fr_0.8fr_auto]">
+        <div className="relative flex flex-col" ref={destRef}>
+          <button
+            type="button"
+            onClick={() => setDestOpen((v) => !v)}
+            aria-haspopup="listbox"
+            aria-expanded={destOpen}
+            className="flex items-center gap-3 rounded-sm px-4 py-3 text-left transition-colors duration-300 hover:bg-secondary/60"
+          >
+            <MapPin className="size-5 shrink-0 text-gold" />
+            <div className="min-w-0 flex-1">
+              <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Destination</p>
+              <p className={`truncate text-sm ${destination ? "text-foreground" : "text-muted-foreground/60"}`}>
+                {destination || "Anywhere in Dubai"}
+              </p>
+            </div>
+            <ChevronDown
+              className={`size-4 shrink-0 text-muted-foreground transition-transform duration-500 ease-luxe ${destOpen ? "rotate-180" : ""}`}
+            />
+          </button>
+
+          {destOpen ? (
+            <div className="absolute left-0 top-full z-30 mt-3 w-full min-w-[17rem] origin-top overflow-hidden rounded-lg border border-gold/25 bg-popover/95 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7),0_0_0_1px_rgba(0,0,0,0.2)] ring-1 ring-inset ring-white/5 backdrop-blur-xl animate-in fade-in-0 zoom-in-95 slide-in-from-top-2 duration-500 ease-luxe">
+              <div className="border-b border-border/60 px-4 pb-2.5 pt-3">
+                <p className="text-sm text-gold">Choose your destination</p>
+              </div>
+              <ul
+                role="listbox"
+                aria-label="Select a destination"
+                className="max-h-64 overflow-y-auto p-2"
+              >
+                <li role="option" aria-selected={destination === ""}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setDestination("")
+                      setDestOpen(false)
+                    }}
+                    className={`group flex w-full items-center gap-2.5 rounded-md px-3 py-2.5 text-left text-sm transition-colors hover:bg-gold/10 ${
+                      destination === "" ? "text-gold" : "text-muted-foreground"
+                    }`}
+                  >
+                    <MapPin className="size-4 shrink-0 opacity-60" />
+                    Anywhere in Dubai
+                  </button>
+                </li>
+                {DESTINATIONS.map((d) => (
+                  <li key={d} role="option" aria-selected={destination === d}>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setDestination(d)
+                        setDestOpen(false)
+                      }}
+                      className={`group flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-left transition-colors hover:bg-gold/10 ${
+                        destination === d ? "bg-gold/10" : ""
+                      }`}
+                    >
+                      <span
+                        className={`flex size-8 shrink-0 items-center justify-center rounded-full border transition-colors ${
+                          destination === d
+                            ? "border-gold/50 bg-gold/15 text-gold"
+                            : "border-border/70 text-muted-foreground group-hover:border-gold/40 group-hover:text-gold"
+                        }`}
+                      >
+                        <MapPin className="size-4" />
+                      </span>
+                      <span className="flex min-w-0 flex-col">
+                        <span className={`text-sm ${destination === d ? "text-gold" : "text-foreground"}`}>{d}</span>
+                        <span className="text-[11px] text-muted-foreground">Dubai, United Arab Emirates</span>
+                      </span>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+        </div>
+
         <div className="relative flex flex-col" ref={calendarRef}>
           <button
             type="button"
@@ -151,7 +262,7 @@ export function PropertySearch() {
             aria-haspopup="dialog"
             aria-expanded={calendarOpen}
             aria-invalid={!!errors.dates}
-            className={`flex items-center gap-3 rounded-sm px-4 py-3 text-left transition-colors ${
+            className={`flex items-center gap-3 rounded-sm px-4 py-3 text-left transition-colors duration-300 ${
               errors.dates ? "ring-1 ring-destructive" : "hover:bg-secondary/60"
             }`}
           >
@@ -166,76 +277,85 @@ export function PropertySearch() {
             <div
               role="dialog"
               aria-label="Select stay dates"
-              className="absolute left-0 bottom-full z-30 mb-2 w-[19rem] rounded-md border border-border bg-popover p-4 shadow-2xl shadow-black/40"
+              className="absolute left-0 top-full z-30 mt-3 w-[20rem] origin-top overflow-hidden rounded-lg border border-gold/25 bg-popover/95 p-4 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7),0_0_0_1px_rgba(0,0,0,0.2)] ring-1 ring-inset ring-white/5 backdrop-blur-xl animate-in fade-in-0 zoom-in-95 slide-in-from-top-2 duration-500 ease-luxe"
             >
+              <p className="mb-2 text-sm text-gold">Select your stay</p>
               <div className="mb-3 flex items-center justify-between">
                 <button
                   type="button"
                   onClick={() => setViewMonth(new Date(viewMonth.getFullYear(), viewMonth.getMonth() - 1, 1))}
                   disabled={!canGoPrev}
                   aria-label="Previous month"
-                  className="inline-flex size-8 items-center justify-center rounded-sm text-foreground transition-colors hover:bg-secondary disabled:cursor-not-allowed disabled:opacity-30"
+                  className="inline-flex size-8 items-center justify-center rounded-full border border-border/70 text-foreground transition-colors duration-300 hover:border-gold/40 hover:text-gold disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:border-border/70 disabled:hover:text-foreground"
                 >
                   <ChevronLeft className="size-4" />
                 </button>
-                <p className="text-sm font-medium text-foreground">
-                  {MONTHS[viewMonth.getMonth()]} {viewMonth.getFullYear()}
+                <p className="font-serif text-base text-foreground">
+                  {MONTHS[viewMonth.getMonth()]} <span className="text-gold">{viewMonth.getFullYear()}</span>
                 </p>
                 <button
                   type="button"
                   onClick={() => setViewMonth(new Date(viewMonth.getFullYear(), viewMonth.getMonth() + 1, 1))}
                   aria-label="Next month"
-                  className="inline-flex size-8 items-center justify-center rounded-sm text-foreground transition-colors hover:bg-secondary"
+                  className="inline-flex size-8 items-center justify-center rounded-full border border-border/70 text-foreground transition-colors duration-300 hover:border-gold/40 hover:text-gold"
                 >
                   <ChevronRight className="size-4" />
                 </button>
               </div>
 
-              <div className="mb-1 grid grid-cols-7 gap-1">
+              <div className="mb-2 grid grid-cols-7 gap-1">
                 {WEEKDAYS.map((w) => (
-                  <div key={w} className="text-center text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
+                  <div key={w} className="text-center text-[10px] font-medium uppercase tracking-[0.15em] text-gold/60">
                     {w}
                   </div>
                 ))}
               </div>
 
-              <div className="grid grid-cols-7 gap-1">
+              <div className="grid grid-cols-7 gap-y-1">
                 {cells.map((day, i) => {
                   if (!day) return <div key={`blank-${i}`} />
                   const isPast = day < today
                   const isFrom = sameDay(day, from)
                   const isTo = sameDay(day, to)
-                  const inRange = from && to && day > from && day < to
+                  const inRange = !!(from && to && day > from && day < to)
                   const isEndpoint = isFrom || isTo
+                  // Connected range background: fill the cell edges so highlights join up.
+                  const rangeBg = isEndpoint || inRange
                   return (
-                    <button
+                    <div
                       key={toISO(day)}
-                      type="button"
-                      disabled={isPast}
-                      onClick={() => handleDayClick(day)}
-                      aria-label={day.toDateString()}
-                      className={`inline-flex size-9 items-center justify-center rounded-sm text-sm transition-colors disabled:cursor-not-allowed disabled:text-muted-foreground/30 ${
-                        isEndpoint
-                          ? "bg-gold font-semibold text-gold-foreground"
-                          : inRange
-                            ? "bg-gold/20 text-foreground"
-                            : "text-foreground hover:bg-secondary"
-                      }`}
+                      className={`relative flex items-center justify-center ${
+                        rangeBg ? "bg-gold/12" : ""
+                      } ${isFrom ? "rounded-l-full" : ""} ${isTo ? "rounded-r-full" : ""}`}
                     >
-                      {day.getDate()}
-                    </button>
+                      <button
+                        type="button"
+                        disabled={isPast}
+                        onClick={() => handleDayClick(day)}
+                        aria-label={day.toDateString()}
+                        className={`inline-flex size-8 items-center justify-center rounded-full text-sm transition-all duration-300 ease-luxe disabled:cursor-not-allowed disabled:text-muted-foreground/25 ${
+                          isEndpoint
+                            ? "bg-gold font-semibold text-gold-foreground shadow-[0_2px_10px_-2px_rgba(0,0,0,0.5)]"
+                            : inRange
+                              ? "text-gold"
+                              : "text-foreground hover:bg-gold/15 hover:text-gold"
+                        }`}
+                      >
+                        {day.getDate()}
+                      </button>
+                    </div>
                   )
                 })}
               </div>
 
-              <div className="mt-3 flex items-center justify-between border-t border-border pt-3">
+              <div className="mt-3 flex items-center justify-between border-t border-border/60 pt-3">
                 <button
                   type="button"
                   onClick={() => {
                     setFrom(null)
                     setTo(null)
                   }}
-                  className="text-xs text-muted-foreground transition-colors hover:text-foreground"
+                  className="text-xs uppercase tracking-[0.15em] text-muted-foreground transition-colors hover:text-foreground"
                 >
                   Clear
                 </button>
@@ -243,7 +363,7 @@ export function PropertySearch() {
                   type="button"
                   onClick={() => setCalendarOpen(false)}
                   disabled={!from || !to}
-                  className="rounded-sm bg-gold px-4 py-1.5 text-xs font-semibold text-gold-foreground transition-opacity hover:opacity-90 disabled:opacity-40"
+                  className="rounded-sm bg-gold px-5 py-2 text-xs font-semibold uppercase tracking-[0.15em] text-gold-foreground transition-all duration-300 ease-luxe hover:opacity-90 active:scale-[0.97] disabled:opacity-40 disabled:active:scale-100"
                 >
                   Done
                 </button>
@@ -266,7 +386,7 @@ export function PropertySearch() {
 
         <button
           type="submit"
-          className="inline-flex items-center justify-center gap-2 rounded-sm bg-gold px-6 py-4 text-sm font-semibold tracking-wide text-gold-foreground transition-opacity hover:opacity-90"
+          className="inline-flex items-center justify-center gap-2 rounded-sm bg-gold px-6 py-4 text-sm font-semibold tracking-wide text-gold-foreground transition-all duration-300 ease-luxe hover:opacity-90 hover:shadow-[0_10px_30px_-8px_var(--gold)] active:scale-[0.98]"
         >
           <Search className="size-4" />
           Search
