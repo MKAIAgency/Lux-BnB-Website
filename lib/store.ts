@@ -44,8 +44,13 @@ function slugify(name: string): string {
 }
 
 export const getProperties = async (): Promise<Property[]> => {
-  const rows = await db.select().from(luxProperties).orderBy(asc(luxProperties.createdAt))
-  return rows.map(toProperty)
+  try {
+    const rows = await db.select().from(luxProperties).orderBy(asc(luxProperties.createdAt))
+    return rows.map(toProperty)
+  } catch (error) {
+    console.error("[v0] Failed to load properties:", error)
+    return []
+  }
 }
 
 export async function getProperty(id: string): Promise<Property | undefined> {
