@@ -14,7 +14,7 @@ export function Hero() {
           muted
           playsInline
           preload="auto"
-          onCanPlay={() => setVideoReady(true)}
+          onCanPlayThrough={() => setVideoReady(true)}
           className={`absolute inset-0 size-full object-cover transition-opacity duration-700 ease-in ${videoReady ? "opacity-100" : "opacity-0"}`}
         >
           <source src="/luxbnb/luxbnb-hero.mp4" type="video/mp4" />
