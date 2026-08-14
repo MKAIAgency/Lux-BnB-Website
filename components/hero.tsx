@@ -1,3 +1,5 @@
+"use client"
+
 import { PropertySearch } from "@/components/property-search"
 
 export function Hero() {
@@ -10,6 +12,7 @@ export function Hero() {
           muted
           playsInline
           preload="auto"
+          onCanPlayThrough={() => window.dispatchEvent(new Event("hero-video-ready"))}
           className="absolute inset-0 size-full object-cover"
         >
           <source src="/luxbnb/luxbnb-hero.mp4?v=20260814-otI5MPR" type="video/mp4" />

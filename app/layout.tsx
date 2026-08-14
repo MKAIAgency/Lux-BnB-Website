@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter, Cormorant_Garamond } from 'next/font/google'
+import { SiteLoadingScreen } from '@/components/site-loading-screen'
 import './globals.css'
 
 const inter = Inter({
@@ -41,6 +42,7 @@ export default function RootLayout({
     <html lang="en" className={`bg-background ${inter.variable} ${cormorant.variable}`}>
       <body className="font-sans antialiased">
         <link rel="preload" as="video" href="/luxbnb/luxbnb-hero.mp4?v=20260814-otI5MPR" type="video/mp4" />
+        <SiteLoadingScreen />
         {children}
       </body>
     </html>
