@@ -17,6 +17,7 @@ export function Hero() {
           preload="auto"
           onCanPlayThrough={(event) => {
             setVideoReady(true)
+            window.dispatchEvent(new Event("hero-video-ready"))
             void event.currentTarget.play()
           }}
           className={`size-full object-cover transition-opacity duration-700 ease-out ${videoReady ? "opacity-100" : "opacity-0"}`}

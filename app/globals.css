@@ -122,6 +122,15 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+@keyframes site-loading-bar {
+  0% { transform: translateX(-120%); }
+  100% { transform: translateX(420%); }
+}
+
+.site-loading-bar {
+  animation: site-loading-bar 1.35s ease-in-out infinite;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
