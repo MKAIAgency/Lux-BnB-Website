@@ -1,3 +1,4 @@
+import { DemoSwitcher } from "@/components/demo-switcher"
 import { SiteHeader } from "@/components/site-header"
 import { Hero } from "@/components/hero"
 import { FeaturedProperties } from "@/components/featured-properties"
@@ -9,7 +10,7 @@ import { SiteFooter } from "@/components/site-footer"
 
 export default function Page() {
   return (
-    <>
+    <DemoSwitcher>
       <SiteHeader />
       <main>
         <Hero />
@@ -20,6 +21,6 @@ export default function Page() {
         <ContactCta />
       </main>
       <SiteFooter />
-    </>
+    </DemoSwitcher>
   )
 }
