@@ -1,5 +1,4 @@
 "use client"
-
 import { useState } from "react"
 import { PropertySearch } from "@/components/property-search"
 
@@ -7,7 +6,7 @@ export function Hero() {
   const [videoReady, setVideoReady] = useState(false)
 
   return (
-    <section className="hero-enter relative flex min-h-screen items-start justify-center overflow-visible bg-[#07152e]">
+    <section className="relative flex min-h-screen items-start justify-center overflow-visible bg-[#07152e]">
       <div className="absolute inset-0 overflow-hidden bg-[#07152e]" aria-hidden="true">
         <video
           autoPlay
@@ -22,8 +21,8 @@ export function Hero() {
         </video>
         <div className="absolute inset-0 bg-gradient-to-b from-foreground/20 via-foreground/25 to-foreground/75" />
       </div>
-      <div className="relative z-10 mx-auto max-w-4xl px-6 pt-44 text-center sm:pt-48 lg:pt-56">
 
+      <div className="relative z-10 mx-auto max-w-4xl px-6 pt-44 text-center sm:pt-48 lg:pt-56">
         <p className="luxe-reveal mb-6 text-xs uppercase tracking-[0.45em] text-background">
           LUX BNB Vacation Homes
         </p>
@@ -42,7 +41,6 @@ export function Hero() {
           Dubai&apos;s most sought-after addresses, paired with attentive
           guest service for a flawless stay.
         </p>
-
         <div className="luxe-reveal" style={{ animationDelay: "0.45s" }}>
           <PropertySearch />
         </div>
