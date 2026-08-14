@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react"
 import { Search, CalendarDays, Users, MapPin, ChevronLeft, ChevronRight, ChevronDown } from "lucide-react"
 
 const BASE_URL = "https://luxbnb.guestybookings.com/en/properties"
+const MIN_NIGHTS = 3
 
 // The company only operates in the UAE, so the country is always fixed.
 const COUNTRY = "United Arab Emirates"
@@ -125,6 +126,11 @@ export function PropertySearch() {
       next.dates = "Check-in cannot be in the past."
     } else if (to <= from) {
       next.dates = "Check-out must be after check-in."
+    } else {
+      const nights = Math.round((to.getTime() - from.getTime()) / 86400000)
+      if (nights < MIN_NIGHTS) {
+        next.dates = `A minimum stay of ${MIN_NIGHTS} nights is required.`
+      }
     }
     if (!adults || adults < 1) {
       next.adults = "At least 1 adult is required."
@@ -174,7 +180,7 @@ export function PropertySearch() {
     <form
       onSubmit={handleSubmit}
       noValidate
-      className="mx-auto mt-8 max-w-3xl rounded-md border border-border/70 bg-card/80 p-3 text-left backdrop-blur-md"
+      className="relative z-50 mx-auto mt-8 max-w-3xl rounded-md border border-border/80 bg-card p-3 text-left shadow-xl"
     >
       <div className="grid grid-cols-1 gap-2 md:grid-cols-[1.3fr_1.3fr_0.8fr_auto]">
         <div className="relative flex flex-col" ref={destRef}>
@@ -183,7 +189,7 @@ export function PropertySearch() {
             onClick={() => setDestOpen((v) => !v)}
             aria-haspopup="listbox"
             aria-expanded={destOpen}
-            className="flex items-center gap-3 rounded-sm px-4 py-3 text-left transition-colors hover:bg-secondary/60"
+            className="flex items-center gap-3 rounded-sm px-4 py-3 text-left transition-colors duration-300 hover:bg-secondary/60"
           >
             <MapPin className="size-5 shrink-0 text-gold" />
             <div className="min-w-0 flex-1">
@@ -193,12 +199,12 @@ export function PropertySearch() {
               </p>
             </div>
             <ChevronDown
-              className={`size-4 shrink-0 text-muted-foreground transition-transform ${destOpen ? "rotate-180" : ""}`}
+              className={`size-4 shrink-0 text-muted-foreground transition-transform duration-500 ease-luxe ${destOpen ? "rotate-180" : ""}`}
             />
           </button>
 
           {destOpen ? (
-            <div className="absolute left-0 top-full z-30 mt-3 w-full min-w-[17rem] overflow-hidden rounded-lg border border-gold/25 bg-popover/95 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7),0_0_0_1px_rgba(0,0,0,0.2)] ring-1 ring-inset ring-white/5 backdrop-blur-xl">
+            <div className="absolute bottom-full left-0 z-[60] mb-3 w-full min-w-[17rem] origin-bottom overflow-hidden rounded-lg border border-gold/25 bg-popover shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7),0_0_0_1px_rgba(0,0,0,0.2)] animate-in fade-in-0 zoom-in-95 slide-in-from-top-2 duration-300 ease-luxe">
               <div className="border-b border-border/60 px-4 pb-2.5 pt-3">
                 <p className="text-sm text-gold">Choose your destination</p>
               </div>
@@ -262,13 +268,13 @@ export function PropertySearch() {
             aria-haspopup="dialog"
             aria-expanded={calendarOpen}
             aria-invalid={!!errors.dates}
-            className={`flex items-center gap-3 rounded-sm px-4 py-3 text-left transition-colors ${
+            className={`flex items-center gap-3 rounded-sm px-4 py-3 text-left transition-colors duration-300 ${
               errors.dates ? "ring-1 ring-destructive" : "hover:bg-secondary/60"
             }`}
           >
             <CalendarDays className="size-5 shrink-0 text-gold" />
             <div className="min-w-0 flex-1">
-              <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Dates</p>
+              <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Dates · 3 night minimum</p>
               <p className={`truncate text-sm ${from ? "text-foreground" : "text-muted-foreground/60"}`}>{dateLabel}</p>
             </div>
           </button>
@@ -277,7 +283,7 @@ export function PropertySearch() {
             <div
               role="dialog"
               aria-label="Select stay dates"
-              className="absolute left-0 top-full z-30 mt-3 w-[20rem] overflow-hidden rounded-lg border border-gold/25 bg-popover/95 p-4 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7),0_0_0_1px_rgba(0,0,0,0.2)] ring-1 ring-inset ring-white/5 backdrop-blur-xl"
+              className="absolute bottom-full left-0 z-[60] mb-3 w-[20rem] origin-bottom overflow-hidden rounded-lg border border-gold/25 bg-popover p-4 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7),0_0_0_1px_rgba(0,0,0,0.2)] animate-in fade-in-0 zoom-in-95 slide-in-from-top-2 duration-300 ease-luxe"
             >
               <p className="mb-2 text-sm text-gold">Select your stay</p>
               <div className="mb-3 flex items-center justify-between">
@@ -286,7 +292,7 @@ export function PropertySearch() {
                   onClick={() => setViewMonth(new Date(viewMonth.getFullYear(), viewMonth.getMonth() - 1, 1))}
                   disabled={!canGoPrev}
                   aria-label="Previous month"
-                  className="inline-flex size-8 items-center justify-center rounded-full border border-border/70 text-foreground transition-colors hover:border-gold/40 hover:text-gold disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:border-border/70 disabled:hover:text-foreground"
+                  className="inline-flex size-8 items-center justify-center rounded-full border border-border/70 text-foreground transition-colors duration-300 hover:border-gold/40 hover:text-gold disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:border-border/70 disabled:hover:text-foreground"
                 >
                   <ChevronLeft className="size-4" />
                 </button>
@@ -297,7 +303,7 @@ export function PropertySearch() {
                   type="button"
                   onClick={() => setViewMonth(new Date(viewMonth.getFullYear(), viewMonth.getMonth() + 1, 1))}
                   aria-label="Next month"
-                  className="inline-flex size-8 items-center justify-center rounded-full border border-border/70 text-foreground transition-colors hover:border-gold/40 hover:text-gold"
+                  className="inline-flex size-8 items-center justify-center rounded-full border border-border/70 text-foreground transition-colors duration-300 hover:border-gold/40 hover:text-gold"
                 >
                   <ChevronRight className="size-4" />
                 </button>
@@ -333,7 +339,7 @@ export function PropertySearch() {
                         disabled={isPast}
                         onClick={() => handleDayClick(day)}
                         aria-label={day.toDateString()}
-                        className={`inline-flex size-8 items-center justify-center rounded-full text-sm transition-colors disabled:cursor-not-allowed disabled:text-muted-foreground/25 ${
+                        className={`inline-flex size-8 items-center justify-center rounded-full text-sm transition-all duration-300 ease-luxe disabled:cursor-not-allowed disabled:text-muted-foreground/25 ${
                           isEndpoint
                             ? "bg-gold font-semibold text-gold-foreground shadow-[0_2px_10px_-2px_rgba(0,0,0,0.5)]"
                             : inRange
@@ -363,7 +369,7 @@ export function PropertySearch() {
                   type="button"
                   onClick={() => setCalendarOpen(false)}
                   disabled={!from || !to}
-                  className="rounded-sm bg-gold px-5 py-2 text-xs font-semibold uppercase tracking-[0.15em] text-gold-foreground transition-opacity hover:opacity-90 disabled:opacity-40"
+                  className="rounded-sm bg-gold px-5 py-2 text-xs font-semibold uppercase tracking-[0.15em] text-gold-foreground transition-all duration-300 ease-luxe hover:opacity-90 active:scale-[0.97] disabled:opacity-40 disabled:active:scale-100"
                 >
                   Done
                 </button>
@@ -386,7 +392,7 @@ export function PropertySearch() {
 
         <button
           type="submit"
-          className="inline-flex items-center justify-center gap-2 rounded-sm bg-gold px-6 py-4 text-sm font-semibold tracking-wide text-gold-foreground transition-opacity hover:opacity-90"
+          className="inline-flex items-center justify-center gap-2 rounded-sm bg-gold px-6 py-4 text-sm font-semibold tracking-wide text-gold-foreground transition-all duration-300 ease-luxe hover:opacity-90 hover:shadow-[0_10px_30px_-8px_var(--gold)] active:scale-[0.98]"
         >
           <Search className="size-4" />
           Search
