@@ -19,7 +19,7 @@ export function Hero() {
         >
           <source src="/videos/hero-dubai.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/40 to-background" />
+        <div className="absolute inset-0 bg-gradient-to-b from-foreground/35 via-foreground/20 to-foreground/60" />
       </div>
 
       <div className="relative z-10 mx-auto max-w-4xl px-6 pt-32 text-center sm:pt-40 lg:pt-48">
