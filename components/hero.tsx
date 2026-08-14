@@ -9,7 +9,7 @@ export function Hero() {
           loop
           muted
           playsInline
-          poster="/images/hero-dubai-skyline.jpeg"
+          preload="auto"
           className="size-full object-cover"
         >
           <source src="/videos/hero-dubai.mp4" type="video/mp4" />
