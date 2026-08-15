@@ -178,17 +178,20 @@
 .lifestyle-hero > div.relative {
   min-height: clamp(680px, 100svh, 840px);
   padding-top: 7.5rem;
+  padding-bottom: 3rem;
 }
 .lifestyle-hero h1 { max-width: 10ch; font-size: clamp(4.25rem, 7.7vw, 7rem); line-height: .88; }
 .lifestyle-hero h1 + p { margin-top: 1.25rem; max-width: 34rem; }
-.lifestyle-hero .grid { gap: 1.25rem; }
-.lifestyle-hero .grid > div:first-child { min-width: 0; }
-.lifestyle-hero .grid > div:last-child { min-width: 0; }
-.lifestyle-hero .lifestyle-search { width: 100%; max-width: 27rem; justify-self: end; }
+.lifestyle-hero .grid { align-items: end; gap: clamp(2rem, 6vw, 7rem); }
+.lifestyle-hero .grid > div:first-child { min-width: 0; max-width: 48rem; }
+.lifestyle-hero .grid > div:last-child { min-width: 0; width: 100%; max-width: 25rem; justify-self: end; }
+.lifestyle-hero .lifestyle-search { width: 100%; }
 .lifestyle-hero .lifestyle-search form { margin-top: 0; }
+.lifestyle-destinations-grid { width: 100%; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.lifestyle-tab { min-width: 0; min-height: 4.6rem; }
 
 @media (max-height: 820px) and (min-width: 768px) {
-  .lifestyle-hero > div.relative { min-height: 720px; padding-top: 7rem; padding-bottom: 1.5rem; }
+  .lifestyle-hero > div.relative { min-height: 720px; padding-top: 7rem; padding-bottom: 2rem; }
   .lifestyle-hero h1 { font-size: clamp(4rem, 6.4vw, 6.25rem); }
   .lifestyle-hero h1 + p { margin-top: 1rem; font-size: .9rem; }
   .lifestyle-hero .lifestyle-tab { padding: .65rem .8rem; }
@@ -235,8 +238,8 @@ main > section:not(.lifestyle-hero)::before { content: ""; position: absolute; l
   .lifestyle-hero__image { background-position: 62% center; }
   .lifestyle-hero h1 { font-size: clamp(3.85rem, 16vw, 5.2rem); }
   .lifestyle-hero h1 + p { font-size: .95rem; }
-  .lifestyle-hero .flex.max-w-3xl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); overflow: visible; }
   .lifestyle-destinations-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .lifestyle-hero .grid > div:last-child { max-width: none; justify-self: stretch; }
   .lifestyle-hero .lifestyle-tab { min-width: 0; width: 100%; }
   .lifestyle-hero .lifestyle-search { max-width: none; justify-self: stretch; }
   main > section:not(.lifestyle-hero)::before { left: 1rem; width: calc(100% - 2rem); }

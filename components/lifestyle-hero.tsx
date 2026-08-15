@@ -52,7 +52,6 @@ export function LifestyleHero() {
                 </button>
               ))}
             </div>
-            <div className="mt-5 flex items-center gap-3 text-sm text-foreground/70"><span className="text-gold">{activeDestination ? String(activeIndex + 1).padStart(2, "0") : "All"}</span><span className="h-px w-20 bg-foreground/30" /><span>05 destinations</span></div>
           </div>
           <div className="lifestyle-search rounded-sm border border-foreground/15 bg-background/55 p-4 backdrop-blur-xl sm:p-5">
             <div className="mb-3 flex items-center justify-between"><span className="text-xs uppercase tracking-[0.24em] text-gold">Find your stay</span><ArrowDownRight className="size-4 text-gold" aria-hidden="true" /></div>
