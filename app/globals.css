@@ -258,6 +258,7 @@ header.fixed > div + div { background: oklch(1 0 0) !important; }
 .lifestyle-tab small { font-size: .65rem; color: color-mix(in srgb, var(--foreground) 52%, transparent); }
 .lifestyle-search .property-search { margin-top: 0; }
 
+.lifestyle-hero__contrast { background: linear-gradient(90deg, rgba(0, 0, 0, .72) 0%, rgba(0, 0, 0, .36) 50%, rgba(0, 0, 0, .08) 100%), linear-gradient(0deg, rgba(0, 0, 0, .4) 0%, transparent 58%); }
 .lifestyle-hero { position: relative; z-index: 10; overflow: visible; }
 .lifestyle-hero .lifestyle-search { position: relative; z-index: 20; }
 main > section:not(.lifestyle-hero) { position: relative; z-index: 0; }
