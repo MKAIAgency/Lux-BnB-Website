@@ -28,7 +28,7 @@ export function LifestyleHero() {
         <div className="max-w-3xl">
           <p className="luxe-reveal mb-6 text-xs uppercase tracking-[0.45em] text-white">LUX BNB Vacation Homes</p>
           <h1 className="luxe-reveal max-w-3xl text-balance font-serif text-6xl font-medium leading-[0.9] text-foreground sm:text-8xl lg:text-[8.5rem]" style={{ animationDelay: "0.15s" }}>
-            <span className="text-white">Beautiful Homes for Inspired Vacations</span>
+            <span className="text-white">Beautiful Homes for <span className="text-gold">Inspired Vacations</span></span>
           </h1>
           <p className="luxe-reveal mt-8 max-w-xl text-pretty text-base leading-relaxed text-white sm:text-lg" style={{ animationDelay: "0.3s" }}>
             A handpicked collection of premium apartments and penthouses across Dubai&apos;s most sought-after addresses, paired with attentive guest service for a flawless stay.
