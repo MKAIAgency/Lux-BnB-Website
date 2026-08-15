@@ -1,9 +1,10 @@
 import { redirect } from "next/navigation"
 import { isAuthenticated } from "@/lib/auth"
-import { getProperties } from "@/lib/store"
+import { getProperties, getSlideshowIds } from "@/lib/store"
 import { logoutAction } from "@/app/admin/actions"
 import { PropertyManager } from "@/components/admin/property-manager"
 import { ChangePassword } from "@/components/admin/change-password"
+import { SlideshowManager } from "@/components/admin/slideshow-manager"
 
 export const metadata = {
   title: "Property Manager | LUX BNB",
@@ -15,6 +16,7 @@ export default async function AdminPage() {
     redirect("/admin/login")
   }
   const properties = await getProperties()
+  const slideshowIds = await getSlideshowIds()
 
   return (
     <main className="min-h-screen bg-background">
@@ -30,7 +32,7 @@ export default async function AdminPage() {
           </div>
           <div className="flex items-center gap-4">
             <a
-              href="/"
+              href="/d/"
               target="_blank"
               rel="noreferrer"
               className="text-xs uppercase tracking-[0.15em] text-muted-foreground transition-colors hover:text-foreground"
@@ -51,6 +53,7 @@ export default async function AdminPage() {
 
       <div className="mx-auto max-w-6xl px-6 py-10">
         <PropertyManager properties={properties} />
+        <SlideshowManager properties={properties} selectedIds={slideshowIds} />
         <div className="mt-16 border-t border-border/60 pt-10">
           <ChangePassword />
         </div>

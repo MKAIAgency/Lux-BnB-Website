@@ -27,12 +27,6 @@ const features = [
   },
 ]
 
-const stats = [
-  { value: "120+", label: "Private Residences" },
-  { value: "18", label: "Prime Districts" },
-  { value: "4.98", label: "Average Guest Rating" },
-  { value: "24/7", label: "Concierge Service" },
-]
 
 export function Experiences() {
   return (
@@ -61,18 +55,6 @@ export function Experiences() {
           ))}
         </div>
 
-        <div className="mt-16 grid grid-cols-2 gap-8 lg:grid-cols-4">
-          {stats.map((stat) => (
-            <div key={stat.label} className="text-center">
-              <p className="font-serif text-4xl font-medium text-gold sm:text-5xl">
-                {stat.value}
-              </p>
-              <p className="mt-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">
-                {stat.label}
-              </p>
-            </div>
-          ))}
-        </div>
       </div>
     </section>
   )

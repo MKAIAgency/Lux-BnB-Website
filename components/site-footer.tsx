@@ -4,15 +4,15 @@ const footerLinks = [
     links: [
       { label: "Residences", href: "#residences" },
       { label: "Experiences", href: "#experiences" },
-      { label: "Concierge", href: "#concierge" },
+      { label: "About Us", href: "#about" },
       { label: "Contact", href: "#contact" },
     ],
   },
   {
     title: "Support",
     links: [
-      { label: "Terms & Conditions", href: "#" },
-      { label: "Privacy Policy", href: "#" },
+      { label: "Terms & Conditions", href: "/d/terms-and-conditions" },
+      { label: "Privacy Policy", href: "/d/privacy-policy" },
     ],
   },
 ]

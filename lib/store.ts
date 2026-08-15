@@ -1,7 +1,8 @@
 import "server-only"
-import { promises as fs } from "fs"
-import path from "path"
 import crypto from "crypto"
+import { asc, eq } from "drizzle-orm"
+import { db } from "@/lib/db"
+import { luxProperties, luxSettings } from "@/lib/db/schema"
 
 export type Property = {
   id: string
@@ -15,107 +16,21 @@ export type Property = {
   enquireLink: string
 }
 
-type Database = {
-  password: string
-  sessionToken: string
-  properties: Property[]
-}
+const DEFAULT_PASSWORD = "050826"
+const SESSION_KEY = "admin_session_token"
 
-const DATA_DIR = path.join(process.cwd(), "data")
-const DB_PATH = path.join(DATA_DIR, "db.json")
-
-const SEED_PROPERTIES: Property[] = [
-  {
-    id: "the-address",
-    name: "The Address",
-    location: "Jumeirah Beach Residences",
-    image: "/images/property-beach-villa.png",
-    beds: "3.5",
-    baths: "4",
-    sqft: "2,000",
-    tag: "Palm & Sea Views",
-    enquireLink: "",
-  },
-  {
-    id: "jbr-penthouse",
-    name: "Penthouse",
-    location: "Jumeirah Beach Residences",
-    image: "/images/property-skyvilla.png",
-    beds: "4",
-    baths: "4",
-    sqft: "6,000",
-    tag: "Private Pool · Ocean Views",
-    enquireLink: "",
-  },
-  {
-    id: "princess-tower",
-    name: "Princess Tower",
-    location: "Dubai Marina",
-    image: "/images/property-marina.png",
-    beds: "3",
-    baths: "3",
-    sqft: "2,100",
-    tag: "Ocean & Palm Views",
-    enquireLink: "",
-  },
-  {
-    id: "opera-grand",
-    name: "Opera Grand",
-    location: "Dubai Opera · Downtown",
-    image: "/images/property-penthouse.png",
-    beds: "3.5",
-    baths: "4.5",
-    sqft: "2,000",
-    tag: "Burj Khalifa & Fountain Views",
-    enquireLink: "",
-  },
-  {
-    id: "anantara-residences",
-    name: "Anantara Residences",
-    location: "Palm Jumeirah",
-    image: "/images/property-desert.png",
-    beds: "1.5",
-    baths: "1.5",
-    sqft: "1,100",
-    tag: "Palm & Sea Views",
-    enquireLink: "",
-  },
-  {
-    id: "29-blvd",
-    name: "29 BLVD",
-    location: "Downtown",
-    image: "/images/property-bedroom.png",
-    beds: "1",
-    baths: "1",
-    sqft: "850",
-    tag: "Burj Khalifa Views",
-    enquireLink: "",
-  },
-]
-
-async function readDb(): Promise<Database> {
-  try {
-    const raw = await fs.readFile(DB_PATH, "utf-8")
-    const parsed = JSON.parse(raw) as Partial<Database>
-    return {
-      password: parsed.password ?? "050826",
-      sessionToken: parsed.sessionToken ?? crypto.randomUUID(),
-      properties: parsed.properties ?? SEED_PROPERTIES,
-    }
-  } catch {
-    const seeded: Database = {
-      password: "050826",
-      sessionToken: crypto.randomUUID(),
-      properties: SEED_PROPERTIES,
-    }
-    await writeDb(seeded)
-    return seeded
+function toProperty(row: typeof luxProperties.$inferSelect): Property {
+  return {
+    id: row.id,
+    name: row.name,
+    location: row.location,
+    image: row.image,
+    beds: row.beds,
+    baths: row.baths,
+    sqft: row.sqft,
+    tag: row.tag,
+    enquireLink: row.enquireLink,
   }
-}
-
-async function writeDb(db: Database): Promise<void> {
-  await fs.mkdir(DATA_DIR, { recursive: true })
-  await fs.writeFile(DB_PATH, JSON.stringify(db, null, 2), "utf-8")
 }
 
 function slugify(name: string): string {
@@ -129,59 +44,125 @@ function slugify(name: string): string {
 }
 
 export async function getProperties(): Promise<Property[]> {
-  const db = await readDb()
-  return db.properties
+  try {
+    const rows = await db.select().from(luxProperties).orderBy(asc(luxProperties.createdAt))
+    return rows.map(toProperty)
+  } catch (error) {
+    console.error("[v0] Failed to load properties:", error)
+    return []
+  }
+}
+
+const SLIDESHOW_SETTING = "slideshow_property_ids"
+
+export async function getSlideshowProperties(): Promise<Property[]> {
+  const properties = await getProperties()
+  const configured = await getSetting(SLIDESHOW_SETTING)
+  if (!configured) return properties
+
+  try {
+    const ids = JSON.parse(configured) as string[]
+    const byId = new Map(properties.map((property) => [property.id, property]))
+    return ids.map((id) => byId.get(id)).filter((property): property is Property => Boolean(property))
+  } catch {
+    return properties
+  }
+}
+
+export async function saveSlideshow(ids: string[]): Promise<void> {
+  await setSetting(SLIDESHOW_SETTING, JSON.stringify(ids))
+}
+
+export async function getSlideshowIds(): Promise<string[]> {
+  const configured = await getSetting(SLIDESHOW_SETTING)
+  if (!configured) return (await getProperties()).map((property) => property.id)
+  try {
+    return JSON.parse(configured) as string[]
+  } catch {
+    return []
+  }
 }
 
 export async function getProperty(id: string): Promise<Property | undefined> {
-  const db = await readDb()
-  return db.properties.find((p) => p.id === id)
+  const rows = await db.select().from(luxProperties).where(eq(luxProperties.id, id)).limit(1)
+  return rows[0] ? toProperty(rows[0]) : undefined
 }
 
 export type PropertyInput = Omit<Property, "id">
 
 export async function createProperty(input: PropertyInput): Promise<Property> {
-  const db = await readDb()
   let id = slugify(input.name)
-  // Ensure a unique id.
-  while (db.properties.some((p) => p.id === id)) {
-    id = `${id}-${crypto.randomUUID().slice(0, 4)}`
-  }
-  const property: Property = { id, ...input }
-  db.properties.push(property)
-  await writeDb(db)
-  return property
+  const existing = await db.select({ id: luxProperties.id }).from(luxProperties).where(eq(luxProperties.id, id)).limit(1)
+  if (existing.length) id = `${id}-${crypto.randomUUID().slice(0, 4)}`
+  const rows = await db.insert(luxProperties).values({ id, ...input }).returning()
+  return toProperty(rows[0])
 }
 
-export async function updateProperty(
-  id: string,
-  input: PropertyInput,
-): Promise<void> {
-  const db = await readDb()
-  const idx = db.properties.findIndex((p) => p.id === id)
-  if (idx === -1) return
-  db.properties[idx] = { id, ...input }
-  await writeDb(db)
+export async function updateProperty(id: string, input: PropertyInput): Promise<void> {
+  await db.update(luxProperties).set({ ...input, updatedAt: new Date() }).where(eq(luxProperties.id, id))
 }
 
 export async function deleteProperty(id: string): Promise<void> {
-  const db = await readDb()
-  db.properties = db.properties.filter((p) => p.id !== id)
-  await writeDb(db)
+  await db.delete(luxProperties).where(eq(luxProperties.id, id))
+}
+
+async function getSetting(key: string): Promise<string | undefined> {
+  try {
+    const rows = await db.select({ value: luxSettings.value }).from(luxSettings).where(eq(luxSettings.key, key)).limit(1)
+    return rows[0]?.value
+  } catch (error) {
+    console.error("[v0] Failed to load setting:", error)
+    return undefined
+  }
+}
+
+async function setSetting(key: string, value: string): Promise<void> {
+  await db.insert(luxSettings).values({ key, value, updatedAt: new Date() }).onConflictDoUpdate({
+    target: luxSettings.key,
+    set: { value, updatedAt: new Date() },
+  })
+}
+
+function hashPassword(password: string, salt = crypto.randomBytes(16).toString("hex")): string {
+  const hash = crypto.scryptSync(password, salt, 64).toString("hex")
+  return `scrypt:${salt}:${hash}`
+}
+
+function checkPassword(password: string, stored: string): boolean {
+  const [algorithm, salt, expected] = stored.split(":")
+  if (algorithm !== "scrypt" || !salt || !expected) return stored === password
+  const actual = crypto.scryptSync(password, salt, 64).toString("hex")
+  const actualBuffer = Buffer.from(actual, "hex")
+  const expectedBuffer = Buffer.from(expected, "hex")
+  return actualBuffer.length === expectedBuffer.length && crypto.timingSafeEqual(actualBuffer, expectedBuffer)
 }
 
 export async function verifyPassword(password: string): Promise<boolean> {
-  const db = await readDb()
-  return db.password === password
+  let stored = await getSetting("admin_password")
+  if (!stored) {
+    stored = hashPassword(DEFAULT_PASSWORD)
+    await setSetting("admin_password", stored)
+  }
+  const valid = checkPassword(password, stored)
+  if (valid && !stored.startsWith("scrypt:")) await setSetting("admin_password", hashPassword(password))
+  return valid
 }
 
 export async function changePassword(next: string): Promise<void> {
-  const db = await readDb()
-  db.password = next
-  await writeDb(db)
+  await setSetting("admin_password", hashPassword(next))
 }
 
 export async function getSessionToken(): Promise<string> {
-  const db = await readDb()
-  return db.sessionToken
+  let token = await getSetting(SESSION_KEY)
+  if (!token) {
+    token = crypto.randomBytes(32).toString("hex")
+    await setSetting(SESSION_KEY, token)
+  }
+  return token
+}
+
+export async function rotateSessionToken(): Promise<string> {
+  const token = crypto.randomBytes(32).toString("hex")
+  await setSetting(SESSION_KEY, token)
+  return token
 }

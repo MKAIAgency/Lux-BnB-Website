@@ -1,6 +1,6 @@
-import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { Inter, Cormorant_Garamond } from 'next/font/google'
+import { SiteLoadingScreen } from '@/components/site-loading-screen'
 import './globals.css'
 
 const inter = Inter({
@@ -21,11 +21,16 @@ export const metadata: Metadata = {
   description:
     'LUX BNB Vacation Homes \u2014 beautiful homes for inspired vacations. A curated collection of premium Dubai apartments and penthouses with attentive guest service.',
   generator: 'v0.app',
+  icons: {
+    icon: '/d/luxbnb.png',
+    shortcut: '/d/luxbnb.png',
+    apple: '/d/luxbnb.png',
+  },
 }
 
 export const viewport: Viewport = {
-  colorScheme: 'dark',
-  themeColor: '#241d12',
+  colorScheme: 'light',
+  themeColor: '#fbfaf7',
 }
 
 export default function RootLayout({
@@ -36,8 +41,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`bg-background ${inter.variable} ${cormorant.variable}`}>
       <body className="font-sans antialiased">
+        <link rel="preload" as="video" href="/d/luxbnb-hero.mp4?v=20260815-9740288-uhd" type="video/mp4" />
+        <SiteLoadingScreen />
         {children}
-        {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
   )

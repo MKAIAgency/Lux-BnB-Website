@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react"
 import { Search, CalendarDays, Users, MapPin, ChevronLeft, ChevronRight, ChevronDown } from "lucide-react"
 
 const BASE_URL = "https://luxbnb.guestybookings.com/en/properties"
+const MIN_NIGHTS = 3
 
 // The company only operates in the UAE, so the country is always fixed.
 const COUNTRY = "United Arab Emirates"
@@ -125,6 +126,11 @@ export function PropertySearch() {
       next.dates = "Check-in cannot be in the past."
     } else if (to <= from) {
       next.dates = "Check-out must be after check-in."
+    } else {
+      const nights = Math.round((to.getTime() - from.getTime()) / 86400000)
+      if (nights < MIN_NIGHTS) {
+        next.dates = `A minimum stay of ${MIN_NIGHTS} nights is required.`
+      }
     }
     if (!adults || adults < 1) {
       next.adults = "At least 1 adult is required."
@@ -174,7 +180,7 @@ export function PropertySearch() {
     <form
       onSubmit={handleSubmit}
       noValidate
-      className="mx-auto mt-8 max-w-3xl rounded-md border border-border/70 bg-card/80 p-3 text-left backdrop-blur-md"
+      className="relative z-50 mx-auto mt-8 max-w-3xl rounded-md border border-border/80 bg-card p-3 text-left shadow-xl"
     >
       <div className="grid grid-cols-1 gap-2 md:grid-cols-[1.3fr_1.3fr_0.8fr_auto]">
         <div className="relative flex flex-col" ref={destRef}>
@@ -198,7 +204,7 @@ export function PropertySearch() {
           </button>
 
           {destOpen ? (
-            <div className="absolute left-0 top-full z-30 mt-3 w-full min-w-[17rem] origin-top overflow-hidden rounded-lg border border-gold/25 bg-popover/95 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7),0_0_0_1px_rgba(0,0,0,0.2)] ring-1 ring-inset ring-white/5 backdrop-blur-xl animate-in fade-in-0 zoom-in-95 slide-in-from-top-2 duration-500 ease-luxe">
+            <div className="absolute bottom-full left-0 z-[60] mb-3 w-full min-w-[17rem] origin-bottom overflow-hidden rounded-lg border border-gold/25 bg-popover shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7),0_0_0_1px_rgba(0,0,0,0.2)] animate-in fade-in-0 zoom-in-95 slide-in-from-top-2 duration-300 ease-luxe">
               <div className="border-b border-border/60 px-4 pb-2.5 pt-3">
                 <p className="text-sm text-gold">Choose your destination</p>
               </div>
@@ -268,7 +274,7 @@ export function PropertySearch() {
           >
             <CalendarDays className="size-5 shrink-0 text-gold" />
             <div className="min-w-0 flex-1">
-              <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Dates</p>
+              <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Dates · 3 night minimum</p>
               <p className={`truncate text-sm ${from ? "text-foreground" : "text-muted-foreground/60"}`}>{dateLabel}</p>
             </div>
           </button>
@@ -277,7 +283,7 @@ export function PropertySearch() {
             <div
               role="dialog"
               aria-label="Select stay dates"
-              className="absolute left-0 top-full z-30 mt-3 w-[20rem] origin-top overflow-hidden rounded-lg border border-gold/25 bg-popover/95 p-4 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7),0_0_0_1px_rgba(0,0,0,0.2)] ring-1 ring-inset ring-white/5 backdrop-blur-xl animate-in fade-in-0 zoom-in-95 slide-in-from-top-2 duration-500 ease-luxe"
+              className="absolute bottom-full left-0 z-[60] mb-3 w-[20rem] origin-bottom overflow-hidden rounded-lg border border-gold/25 bg-popover p-4 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7),0_0_0_1px_rgba(0,0,0,0.2)] animate-in fade-in-0 zoom-in-95 slide-in-from-top-2 duration-300 ease-luxe"
             >
               <p className="mb-2 text-sm text-gold">Select your stay</p>
               <div className="mb-3 flex items-center justify-between">

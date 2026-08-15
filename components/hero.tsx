@@ -1,35 +1,39 @@
+"use client"
+
 import { PropertySearch } from "@/components/property-search"
 
 export function Hero() {
   return (
-    <section className="relative flex min-h-screen items-start justify-center">
-      <div className="absolute inset-0 overflow-hidden">
+    <section className="hero-enter relative flex min-h-screen items-start justify-center overflow-visible bg-foreground">
+      <div className="absolute inset-0 overflow-hidden bg-foreground" aria-hidden="true">
         <video
           autoPlay
           loop
           muted
           playsInline
-          poster="/images/hero-dubai-skyline.jpeg"
-          className="size-full object-cover"
+          preload="auto"
+          onCanPlayThrough={() => window.dispatchEvent(new Event("hero-video-ready"))}
+          className="absolute inset-0 size-full object-cover"
         >
-          <source src="/videos/hero-dubai.mp4" type="video/mp4" />
+          <source src="/d/luxbnb-hero.mp4?v=20260815-9740288-uhd" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/40 to-background" />
+        <div className="absolute inset-0 bg-gradient-to-b from-foreground/20 via-foreground/25 to-foreground/75" />
+        <div className="absolute inset-y-0 left-0 hidden w-[62%] bg-gradient-to-r from-foreground/65 via-foreground/25 to-transparent lg:block" />
       </div>
+      <div className="relative z-10 mx-auto max-w-4xl px-6 pt-44 text-center sm:pt-48 lg:pt-56">
 
-      <div className="relative z-10 mx-auto max-w-4xl px-6 pt-24 text-center">
-        <p className="luxe-reveal mb-6 text-xs uppercase tracking-[0.45em] text-gold">
+        <p className="luxe-reveal mb-6 text-xs uppercase tracking-[0.45em] text-background">
           LUX BNB Vacation Homes
         </p>
         <h1
-          className="luxe-reveal text-balance font-serif text-5xl font-medium leading-[1.05] text-foreground sm:text-6xl lg:text-7xl"
+          className="luxe-reveal text-balance font-serif text-5xl font-medium leading-[1.05] text-background sm:text-6xl lg:text-7xl"
           style={{ animationDelay: "0.15s" }}
         >
-          Beautiful Homes for{" "}
-          <span className="text-gold">Inspired Vacations</span>
+          {"Beautiful Homes for "}
+          <span className="text-gold font-semibold">Inspired Vacations</span>
         </h1>
         <p
-          className="luxe-reveal mx-auto mt-6 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg"
+          className="luxe-reveal mx-auto mt-6 max-w-xl text-pretty text-base leading-relaxed text-background sm:text-lg"
           style={{ animationDelay: "0.3s" }}
         >
           A handpicked collection of premium apartments and penthouses across

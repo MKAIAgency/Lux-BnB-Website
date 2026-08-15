@@ -6,6 +6,7 @@ import {
   createProperty,
   updateProperty,
   deleteProperty,
+  saveSlideshow,
   verifyPassword,
   changePassword,
   type PropertyInput,
@@ -33,15 +34,16 @@ export async function logoutAction(): Promise<void> {
 }
 
 function parseProperty(formData: FormData): PropertyInput {
+  const clean = (key: string, max = 240) => String(formData.get(key) ?? "").trim().slice(0, max)
   return {
-    name: String(formData.get("name") ?? "").trim(),
-    location: String(formData.get("location") ?? "").trim(),
-    image: String(formData.get("image") ?? "").trim(),
-    beds: String(formData.get("beds") ?? "").trim(),
-    baths: String(formData.get("baths") ?? "").trim(),
-    sqft: String(formData.get("sqft") ?? "").trim(),
-    tag: String(formData.get("tag") ?? "").trim(),
-    enquireLink: String(formData.get("enquireLink") ?? "").trim(),
+    name: clean("name", 120),
+    location: clean("location", 160),
+    image: clean("image", 500),
+    beds: clean("beds", 40),
+    baths: clean("baths", 40),
+    sqft: clean("sqft", 40),
+    tag: clean("tag", 160),
+    enquireLink: clean("enquireLink", 500),
   }
 }
 
@@ -56,6 +58,14 @@ export async function savePropertyAction(
   const data = parseProperty(formData)
   if (!data.name || !data.location) {
     return { error: "Name and location are required." }
+  }
+  if (data.enquireLink) {
+    try {
+      const url = new URL(data.enquireLink)
+      if (url.protocol !== "https:") return { error: "Enquiry link must use HTTPS." }
+    } catch {
+      return { error: "Enquiry link must be a valid URL." }
+    }
   }
   if (id) {
     await updateProperty(id, data)
@@ -75,6 +85,14 @@ export async function deletePropertyAction(formData: FormData): Promise<void> {
     revalidatePath("/admin")
     revalidatePath("/")
   }
+}
+
+export async function saveSlideshowAction(formData: FormData): Promise<void> {
+  if (!(await isAuthenticated())) return
+  const ids = formData.getAll("propertyId").map(String).filter(Boolean)
+  await saveSlideshow(ids)
+  revalidatePath("/admin")
+  revalidatePath("/")
 }
 
 export async function changePasswordAction(
