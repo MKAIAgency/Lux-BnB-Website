@@ -1,4 +1,3 @@
-import { SiteHeader } from "@/components/site-header"
 import { LifestyleHero } from "@/components/lifestyle-hero"
 import { FeaturedProperties } from "@/components/featured-properties"
 import { Experiences } from "@/components/experiences"
@@ -10,7 +9,6 @@ import { SiteFooter } from "@/components/site-footer"
 export default function Page() {
   return (
     <>
-      <SiteHeader />
       <main>
         <LifestyleHero />
         <FeaturedProperties />
