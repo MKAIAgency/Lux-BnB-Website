@@ -24,9 +24,6 @@ export function LifestyleHero() {
   return (
     <section className="lifestyle-hero relative isolate min-h-[min(920px,100vh)] overflow-visible bg-background">
       <div className="lifestyle-hero__image absolute inset-0" key={lifestyle.image} style={{ backgroundImage: `url(${lifestyle.image})` }} aria-hidden="true" />
-      <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/55 to-background/10" aria-hidden="true" />
-      <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/25" aria-hidden="true" />
-
       <div className="relative z-10 mx-auto flex min-h-[min(920px,100vh)] max-w-[1500px] flex-col justify-between px-6 pb-8 pt-32 lg:px-12 lg:pb-12 lg:pt-40">
         <div className="max-w-3xl">
           <p className="luxe-reveal mb-6 text-xs uppercase tracking-[0.45em] text-gold">LUX BNB Vacation Homes</p>

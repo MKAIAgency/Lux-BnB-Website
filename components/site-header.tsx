@@ -16,13 +16,12 @@ export function SiteHeader() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-background/70 backdrop-blur-md">
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-10">
-        <a href="#" className="flex flex-col leading-none">
-          <span className="font-serif text-2xl font-semibold tracking-wide text-foreground">
-            LUX <span className="text-gold">BNB</span>
-          </span>
-          <span className="text-[10px] uppercase tracking-[0.35em] text-muted-foreground">
-            Vacation Homes
-          </span>
+        <a href="#" className="flex items-center leading-none" aria-label="Lux BNB Vacation Homes">
+          <img
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/644d6bbff379b2416f2f0332_logo-blue-luxbnb-rDGqIasy4sMK9GCWDBklWr1TGmlNMz.png"
+            alt="Lux BNB"
+            className="h-10 w-auto object-contain"
+          />
         </a>
 
         <nav className="hidden items-center gap-10 md:flex">

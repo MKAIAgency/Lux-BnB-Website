@@ -57,7 +57,7 @@
   --card-foreground: oklch(0.18 0.02 60);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.18 0.02 60);
-  --primary: oklch(0.78 0.12 82);
+  --primary: oklch(0.69 0.14 76);
   --primary-foreground: oklch(0.18 0.02 60);
   --secondary: oklch(0.94 0.012 80);
   --secondary-foreground: oklch(0.18 0.02 60);
@@ -68,8 +68,8 @@
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.86 0.02 80);
   --input: oklch(0.9 0.015 80);
-  --ring: oklch(0.78 0.12 82);
-  --gold: oklch(0.65 0.12 70);
+  --ring: oklch(0.69 0.14 76);
+  --gold: oklch(0.69 0.14 76);
   --gold-foreground: oklch(1 0 0);
   --chart-1: oklch(0.78 0.12 82);
   --chart-2: oklch(0.68 0.1 75);
@@ -79,7 +79,7 @@
   --radius: 0.25rem;
   --sidebar: oklch(0.98 0.008 80);
   --sidebar-foreground: oklch(0.18 0.02 60);
-  --sidebar-primary: oklch(0.78 0.12 82);
+  --sidebar-primary: oklch(0.69 0.14 76);
   --sidebar-primary-foreground: oklch(0.18 0.02 60);
   --sidebar-accent: oklch(0.94 0.012 80);
   --sidebar-accent-foreground: oklch(0.18 0.02 60);
