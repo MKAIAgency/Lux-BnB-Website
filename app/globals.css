@@ -261,7 +261,7 @@ header.fixed > div + div { background: oklch(1 0 0) !important; }
 .lifestyle-search .property-search { margin-top: 0; }
 
 .lifestyle-hero__contrast { background: linear-gradient(90deg, rgba(0, 0, 0, .54) 0%, rgba(0, 0, 0, .27) 50%, rgba(0, 0, 0, .06) 100%), linear-gradient(0deg, rgba(0, 0, 0, .3) 0%, transparent 58%); }
-.lifestyle-hero { position: relative; z-index: 10; overflow: visible; background: var(--foreground); }
+.lifestyle-hero { position: relative; z-index: 10; overflow: visible; background: var(--background); }
 .lifestyle-hero .lifestyle-search { position: relative; z-index: 20; }
 main > section:not(.lifestyle-hero) { position: relative; z-index: 0; }
 main > section:not(.lifestyle-hero)::before { content: ""; position: absolute; left: 2rem; top: 0; height: 1px; width: calc(100% - 4rem); background: color-mix(in srgb, var(--foreground) 10%, transparent); }

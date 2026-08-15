@@ -29,11 +29,11 @@ export function LifestyleHero() {
       {lifestyle.name !== "Dubai" && lifestyle.name !== "Downtown" ? <div className="lifestyle-hero__contrast absolute inset-y-0 right-0 w-1/2" aria-hidden="true" /> : null}
       <div className="relative z-10 mx-0 flex min-h-[min(920px,100vh)] w-full max-w-[1500px] flex-col items-start justify-between px-6 pb-8 pt-32 text-left lg:mr-auto lg:w-1/2 lg:px-12 lg:pb-12 lg:pt-40">
         <div className="max-w-3xl">
-          <p className="luxe-reveal mb-6 text-xs uppercase tracking-[0.45em] text-white">LUX BNB Vacation Homes</p>
+          <p className="luxe-reveal mb-6 text-xs uppercase tracking-[0.45em] text-foreground">LUX BNB Vacation Homes</p>
           <h1 className="luxe-reveal max-w-3xl text-balance font-serif text-6xl font-medium leading-[0.9] text-foreground sm:text-8xl lg:text-[8.5rem]" style={{ animationDelay: "0.15s" }}>
-            <span className="text-white">Beautiful Homes for <span className="text-gold">Inspired Vacations</span></span>
+            <span className="text-foreground">Beautiful Homes for <span className="text-gold">Inspired Vacations</span></span>
           </h1>
-          <p className="luxe-reveal mt-8 max-w-xl text-pretty text-base leading-relaxed text-white sm:text-lg" style={{ animationDelay: "0.3s" }}>
+          <p className="luxe-reveal mt-8 max-w-xl text-pretty text-base leading-relaxed text-foreground sm:text-lg" style={{ animationDelay: "0.3s" }}>
             A handpicked collection of premium apartments and penthouses across Dubai&apos;s most sought-after addresses, paired with attentive guest service for a flawless stay.
           </p>
         </div>
