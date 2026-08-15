@@ -169,7 +169,7 @@
 
 .lifestyle-hero__image {
   background-position: center center;
-  background-size: 100% 100%;
+  background-size: cover;
   filter: saturate(.78) contrast(1.04);
   animation: lifestyle-image-in 900ms var(--ease-luxe) both;
 }
@@ -259,7 +259,7 @@ header.fixed > div + div { background: oklch(1 0 0) !important; }
 .lifestyle-search .property-search { margin-top: 0; }
 
 .lifestyle-hero__contrast { background: linear-gradient(90deg, rgba(0, 0, 0, .54) 0%, rgba(0, 0, 0, .27) 50%, rgba(0, 0, 0, .06) 100%), linear-gradient(0deg, rgba(0, 0, 0, .3) 0%, transparent 58%); }
-.lifestyle-hero { position: relative; z-index: 10; overflow: visible; }
+.lifestyle-hero { position: relative; z-index: 10; overflow: visible; background: var(--foreground); }
 .lifestyle-hero .lifestyle-search { position: relative; z-index: 20; }
 main > section:not(.lifestyle-hero) { position: relative; z-index: 0; }
 main > section:not(.lifestyle-hero)::before { content: ""; position: absolute; left: 2rem; top: 0; height: 1px; width: calc(100% - 4rem); background: color-mix(in srgb, var(--foreground) 10%, transparent); }
@@ -267,6 +267,7 @@ main > section:not(.lifestyle-hero)::before { content: ""; position: absolute; l
 @media (max-width: 640px) {
   .lifestyle-hero { min-height: auto; }
   .lifestyle-hero > div.relative { min-height: auto; padding: 7rem 1.25rem 2.25rem; }
+  .lifestyle-hero__image, .lifestyle-hero__contrast { right: 0; width: 100%; }
   .lifestyle-hero__image { background-position: center center; }
   .lifestyle-hero h1 { max-width: 9ch; font-size: clamp(3.25rem, 14vw, 4.4rem); line-height: .9; }
   .lifestyle-hero h1 + p { margin-top: 1rem; font-size: .9rem; line-height: 1.55; }
