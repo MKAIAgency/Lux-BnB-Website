@@ -30,7 +30,7 @@ export function Hero() {
           style={{ animationDelay: "0.15s" }}
         >
           {"Beautiful Homes for "}
-          <span className="text-gold drop-shadow-[0_2px_4px_rgb(0_0_0_/_1),0_0_20px_rgb(232_181_76_/_0.7)]">Inspired Vacations</span>
+          <span className="text-gold font-semibold">Inspired Vacations</span>
         </h1>
         <p
           className="luxe-reveal mx-auto mt-6 max-w-xl text-pretty text-base leading-relaxed text-background drop-shadow-[0_2px_10px_rgb(255_255_255_/_0.45)] sm:text-lg"
