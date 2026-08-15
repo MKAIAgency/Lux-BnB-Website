@@ -27,7 +27,7 @@ export function LifestyleHero() {
     <section className="lifestyle-hero relative isolate min-h-[min(920px,100vh)] overflow-visible bg-background">
       <div className="lifestyle-hero__image absolute inset-y-0 right-0 w-1/2" key={lifestyle.image} style={{ backgroundImage: `url(${lifestyle.image})`, backgroundPosition: lifestyle.name === "Palm Jumeirah" ? "center calc(0% - 20px)" : lifestyle.name === "Dubai" || lifestyle.name === "Downtown" ? "center calc(100% + 80px)" : lifestyle.name === "Dubai Marina" ? "center calc(100% + 80px)" : undefined }} aria-hidden="true" />
       {lifestyle.name !== "Dubai" && lifestyle.name !== "Downtown" ? <div className="lifestyle-hero__contrast absolute inset-y-0 right-0 w-1/2" aria-hidden="true" /> : null}
-      <div className="relative z-10 mx-auto flex min-h-[min(920px,100vh)] w-full max-w-[1500px] flex-col justify-between px-6 pb-8 pt-32 lg:mr-auto lg:w-1/2 lg:px-12 lg:pb-12 lg:pt-40">
+      <div className="relative z-10 mx-0 flex min-h-[min(920px,100vh)] w-full max-w-[1500px] flex-col items-start justify-between px-6 pb-8 pt-32 text-left lg:mr-auto lg:w-1/2 lg:px-12 lg:pb-12 lg:pt-40">
         <div className="max-w-3xl">
           <p className="luxe-reveal mb-6 text-xs uppercase tracking-[0.45em] text-white">LUX BNB Vacation Homes</p>
           <h1 className="luxe-reveal max-w-3xl text-balance font-serif text-6xl font-medium leading-[0.9] text-foreground sm:text-8xl lg:text-[8.5rem]" style={{ animationDelay: "0.15s" }}>
