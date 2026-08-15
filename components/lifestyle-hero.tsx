@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { ArrowDownRight, MapPin } from "lucide-react"
+import { ArrowDownRight, ChevronDown, MapPin } from "lucide-react"
 import { PropertySearch } from "@/components/property-search"
 
 const lifestyles = [
@@ -17,6 +17,7 @@ const lifestyles = [
 
 export function LifestyleHero() {
   const [activeDestination, setActiveDestination] = useState("")
+  const [destinationOpen, setDestinationOpen] = useState(false)
   const activeIndex = lifestyles.findIndex((item) => item.name === activeDestination)
   const lifestyle = activeIndex >= 0 ? lifestyles[activeIndex] : { name: "All destinations", mood: "Dubai, your way", image: "/images/hero-dubai-skyline.jpeg" }
 
@@ -43,17 +44,23 @@ export function LifestyleHero() {
               <MapPin className="size-3.5 text-gold" aria-hidden="true" />
               <span>Explore destinations</span>
             </div>
-            <div className="lifestyle-destinations-grid" role="tablist" aria-label="Choose a destination">
-              <button type="button" role="tab" aria-selected={activeDestination === ""} onClick={() => setActiveDestination("")} className={`lifestyle-tab ${activeDestination === "" ? "is-active" : ""}`}>
-                <span>Dubai</span>
-                <small>Dubai, your way</small>
+            <div className="destination-picker">
+              <button type="button" className="destination-picker__trigger" aria-expanded={destinationOpen} aria-controls="destination-options" onClick={() => setDestinationOpen((open) => !open)}>
+                <span>{activeDestination || "Dubai"}</span>
+                <ChevronDown className={`size-4 transition-transform ${destinationOpen ? "rotate-180" : ""}`} aria-hidden="true" />
               </button>
-              {lifestyles.map((item) => (
-                <button key={item.name} type="button" role="tab" aria-selected={activeDestination === item.name} onClick={() => setActiveDestination(item.name)} className={`lifestyle-tab ${activeDestination === item.name ? "is-active" : ""}`}>
-                  <span>{item.name}</span>
-                  <small>{item.mood}</small>
-                </button>
-              ))}
+              {destinationOpen ? (
+                <div id="destination-options" className="destination-picker__menu" role="listbox" aria-label="Choose a destination">
+                  <button type="button" role="option" aria-selected={activeDestination === ""} onClick={() => { setActiveDestination(""); setDestinationOpen(false) }}>
+                    <span>Dubai</span><small>Dubai, your way</small>
+                  </button>
+                  {lifestyles.map((item) => (
+                    <button key={item.name} type="button" role="option" aria-selected={activeDestination === item.name} onClick={() => { setActiveDestination(item.name); setDestinationOpen(false) }}>
+                      <span>{item.name}</span><small>{item.mood}</small>
+                    </button>
+                  ))}
+                </div>
+              ) : null}
             </div>
           </div>
           <div className="lifestyle-search rounded-sm border border-foreground/15 bg-background/55 p-4 backdrop-blur-xl sm:p-5">
