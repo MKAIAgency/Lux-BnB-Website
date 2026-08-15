@@ -40,26 +40,31 @@ export function LifestyleHero() {
 
         <div className="grid gap-8 lg:grid-cols-[1fr_430px] lg:items-end">
           <div className="lifestyle-search rounded-sm border border-foreground/15 bg-background/55 p-4 backdrop-blur-xl sm:p-5">
-            <div className="mb-3 flex items-center justify-between"><span className="text-xs uppercase tracking-[0.24em] text-gold">Explore destinations</span><ArrowDownRight className="size-4 text-gold" aria-hidden="true" /></div>
-            <div className="destination-picker">
-              <button type="button" className="destination-picker__trigger" aria-expanded={destinationOpen} aria-controls="destination-options" onClick={() => setDestinationOpen((open) => !open)}>
-                <span>{activeDestination || "Dubai"}</span>
-                <ChevronDown className={`size-4 transition-transform ${destinationOpen ? "rotate-180" : ""}`} aria-hidden="true" />
-              </button>
-              {destinationOpen ? (
-                <div id="destination-options" className="destination-picker__menu" role="listbox" aria-label="Choose a destination">
-                  <button type="button" role="option" aria-selected={activeDestination === ""} onClick={() => { setActiveDestination(""); setDestinationOpen(false) }}>
-                    <span>Dubai</span><small>Dubai, your way</small>
-                  </button>
-                  {lifestyles.map((item) => (
-                    <button key={item.name} type="button" role="option" aria-selected={activeDestination === item.name} onClick={() => { setActiveDestination(item.name); setDestinationOpen(false) }}>
-                      <span>{item.name}</span><small>{item.mood}</small>
+            <div className="lifestyle-search__destination">
+              <div className="mb-3 flex items-center justify-between"><span className="text-xs uppercase tracking-[0.24em] text-gold">Explore destinations</span><ArrowDownRight className="size-4 text-gold" aria-hidden="true" /></div>
+              <div className="destination-picker">
+                <button type="button" className="destination-picker__trigger" aria-expanded={destinationOpen} aria-controls="destination-options" onClick={() => setDestinationOpen((open) => !open)}>
+                  <span>{activeDestination || "Dubai"}</span>
+                  <ChevronDown className={`size-4 transition-transform ${destinationOpen ? "rotate-180" : ""}`} aria-hidden="true" />
+                </button>
+                {destinationOpen ? (
+                  <div id="destination-options" className="destination-picker__menu" role="listbox" aria-label="Choose a destination">
+                    <button type="button" role="option" aria-selected={activeDestination === ""} onClick={() => { setActiveDestination(""); setDestinationOpen(false) }}>
+                      <span>Dubai</span><small>Dubai, your way</small>
                     </button>
-                  ))}
-                </div>
-              ) : null}
+                    {lifestyles.map((item) => (
+                      <button key={item.name} type="button" role="option" aria-selected={activeDestination === item.name} onClick={() => { setActiveDestination(item.name); setDestinationOpen(false) }}>
+                        <span>{item.name}</span><small>{item.mood}</small>
+                      </button>
+                    ))}
+                  </div>
+                ) : null}
+              </div>
             </div>
-            <PropertySearch selectedDestination={activeDestination} />
+            <div className="lifestyle-search__form">
+              <span className="mb-3 block text-xs uppercase tracking-[0.24em] text-gold">Find your stay</span>
+              <PropertySearch selectedDestination={activeDestination} />
+            </div>
           </div>
         </div>
       </div>
