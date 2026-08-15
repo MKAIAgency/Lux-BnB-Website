@@ -184,8 +184,12 @@
 .lifestyle-hero h1 + p { margin-top: 1.25rem; max-width: 34rem; }
 .lifestyle-hero .grid { align-items: end; gap: clamp(1.5rem, 4vw, 4rem); }
 .lifestyle-hero .grid > div:first-child { min-width: 0; max-width: 48rem; }
-.lifestyle-hero .grid > div:last-child { min-width: 0; width: 100%; max-width: 25rem; justify-self: end; }
+.lifestyle-hero .grid > div:last-child { min-width: 0; width: 100%; max-width: 31rem; justify-self: end; }
 .lifestyle-hero .lifestyle-search { width: 100%; }
+.lifestyle-hero .lifestyle-search form { padding: .55rem; }
+.lifestyle-hero .lifestyle-search form > div { align-items: stretch; }
+.lifestyle-hero .lifestyle-search form button[type="submit"] { min-width: 7rem; white-space: nowrap; }
+.lifestyle-hero .lifestyle-search form [class*="text-[10px]"] { white-space: nowrap; }
 .lifestyle-hero .lifestyle-search form { margin-top: 0; }
 .lifestyle-destinations-grid { width: 100%; grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .lifestyle-tab { min-width: 0; min-height: 4.6rem; }
