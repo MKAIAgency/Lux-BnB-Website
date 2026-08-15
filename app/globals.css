@@ -199,6 +199,13 @@
   to { opacity: 1; transform: scale(1); }
 }
 
+.lifestyle-destinations-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .5rem;
+  max-width: 48rem;
+}
+
 .lifestyle-tab {
   display: flex;
   min-width: 9.5rem;
@@ -229,6 +236,7 @@ main > section:not(.lifestyle-hero)::before { content: ""; position: absolute; l
   .lifestyle-hero h1 { font-size: clamp(3.85rem, 16vw, 5.2rem); }
   .lifestyle-hero h1 + p { font-size: .95rem; }
   .lifestyle-hero .flex.max-w-3xl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); overflow: visible; }
+  .lifestyle-destinations-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .lifestyle-hero .lifestyle-tab { min-width: 0; width: 100%; }
   .lifestyle-hero .lifestyle-search { max-width: none; justify-self: stretch; }
   main > section:not(.lifestyle-hero)::before { left: 1rem; width: calc(100% - 2rem); }

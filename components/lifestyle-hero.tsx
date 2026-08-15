@@ -40,7 +40,7 @@ export function LifestyleHero() {
               <MapPin className="size-3.5 text-gold" aria-hidden="true" />
               <span>Explore destinations</span>
             </div>
-            <div className="flex max-w-3xl gap-2 overflow-x-auto pb-2" role="tablist" aria-label="Choose a destination">
+            <div className="lifestyle-destinations-grid" role="tablist" aria-label="Choose a destination">
               <button type="button" role="tab" aria-selected={activeDestination === ""} onClick={() => setActiveDestination("")} className={`lifestyle-tab ${activeDestination === "" ? "is-active" : ""}`}>
                 <span>All</span>
                 <small>Dubai, your way</small>
@@ -56,7 +56,7 @@ export function LifestyleHero() {
           </div>
           <div className="lifestyle-search rounded-sm border border-foreground/15 bg-background/55 p-4 backdrop-blur-xl sm:p-5">
             <div className="mb-3 flex items-center justify-between"><span className="text-xs uppercase tracking-[0.24em] text-gold">Find your stay</span><ArrowDownRight className="size-4 text-gold" aria-hidden="true" /></div>
-            <PropertySearch selectedDestination={activeDestination} onDestinationChange={setActiveDestination} />
+            <PropertySearch selectedDestination={activeDestination} />
           </div>
         </div>
       </div>

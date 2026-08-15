@@ -2,26 +2,12 @@
 
 import type React from "react"
 import { useEffect, useRef, useState } from "react"
-import { Search, CalendarDays, Users, MapPin, ChevronLeft, ChevronRight, ChevronDown } from "lucide-react"
+import { Search, CalendarDays, Users, ChevronLeft, ChevronRight } from "lucide-react"
 
 const BASE_URL = "https://luxbnb.guestybookings.com/en/properties"
 
 // The company only operates in the UAE, so the country is always fixed.
 const COUNTRY = "United Arab Emirates"
-
-// Destinations the company operates in. Selecting one is optional; it simply
-// adds a `city` filter to the search.
-const DESTINATIONS = [
-  "Business Bay",
-  "Downtown",
-  "Dubai",
-  "Dubai Creek Harbour",
-  "Greens & Views",
-  "JBR",
-  "JVC",
-  "Palm Jumeirah",
-  "دبي",
-]
 
 type FieldErrors = {
   dates?: string
@@ -64,18 +50,9 @@ function formatDisplay(d: Date | null) {
 
 type PropertySearchProps = {
   selectedDestination?: string
-  onDestinationChange?: (destination: string) => void
 }
 
-export function PropertySearch({ selectedDestination, onDestinationChange }: PropertySearchProps) {
-  const [destination, setDestination] = useState(selectedDestination ?? "")
-  const currentDestination = selectedDestination ?? destination
-
-  function updateDestination(value: string) {
-    setDestination(value)
-    onDestinationChange?.(value)
-  }
-  const [destOpen, setDestOpen] = useState(false)
+export function PropertySearch({ selectedDestination }: PropertySearchProps) {
   const [adults, setAdults] = useState(1)
   const [from, setFrom] = useState<Date | null>(null)
   const [to, setTo] = useState<Date | null>(null)
@@ -86,7 +63,6 @@ export function PropertySearch({ selectedDestination, onDestinationChange }: Pro
   const [viewMonth, setViewMonth] = useState(new Date(today.getFullYear(), today.getMonth(), 1))
 
   const calendarRef = useRef<HTMLDivElement>(null)
-  const destRef = useRef<HTMLDivElement>(null)
 
   // Close the calendar when clicking outside of it.
   useEffect(() => {
@@ -99,18 +75,6 @@ export function PropertySearch({ selectedDestination, onDestinationChange }: Pro
     document.addEventListener("mousedown", onPointerDown)
     return () => document.removeEventListener("mousedown", onPointerDown)
   }, [calendarOpen])
-
-  // Close the destination dropdown when clicking outside of it.
-  useEffect(() => {
-    if (!destOpen) return
-    function onPointerDown(e: MouseEvent) {
-      if (destRef.current && !destRef.current.contains(e.target as Node)) {
-        setDestOpen(false)
-      }
-    }
-    document.addEventListener("mousedown", onPointerDown)
-    return () => document.removeEventListener("mousedown", onPointerDown)
-  }, [destOpen])
 
   function handleDayClick(day: Date) {
     if (!from || (from && to)) {
@@ -151,10 +115,7 @@ export function PropertySearch({ selectedDestination, onDestinationChange }: Pro
 
     // URLSearchParams handles encoding of spaces and non-Latin characters.
     const params = new URLSearchParams()
-    // Destination is optional; only add a `city` filter when one is selected.
-    if (currentDestination) {
-      params.set("city", currentDestination)
-    }
+    if (selectedDestination) params.set("city", selectedDestination)
     params.set("country", COUNTRY)
     params.set("minOccupancy", String(adults))
     params.set("checkIn", toISO(from as Date))
@@ -187,85 +148,7 @@ export function PropertySearch({ selectedDestination, onDestinationChange }: Pro
       noValidate
       className="mx-auto mt-8 w-full max-w-3xl rounded-md border border-border/70 bg-card/80 p-3 text-left backdrop-blur-md"
     >
-      <div className="grid grid-cols-1 gap-2 lg:grid-cols-[1.3fr_1.3fr_0.8fr_auto]">
-        <div className="relative flex flex-col" ref={destRef}>
-          <button
-            type="button"
-            onClick={() => setDestOpen((v) => !v)}
-            aria-haspopup="listbox"
-            aria-expanded={destOpen}
-            className="flex items-center gap-3 rounded-sm px-4 py-3 text-left transition-colors duration-300 hover:bg-secondary/60"
-          >
-            <MapPin className="size-5 shrink-0 text-gold" />
-            <div className="min-w-0 flex-1">
-              <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Destination</p>
-              <p className={`truncate text-sm ${currentDestination ? "text-foreground" : "text-muted-foreground/60"}`}>
-                {currentDestination || "Anywhere in Dubai"}
-              </p>
-            </div>
-            <ChevronDown
-              className={`size-4 shrink-0 text-muted-foreground transition-transform duration-500 ease-luxe ${destOpen ? "rotate-180" : ""}`}
-            />
-          </button>
-
-          {destOpen ? (
-            <div className="absolute left-0 top-full z-30 mt-3 w-full min-w-[17rem] origin-top overflow-hidden rounded-lg border border-gold/25 bg-popover/95 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7),0_0_0_1px_rgba(0,0,0,0.2)] ring-1 ring-inset ring-white/5 backdrop-blur-xl animate-in fade-in-0 zoom-in-95 slide-in-from-top-2 duration-500 ease-luxe">
-              <div className="border-b border-border/60 px-4 pb-2.5 pt-3">
-                <p className="text-sm text-gold">Choose your destination</p>
-              </div>
-              <ul
-                role="listbox"
-                aria-label="Select a destination"
-                className="max-h-64 overflow-y-auto p-2"
-              >
-                <li role="option" aria-selected={currentDestination === ""}>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      updateDestination("")
-                      setDestOpen(false)
-                    }}
-                    className={`group flex w-full items-center gap-2.5 rounded-md px-3 py-2.5 text-left text-sm transition-colors hover:bg-gold/10 ${
-                      currentDestination === "" ? "text-gold" : "text-muted-foreground"
-                    }`}
-                  >
-                    <MapPin className="size-4 shrink-0 opacity-60" />
-                    Anywhere in Dubai
-                  </button>
-                </li>
-                {DESTINATIONS.map((d) => (
-                  <li key={d} role="option" aria-selected={currentDestination === d}>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        updateDestination(d)
-                        setDestOpen(false)
-                      }}
-                      className={`group flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-left transition-colors hover:bg-gold/10 ${
-                        currentDestination === d ? "bg-gold/10" : ""
-                      }`}
-                    >
-                      <span
-                        className={`flex size-8 shrink-0 items-center justify-center rounded-full border transition-colors ${
-                          currentDestination === d
-                            ? "border-gold/50 bg-gold/15 text-gold"
-                            : "border-border/70 text-muted-foreground group-hover:border-gold/40 group-hover:text-gold"
-                        }`}
-                      >
-                        <MapPin className="size-4" />
-                      </span>
-                      <span className="flex min-w-0 flex-col">
-                        <span className={`text-sm ${currentDestination === d ? "text-gold" : "text-foreground"}`}>{d}</span>
-                        <span className="text-[11px] text-muted-foreground">Dubai, United Arab Emirates</span>
-                      </span>
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ) : null}
-        </div>
-
+      <div className="grid grid-cols-1 gap-2 sm:grid-cols-[1fr_1fr_auto]">
         <div className="relative flex flex-col" ref={calendarRef}>
           <button
             type="button"
