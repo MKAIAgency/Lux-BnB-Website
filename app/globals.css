@@ -190,6 +190,11 @@
 header.fixed { background: oklch(1 0 0) !important; }
 header.fixed > div + div { background: oklch(1 0 0) !important; }
 .lifestyle-search { display: grid; grid-template-columns: 1fr; align-items: stretch; gap: 1rem; padding: 1rem 1.15rem; background: color-mix(in srgb, var(--foreground) 92%, transparent) !important; border-color: color-mix(in srgb, var(--gold) 38%, transparent); box-shadow: 0 18px 50px rgba(0,0,0,.28); color: var(--background); }
+@media (min-width: 768px) {
+  .lifestyle-search { grid-template-columns: 12rem minmax(0, 1fr); }
+  .lifestyle-hero .lifestyle-search form > div { grid-template-columns: minmax(0, 1.25fr) minmax(7rem, .7fr) auto; gap: 0; }
+  .lifestyle-hero .lifestyle-search form > div > * + * { border-left: 1px solid color-mix(in srgb, var(--background) 18%, transparent); border-top: 0; }
+}
 .lifestyle-search .property-search form { max-width: none; padding: 0; }
 .lifestyle-search .property-search form > div { grid-template-columns: 1fr; gap: .35rem; }
 .lifestyle-search .property-search form button, .lifestyle-search .property-search form [class*="px-4"] { min-height: 3.25rem; }
