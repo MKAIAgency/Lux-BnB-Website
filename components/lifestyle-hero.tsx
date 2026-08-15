@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { ArrowDownRight, ChevronDown, MapPin } from "lucide-react"
+import { ArrowDownRight, ChevronDown } from "lucide-react"
 import { PropertySearch } from "@/components/property-search"
 
 const lifestyles = [
@@ -39,11 +39,8 @@ export function LifestyleHero() {
         </div>
 
         <div className="grid gap-8 lg:grid-cols-[1fr_430px] lg:items-end">
-          <div>
-            <div className="mb-4 flex items-center gap-2 text-xs uppercase tracking-[0.24em] text-foreground/70">
-              <MapPin className="size-3.5 text-gold" aria-hidden="true" />
-              <span>Explore destinations</span>
-            </div>
+          <div className="lifestyle-search rounded-sm border border-foreground/15 bg-background/55 p-4 backdrop-blur-xl sm:p-5">
+            <div className="mb-3 flex items-center justify-between"><span className="text-xs uppercase tracking-[0.24em] text-gold">Explore destinations</span><ArrowDownRight className="size-4 text-gold" aria-hidden="true" /></div>
             <div className="destination-picker">
               <button type="button" className="destination-picker__trigger" aria-expanded={destinationOpen} aria-controls="destination-options" onClick={() => setDestinationOpen((open) => !open)}>
                 <span>{activeDestination || "Dubai"}</span>
@@ -62,9 +59,6 @@ export function LifestyleHero() {
                 </div>
               ) : null}
             </div>
-          </div>
-          <div className="lifestyle-search rounded-sm border border-foreground/15 bg-background/55 p-4 backdrop-blur-xl sm:p-5">
-            <div className="mb-3 flex items-center justify-between"><span className="text-xs uppercase tracking-[0.24em] text-gold">Find your stay</span><ArrowDownRight className="size-4 text-gold" aria-hidden="true" /></div>
             <PropertySearch selectedDestination={activeDestination} />
           </div>
         </div>

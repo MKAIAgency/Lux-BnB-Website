@@ -182,10 +182,13 @@
 }
 .lifestyle-hero h1 { max-width: 10ch; font-size: clamp(4.25rem, 7.7vw, 7rem); line-height: .88; }
 .lifestyle-hero h1 + p { margin-top: 1.25rem; max-width: 34rem; }
-.lifestyle-hero .grid { align-items: end; gap: clamp(1.5rem, 4vw, 4rem); }
+.lifestyle-hero .grid { grid-template-columns: minmax(0, 1fr); align-items: end; gap: 0; }
+.lifestyle-hero .grid > div:last-child { max-width: 42rem; justify-self: center; }
 .lifestyle-hero .grid > div:first-child { min-width: 0; max-width: 48rem; }
 .lifestyle-hero .grid > div:last-child { min-width: 0; width: 100%; max-width: 31rem; justify-self: end; }
 .lifestyle-hero .lifestyle-search { width: 100%; }
+.lifestyle-hero .lifestyle-search .destination-picker { width: 100%; }
+.lifestyle-hero .lifestyle-search .destination-picker__menu { top: calc(100% + .4rem); bottom: auto; }
 .lifestyle-hero .lifestyle-search form { padding: .55rem; }
 .lifestyle-hero .lifestyle-search form > div { align-items: stretch; }
 .lifestyle-hero .lifestyle-search form button[type="submit"] { min-width: 7rem; white-space: nowrap; }
