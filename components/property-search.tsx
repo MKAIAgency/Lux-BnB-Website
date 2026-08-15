@@ -62,8 +62,19 @@ function formatDisplay(d: Date | null) {
   return d.toLocaleDateString("en-US", { day: "numeric", month: "short" })
 }
 
-export function PropertySearch() {
-  const [destination, setDestination] = useState("")
+type PropertySearchProps = {
+  selectedDestination?: string
+  onDestinationChange?: (destination: string) => void
+}
+
+export function PropertySearch({ selectedDestination, onDestinationChange }: PropertySearchProps) {
+  const [destination, setDestination] = useState(selectedDestination ?? "")
+  const currentDestination = selectedDestination ?? destination
+
+  function updateDestination(value: string) {
+    setDestination(value)
+    onDestinationChange?.(value)
+  }
   const [destOpen, setDestOpen] = useState(false)
   const [adults, setAdults] = useState(1)
   const [from, setFrom] = useState<Date | null>(null)
@@ -141,8 +152,8 @@ export function PropertySearch() {
     // URLSearchParams handles encoding of spaces and non-Latin characters.
     const params = new URLSearchParams()
     // Destination is optional; only add a `city` filter when one is selected.
-    if (destination) {
-      params.set("city", destination)
+    if (currentDestination) {
+      params.set("city", currentDestination)
     }
     params.set("country", COUNTRY)
     params.set("minOccupancy", String(adults))
@@ -174,9 +185,9 @@ export function PropertySearch() {
     <form
       onSubmit={handleSubmit}
       noValidate
-      className="mx-auto mt-8 max-w-3xl rounded-md border border-border/70 bg-card/80 p-3 text-left backdrop-blur-md"
+      className="mx-auto mt-8 w-full max-w-3xl rounded-md border border-border/70 bg-card/80 p-3 text-left backdrop-blur-md"
     >
-      <div className="grid grid-cols-1 gap-2 md:grid-cols-[1.3fr_1.3fr_0.8fr_auto]">
+      <div className="grid grid-cols-1 gap-2 lg:grid-cols-[1.3fr_1.3fr_0.8fr_auto]">
         <div className="relative flex flex-col" ref={destRef}>
           <button
             type="button"
@@ -188,8 +199,8 @@ export function PropertySearch() {
             <MapPin className="size-5 shrink-0 text-gold" />
             <div className="min-w-0 flex-1">
               <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Destination</p>
-              <p className={`truncate text-sm ${destination ? "text-foreground" : "text-muted-foreground/60"}`}>
-                {destination || "Anywhere in Dubai"}
+              <p className={`truncate text-sm ${currentDestination ? "text-foreground" : "text-muted-foreground/60"}`}>
+                {currentDestination || "Anywhere in Dubai"}
               </p>
             </div>
             <ChevronDown
@@ -207,15 +218,15 @@ export function PropertySearch() {
                 aria-label="Select a destination"
                 className="max-h-64 overflow-y-auto p-2"
               >
-                <li role="option" aria-selected={destination === ""}>
+                <li role="option" aria-selected={currentDestination === ""}>
                   <button
                     type="button"
                     onClick={() => {
-                      setDestination("")
+                      updateDestination("")
                       setDestOpen(false)
                     }}
                     className={`group flex w-full items-center gap-2.5 rounded-md px-3 py-2.5 text-left text-sm transition-colors hover:bg-gold/10 ${
-                      destination === "" ? "text-gold" : "text-muted-foreground"
+                      currentDestination === "" ? "text-gold" : "text-muted-foreground"
                     }`}
                   >
                     <MapPin className="size-4 shrink-0 opacity-60" />
@@ -223,20 +234,20 @@ export function PropertySearch() {
                   </button>
                 </li>
                 {DESTINATIONS.map((d) => (
-                  <li key={d} role="option" aria-selected={destination === d}>
+                  <li key={d} role="option" aria-selected={currentDestination === d}>
                     <button
                       type="button"
                       onClick={() => {
-                        setDestination(d)
+                        updateDestination(d)
                         setDestOpen(false)
                       }}
                       className={`group flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-left transition-colors hover:bg-gold/10 ${
-                        destination === d ? "bg-gold/10" : ""
+                        currentDestination === d ? "bg-gold/10" : ""
                       }`}
                     >
                       <span
                         className={`flex size-8 shrink-0 items-center justify-center rounded-full border transition-colors ${
-                          destination === d
+                          currentDestination === d
                             ? "border-gold/50 bg-gold/15 text-gold"
                             : "border-border/70 text-muted-foreground group-hover:border-gold/40 group-hover:text-gold"
                         }`}
@@ -244,7 +255,7 @@ export function PropertySearch() {
                         <MapPin className="size-4" />
                       </span>
                       <span className="flex min-w-0 flex-col">
-                        <span className={`text-sm ${destination === d ? "text-gold" : "text-foreground"}`}>{d}</span>
+                        <span className={`text-sm ${currentDestination === d ? "text-gold" : "text-foreground"}`}>{d}</span>
                         <span className="text-[11px] text-muted-foreground">Dubai, United Arab Emirates</span>
                       </span>
                     </button>

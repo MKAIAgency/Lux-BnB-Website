@@ -182,7 +182,10 @@
 .lifestyle-hero h1 { max-width: 10ch; font-size: clamp(4.25rem, 7.7vw, 7rem); line-height: .88; }
 .lifestyle-hero h1 + p { margin-top: 1.25rem; max-width: 34rem; }
 .lifestyle-hero .grid { gap: 1.25rem; }
-.lifestyle-hero .lifestyle-search { max-width: 27rem; justify-self: end; }
+.lifestyle-hero .grid > div:first-child { min-width: 0; }
+.lifestyle-hero .grid > div:last-child { min-width: 0; }
+.lifestyle-hero .lifestyle-search { width: 100%; max-width: 27rem; justify-self: end; }
+.lifestyle-hero .lifestyle-search form { margin-top: 0; }
 
 @media (max-height: 820px) and (min-width: 768px) {
   .lifestyle-hero > div.relative { min-height: 720px; padding-top: 7rem; padding-bottom: 1.5rem; }

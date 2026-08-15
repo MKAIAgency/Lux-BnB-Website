@@ -13,8 +13,9 @@ const lifestyles = [
 ]
 
 export function LifestyleHero() {
-  const [active, setActive] = useState(0)
-  const lifestyle = lifestyles[active]
+  const [activeDestination, setActiveDestination] = useState("")
+  const activeIndex = lifestyles.findIndex((item) => item.name === activeDestination)
+  const lifestyle = activeIndex >= 0 ? lifestyles[activeIndex] : { name: "All destinations", mood: "Dubai, your way", image: "/images/hero-dubai-skyline.jpeg" }
 
   return (
     <section className="lifestyle-hero relative isolate min-h-[min(920px,100vh)] overflow-hidden bg-background">
@@ -37,21 +38,25 @@ export function LifestyleHero() {
           <div>
             <div className="mb-4 flex items-center gap-2 text-xs uppercase tracking-[0.24em] text-foreground/70">
               <MapPin className="size-3.5 text-gold" aria-hidden="true" />
-              <span>Explore by feeling</span>
+              <span>Explore destinations</span>
             </div>
-            <div className="flex max-w-3xl gap-2 overflow-x-auto pb-2" role="tablist" aria-label="Choose your Dubai lifestyle">
-              {lifestyles.map((item, index) => (
-                <button key={item.name} type="button" role="tab" aria-selected={active === index} onClick={() => setActive(index)} className={`lifestyle-tab ${active === index ? "is-active" : ""}`}>
+            <div className="flex max-w-3xl gap-2 overflow-x-auto pb-2" role="tablist" aria-label="Choose a destination">
+              <button type="button" role="tab" aria-selected={activeDestination === ""} onClick={() => setActiveDestination("")} className={`lifestyle-tab ${activeDestination === "" ? "is-active" : ""}`}>
+                <span>All</span>
+                <small>Dubai, your way</small>
+              </button>
+              {lifestyles.map((item) => (
+                <button key={item.name} type="button" role="tab" aria-selected={activeDestination === item.name} onClick={() => setActiveDestination(item.name)} className={`lifestyle-tab ${activeDestination === item.name ? "is-active" : ""}`}>
                   <span>{item.name}</span>
                   <small>{item.mood}</small>
                 </button>
               ))}
             </div>
-            <div className="mt-5 flex items-center gap-3 text-sm text-foreground/70"><span className="text-gold">0{active + 1}</span><span className="h-px w-20 bg-foreground/30" /><span>05 destinations</span></div>
+            <div className="mt-5 flex items-center gap-3 text-sm text-foreground/70"><span className="text-gold">{activeDestination ? String(activeIndex + 1).padStart(2, "0") : "All"}</span><span className="h-px w-20 bg-foreground/30" /><span>05 destinations</span></div>
           </div>
           <div className="lifestyle-search rounded-sm border border-foreground/15 bg-background/55 p-4 backdrop-blur-xl sm:p-5">
             <div className="mb-3 flex items-center justify-between"><span className="text-xs uppercase tracking-[0.24em] text-gold">Find your stay</span><ArrowDownRight className="size-4 text-gold" aria-hidden="true" /></div>
-            <PropertySearch />
+            <PropertySearch selectedDestination={activeDestination} onDestinationChange={setActiveDestination} />
           </div>
         </div>
       </div>
