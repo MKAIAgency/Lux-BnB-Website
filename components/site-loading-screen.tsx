@@ -13,6 +13,12 @@ export function SiteLoadingScreen() {
     }
 
     window.addEventListener("hero-video-ready", handleReady)
+
+    const video = document.querySelector("video")
+    if (video && video.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) {
+      handleReady()
+    }
+
     return () => window.removeEventListener("hero-video-ready", handleReady)
   }, [])
 

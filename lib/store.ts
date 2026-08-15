@@ -44,8 +44,13 @@ function slugify(name: string): string {
 }
 
 export async function getProperties(): Promise<Property[]> {
-  const rows = await db.select().from(luxProperties).orderBy(asc(luxProperties.createdAt))
-  return rows.map(toProperty)
+  try {
+    const rows = await db.select().from(luxProperties).orderBy(asc(luxProperties.createdAt))
+    return rows.map(toProperty)
+  } catch (error) {
+    console.error("[v0] Failed to load properties:", error)
+    return []
+  }
 }
 
 const SLIDESHOW_SETTING = "slideshow_property_ids"
@@ -102,8 +107,13 @@ export async function deleteProperty(id: string): Promise<void> {
 }
 
 async function getSetting(key: string): Promise<string | undefined> {
-  const rows = await db.select({ value: luxSettings.value }).from(luxSettings).where(eq(luxSettings.key, key)).limit(1)
-  return rows[0]?.value
+  try {
+    const rows = await db.select({ value: luxSettings.value }).from(luxSettings).where(eq(luxSettings.key, key)).limit(1)
+    return rows[0]?.value
+  } catch (error) {
+    console.error("[v0] Failed to load setting:", error)
+    return undefined
+  }
 }
 
 async function setSetting(key: string, value: string): Promise<void> {
