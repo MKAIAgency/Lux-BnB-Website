@@ -238,14 +238,19 @@ main > section:not(.lifestyle-hero) { position: relative; }
 main > section:not(.lifestyle-hero)::before { content: ""; position: absolute; left: 2rem; top: 0; height: 1px; width: calc(100% - 4rem); background: color-mix(in srgb, var(--foreground) 10%, transparent); }
 
 @media (max-width: 640px) {
-  .lifestyle-hero { min-height: 980px; }
-  .lifestyle-hero > div.relative { min-height: 980px; padding-top: 7.5rem; padding-bottom: 1.5rem; }
+  .lifestyle-hero { min-height: auto; }
+  .lifestyle-hero > div.relative { min-height: auto; padding: 7rem 1.25rem 2.25rem; }
   .lifestyle-hero__image { background-position: 62% center; }
-  .lifestyle-hero h1 { font-size: clamp(3.85rem, 16vw, 5.2rem); }
-  .lifestyle-hero h1 + p { font-size: .95rem; }
-  .lifestyle-destinations-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .lifestyle-hero h1 { max-width: 9ch; font-size: clamp(3.25rem, 14vw, 4.4rem); line-height: .9; }
+  .lifestyle-hero h1 + p { margin-top: 1rem; font-size: .9rem; line-height: 1.55; }
+  .lifestyle-hero .grid { gap: 1.5rem; }
+  .lifestyle-destinations-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .3rem; }
   .lifestyle-hero .grid > div:last-child { max-width: none; justify-self: stretch; }
-  .lifestyle-hero .lifestyle-tab { min-width: 0; width: 100%; }
-  .lifestyle-hero .lifestyle-search { max-width: none; justify-self: stretch; }
+  .lifestyle-hero .lifestyle-tab { min-width: 0; min-height: 3rem; width: 100%; gap: .1rem; padding: .45rem .55rem; }
+  .lifestyle-tab span { font-size: .68rem; }
+  .lifestyle-tab small { font-size: .56rem; }
+  .lifestyle-hero .lifestyle-search { max-width: none; justify-self: stretch; padding: .75rem; }
+  .lifestyle-hero .lifestyle-search > div:first-child { margin-bottom: .5rem; }
+  .lifestyle-hero .lifestyle-search form { padding: .35rem; }
   main > section:not(.lifestyle-hero)::before { left: 1rem; width: calc(100% - 2rem); }
 }
