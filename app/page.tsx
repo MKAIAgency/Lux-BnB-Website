@@ -1,5 +1,5 @@
 import { SiteHeader } from "@/components/site-header"
-import { Hero } from "@/components/hero"
+import { LifestyleHero } from "@/components/lifestyle-hero"
 import { FeaturedProperties } from "@/components/featured-properties"
 import { Experiences } from "@/components/experiences"
 import { Concierge } from "@/components/concierge"
@@ -12,7 +12,7 @@ export default function Page() {
     <>
       <SiteHeader />
       <main>
-        <Hero />
+        <LifestyleHero />
         <FeaturedProperties />
         <Experiences />
         <Concierge />
