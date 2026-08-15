@@ -5,6 +5,7 @@ import { ArrowDownRight, ChevronDown } from "lucide-react"
 import { PropertySearch } from "@/components/property-search"
 
 const lifestyles = [
+  { name: "Dubai", mood: "City in motion", image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-NY2kQ60SGYyrA9ytfsUoYj51WfWC2n.png" },
   { name: "Palm Jumeirah", mood: "Island calm", image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-AI3y4QXuwJ8eLcRiwovi1puABIIV4B.png" },
   { name: "Dubai Marina", mood: "Waterfront energy", image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image.png-NPyJrRSDlRw6QoQvr6CXbLTfNUwhEt.jpeg" },
   { name: "Downtown", mood: "City in motion", image: "/images/hero-dubai-skyline.jpeg" },
@@ -19,7 +20,7 @@ export function LifestyleHero() {
   const [activeDestination, setActiveDestination] = useState("")
   const [destinationOpen, setDestinationOpen] = useState(false)
   const activeIndex = lifestyles.findIndex((item) => item.name === activeDestination)
-  const lifestyle = activeIndex >= 0 ? lifestyles[activeIndex] : { name: "All destinations", mood: "Dubai, your way", image: "/images/hero-dubai-skyline.jpeg" }
+  const lifestyle = activeIndex >= 0 ? lifestyles[activeIndex] : lifestyles[0]
 
   return (
     <section className="lifestyle-hero relative isolate min-h-[min(920px,100vh)] overflow-visible bg-background">
