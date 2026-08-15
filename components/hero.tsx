@@ -22,7 +22,7 @@ export function Hero() {
       </div>
       <div className="relative z-10 mx-auto max-w-4xl px-6 pt-44 text-center sm:pt-48 lg:pt-56">
 
-        <p className="luxe-reveal mb-6 text-xs uppercase tracking-[0.45em] text-gold">
+        <p className="luxe-reveal mb-6 text-xs uppercase tracking-[0.45em] text-background">
           LUX BNB Vacation Homes
         </p>
         <h1
