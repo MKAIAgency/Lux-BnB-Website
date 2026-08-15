@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { ArrowDownRight, Compass, MapPin } from "lucide-react"
+import { ArrowDownRight, MapPin } from "lucide-react"
 import { PropertySearch } from "@/components/property-search"
 
 const lifestyles = [
@@ -24,10 +24,6 @@ export function LifestyleHero() {
 
       <div className="relative z-10 mx-auto flex min-h-[min(920px,100vh)] max-w-[1500px] flex-col justify-between px-6 pb-8 pt-32 lg:px-12 lg:pb-12 lg:pt-40">
         <div className="max-w-3xl">
-          <div className="mb-8 flex items-center gap-3 text-[10px] uppercase tracking-[0.34em] text-gold">
-            <Compass className="size-4" aria-hidden="true" />
-            <span>Choose Your Dubai Lifestyle</span>
-          </div>
           <p className="luxe-reveal mb-6 text-xs uppercase tracking-[0.45em] text-gold">LUX BNB Vacation Homes</p>
           <h1 className="luxe-reveal max-w-3xl text-balance font-serif text-6xl font-medium leading-[0.9] text-foreground sm:text-8xl lg:text-[8.5rem]" style={{ animationDelay: "0.15s" }}>
             Beautiful Homes for <span className="text-gold">Inspired Vacations</span>
