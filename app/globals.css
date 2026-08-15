@@ -169,7 +169,7 @@
 
 .lifestyle-hero__image {
   background-position: center center;
-  background-size: cover;
+  background-size: 100% 100%;
   filter: saturate(.78) contrast(1.04);
   animation: lifestyle-image-in 900ms var(--ease-luxe) both;
 }
