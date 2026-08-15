@@ -4,7 +4,7 @@ import { useState } from "react"
 import { ArrowDownRight, ChevronDown } from "lucide-react"
 import { PropertySearch } from "@/components/property-search"
 
-const defaultDubai = { name: "Dubai", mood: "City in motion", image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-o9RMiOTrCz30g6J7qC9NRhtSk5HETA.png" }
+const defaultDubai = { name: "Dubai", mood: "City in motion", image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/pexels-ayrat-244411276-19136351-OKiKiMVs6nqKnEvotIxWld8z82Qo4q.jpg" }
 
 const lifestyles = [
   { name: "Palm Jumeirah", mood: "Island calm", image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-AI3y4QXuwJ8eLcRiwovi1puABIIV4B.png" },
