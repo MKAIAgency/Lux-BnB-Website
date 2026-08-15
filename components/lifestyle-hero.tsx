@@ -5,7 +5,7 @@ import { ArrowDownRight, ChevronDown } from "lucide-react"
 import { PropertySearch } from "@/components/property-search"
 
 const lifestyles = [
-  { name: "Palm Jumeirah", mood: "Island calm", image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-K2AEl1SuyAOxjgFCQxXkSCV3ZHBtea.png" },
+  { name: "Palm Jumeirah", mood: "Island calm", image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-BejPvavRwvWHmUOvRciumkQMFQjXAT.png" },
   { name: "Dubai Marina", mood: "Waterfront energy", image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image.png-NPyJrRSDlRw6QoQvr6CXbLTfNUwhEt.jpeg" },
   { name: "Downtown", mood: "City in motion", image: "/images/hero-dubai-skyline.jpeg" },
   { name: "JBR", mood: "Beachside living", image: "/images/property-penthouse.png" },
