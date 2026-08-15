@@ -6,7 +6,7 @@ import { PropertySearch } from "@/components/property-search"
 
 const lifestyles = [
   { name: "Palm Jumeirah", mood: "Island calm", image: "/images/property-beach-villa.png" },
-  { name: "Dubai Marina", mood: "Waterfront energy", image: "/images/property-marina.png" },
+  { name: "Dubai Marina", mood: "Waterfront energy", image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image.png-NPyJrRSDlRw6QoQvr6CXbLTfNUwhEt.jpeg" },
   { name: "Downtown", mood: "City in motion", image: "/images/hero-dubai-skyline.jpeg" },
   { name: "JBR", mood: "Beachside living", image: "/images/property-penthouse.png" },
   { name: "Emirates Hills", mood: "Private retreat", image: "/images/hero-villa.png" },
