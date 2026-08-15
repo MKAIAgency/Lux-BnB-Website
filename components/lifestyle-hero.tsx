@@ -22,7 +22,7 @@ export function LifestyleHero() {
   const lifestyle = activeIndex >= 0 ? lifestyles[activeIndex] : { name: "All destinations", mood: "Dubai, your way", image: "/images/hero-dubai-skyline.jpeg" }
 
   return (
-    <section className="lifestyle-hero relative isolate min-h-[min(920px,100vh)] overflow-hidden bg-background">
+    <section className="lifestyle-hero relative isolate min-h-[min(920px,100vh)] overflow-visible bg-background">
       <div className="lifestyle-hero__image absolute inset-0" key={lifestyle.image} style={{ backgroundImage: `url(${lifestyle.image})` }} aria-hidden="true" />
       <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/55 to-background/10" aria-hidden="true" />
       <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/25" aria-hidden="true" />
