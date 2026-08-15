@@ -25,7 +25,7 @@ export function LifestyleHero() {
 
   return (
     <section className="lifestyle-hero relative isolate min-h-[min(920px,100vh)] overflow-visible bg-background">
-      <div className="lifestyle-hero__image absolute inset-0" key={lifestyle.image} style={{ backgroundImage: `url(${lifestyle.image})`, backgroundPosition: lifestyle.name === "Palm Jumeirah" ? "center 0%" : lifestyle.name === "Dubai" || lifestyle.name === "Downtown" ? "center 100%" : undefined }} aria-hidden="true" />
+      <div className="lifestyle-hero__image absolute inset-0" key={lifestyle.image} style={{ backgroundImage: `url(${lifestyle.image})`, backgroundPosition: lifestyle.name === "Palm Jumeirah" ? "center 0%" : lifestyle.name === "Dubai" || lifestyle.name === "Downtown" ? "center calc(100% + 50px)" : undefined }} aria-hidden="true" />
       {lifestyle.name !== "Dubai" && lifestyle.name !== "Downtown" ? <div className="lifestyle-hero__contrast absolute inset-0" aria-hidden="true" /> : null}
       <div className="relative z-10 mx-auto flex min-h-[min(920px,100vh)] max-w-[1500px] flex-col justify-between px-6 pb-8 pt-32 lg:px-12 lg:pb-12 lg:pt-40">
         <div className="max-w-3xl">
