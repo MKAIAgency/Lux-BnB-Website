@@ -4,17 +4,17 @@ import { useState } from "react"
 import { ArrowDownRight, ChevronDown } from "lucide-react"
 import { PropertySearch } from "@/components/property-search"
 
-const defaultDubai = { name: "Dubai", mood: "City in motion", image: "https://source.unsplash.com/1600x1000/?dubai,skyline,night" }
+const defaultDubai = { name: "Dubai", mood: "City in motion", image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-HcIO3cYV1ORwdvagZKWJRuDMT5pvEm.png" }
 
 const lifestyles = [
-  { name: "Palm Jumeirah", mood: "Island calm", image: "https://source.unsplash.com/1600x1000/?palm,jumeirah,dubai" },
-  { name: "Dubai Marina", mood: "Waterfront energy", image: "https://source.unsplash.com/1600x1000/?dubai,marina,skyline" },
-  { name: "Downtown", mood: "City in motion", image: "https://source.unsplash.com/1600x1000/?downtown,dubai,burj,khalifa" },
-  { name: "JBR", mood: "Beachside living", image: "https://source.unsplash.com/1600x1000/?jbr,dubai,beach" },
-  { name: "JVC", mood: "Modern garden living", image: "https://source.unsplash.com/1600x1000/?dubai,residential,city" },
-  { name: "Business Bay", mood: "Urban waterfront", image: "https://source.unsplash.com/1600x1000/?business,bay,dubai" },
-  { name: "Dubai Creek Harbour", mood: "Creekside calm", image: "https://source.unsplash.com/1600x1000/?dubai,creek,harbour" },
-  { name: "Greens & Views", mood: "Leafy retreat", image: "https://source.unsplash.com/1600x1000/?dubai,garden,residence" },
+  { name: "Palm Jumeirah", mood: "Island calm", image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-AI3y4QXuwJ8eLcRiwovi1puABIIV4B.png" },
+  { name: "Dubai Marina", mood: "Waterfront energy", image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image.png-NPyJrRSDlRw6QoQvr6CXbLTfNUwhEt.jpeg" },
+  { name: "Downtown", mood: "City in motion", image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-2Ph1R9p3bCnVo2qf0bNYDb8D57PK6v.png" },
+  { name: "JBR", mood: "Beachside living", image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-WXMTYwyCSITnClVnyr5MTzQuRuqvrP.png" },
+  { name: "JVC", mood: "Modern garden living", image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image.png-qY2hJFdPIjgTgrBSzR7REjJWtL5n4E.jpeg" },
+  { name: "Business Bay", mood: "Urban waterfront", image: "/images/property-marina.png" },
+  { name: "Dubai Creek Harbour", mood: "Creekside calm", image: "/images/hero-dubai-skyline.jpeg" },
+  { name: "Greens & Views", mood: "Leafy retreat", image: "/images/hero-villa.png" },
 ]
 
 export function LifestyleHero() {
