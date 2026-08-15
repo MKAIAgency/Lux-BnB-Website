@@ -7,9 +7,12 @@ import { PropertySearch } from "@/components/property-search"
 const lifestyles = [
   { name: "Palm Jumeirah", mood: "Island calm", image: "/images/property-beach-villa.png" },
   { name: "Dubai Marina", mood: "Waterfront energy", image: "/images/property-marina.png" },
-  { name: "Downtown Dubai", mood: "City in motion", image: "/images/hero-dubai-skyline.jpeg" },
+  { name: "Downtown", mood: "City in motion", image: "/images/hero-dubai-skyline.jpeg" },
   { name: "JBR", mood: "Beachside living", image: "/images/property-penthouse.png" },
   { name: "Emirates Hills", mood: "Private retreat", image: "/images/hero-villa.png" },
+  { name: "Business Bay", mood: "Urban waterfront", image: "/images/property-marina.png" },
+  { name: "Dubai Creek Harbour", mood: "Creekside calm", image: "/images/hero-dubai-skyline.jpeg" },
+  { name: "Greens & Views", mood: "Leafy retreat", image: "/images/hero-villa.png" },
 ]
 
 export function LifestyleHero() {
@@ -42,7 +45,7 @@ export function LifestyleHero() {
             </div>
             <div className="lifestyle-destinations-grid" role="tablist" aria-label="Choose a destination">
               <button type="button" role="tab" aria-selected={activeDestination === ""} onClick={() => setActiveDestination("")} className={`lifestyle-tab ${activeDestination === "" ? "is-active" : ""}`}>
-                <span>All</span>
+                <span>Dubai</span>
                 <small>Dubai, your way</small>
               </button>
               {lifestyles.map((item) => (
