@@ -37,7 +37,7 @@ function PropertyCard({ property }: { property: Property }) {
     <article className="group overflow-hidden rounded-md border border-border/60 bg-card transition-all duration-500 ease-luxe hover:-translate-y-1.5 hover:border-gold/50 hover:shadow-[0_24px_50px_-20px_rgba(0,0,0,0.6)]">
       <div className="relative aspect-[4/3] overflow-hidden">
         <img
-          src={property.image?.startsWith("/") ? `/luxbnb${property.image}` : property.image || "/luxbnb/placeholder.svg"}
+          src={property.image?.startsWith("/") ? `/d${property.image}` : property.image || "/d/placeholder.svg"}
           alt={`${property.name} in ${property.location}`}
           className="size-full object-cover transition-transform duration-[900ms] ease-luxe group-hover:scale-105"
         />

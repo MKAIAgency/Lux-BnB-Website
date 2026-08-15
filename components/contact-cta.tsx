@@ -5,7 +5,7 @@ export function ContactCta() {
     <section id="contact" className="relative overflow-hidden">
       <div className="absolute inset-0">
         <img
-          src="/luxbnb/images/property-skyvilla.png"
+          src="/d/images/property-skyvilla.png"
           alt=""
           aria-hidden="true"
           className="size-full object-cover"

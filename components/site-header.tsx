@@ -20,7 +20,7 @@ export function SiteHeader() {
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-10">
         <a href="#" className="flex items-center" aria-label="Luxbnb home">
           <img
-            src="/luxbnb/luxbnb-wordmark.png"
+            src="/d/luxbnb-wordmark.png"
             alt="Luxbnb — Beautiful Homes for Inspired Vacations"
             className="h-12 w-auto max-w-[220px] object-contain"
           />

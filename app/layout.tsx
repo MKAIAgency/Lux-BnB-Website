@@ -22,9 +22,9 @@ export const metadata: Metadata = {
     'LUX BNB Vacation Homes \u2014 beautiful homes for inspired vacations. A curated collection of premium Dubai apartments and penthouses with attentive guest service.',
   generator: 'v0.app',
   icons: {
-    icon: '/luxbnb.png',
-    shortcut: '/luxbnb.png',
-    apple: '/luxbnb.png',
+    icon: '/d/luxbnb.png',
+    shortcut: '/d/luxbnb.png',
+    apple: '/d/luxbnb.png',
   },
 }
 
@@ -41,7 +41,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`bg-background ${inter.variable} ${cormorant.variable}`}>
       <body className="font-sans antialiased">
-        <link rel="preload" as="video" href="/luxbnb/luxbnb-hero.mp4?v=20260814-otI5MPR" type="video/mp4" />
+        <link rel="preload" as="video" href="/d/luxbnb-hero.mp4?v=20260814-otI5MPR" type="video/mp4" />
         <SiteLoadingScreen />
         {children}
       </body>

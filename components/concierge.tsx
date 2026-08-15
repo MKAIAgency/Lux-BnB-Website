@@ -13,7 +13,7 @@ export function Concierge() {
       <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
         <div className="relative overflow-hidden rounded-md border border-border/60">
           <img
-            src="/luxbnb/images/concierge.png"
+            src="/d/images/concierge.png"
             alt="Private chauffeur service outside a luxury Dubai villa at night"
             className="aspect-[4/5] size-full object-cover"
           />

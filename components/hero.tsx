@@ -15,7 +15,7 @@ export function Hero() {
           onCanPlayThrough={() => window.dispatchEvent(new Event("hero-video-ready"))}
           className="absolute inset-0 size-full object-cover"
         >
-          <source src="/luxbnb/luxbnb-hero.mp4?v=20260814-otI5MPR" type="video/mp4" />
+          <source src="/d/luxbnb-hero.mp4?v=20260814-otI5MPR" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-gradient-to-b from-foreground/20 via-foreground/25 to-foreground/75" />
         <div className="absolute inset-y-0 left-0 hidden w-[62%] bg-gradient-to-r from-foreground/65 via-foreground/25 to-transparent lg:block" />
