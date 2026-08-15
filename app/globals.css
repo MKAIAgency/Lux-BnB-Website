@@ -176,15 +176,21 @@
 
 /* Keep the hero composition visible at laptop-height viewports instead of pushing the controls below the fold. */
 .lifestyle-hero > div.relative {
-  min-height: clamp(680px, 100svh, 840px);
+  min-height: clamp(660px, 100svh, 840px);
   padding-top: 7.5rem;
-  padding-bottom: 3rem;
+  padding-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .lifestyle-hero h1 { max-width: 10ch; font-size: clamp(4.25rem, 7.7vw, 7rem); line-height: .88; }
 .lifestyle-hero h1 + p { margin-top: 1.25rem; max-width: 34rem; }
 .lifestyle-hero .grid { grid-template-columns: minmax(0, 1fr); align-items: end; gap: 0; }
 .lifestyle-hero .grid > div:last-child { max-width: 62rem; justify-self: center; }
-.lifestyle-search { display: grid; grid-template-columns: minmax(10rem, .72fr) minmax(0, 1.7fr); align-items: end; gap: 1.25rem; }
+.lifestyle-search { display: grid; grid-template-columns: 10rem minmax(0, 1fr); align-items: end; gap: 1rem; padding: 1rem; }
+.lifestyle-search .property-search form { max-width: none; padding: .25rem; }
+.lifestyle-search .property-search form > div { grid-template-columns: minmax(0, 1fr) minmax(6rem, .65fr) auto; }
+.lifestyle-search .property-search form button, .lifestyle-search .property-search form [class*="px-4"] { min-height: 3.25rem; }
 .lifestyle-search__destination, .lifestyle-search__form { min-width: 0; }
 .lifestyle-search__form .property-search { width: 100%; }
 .lifestyle-hero .grid > div:first-child { min-width: 0; max-width: 48rem; }
@@ -201,7 +207,7 @@
 .lifestyle-tab { min-width: 0; min-height: 4.6rem; }
 
 @media (max-height: 820px) and (min-width: 768px) {
-  .lifestyle-hero > div.relative { min-height: 720px; padding-top: 7rem; padding-bottom: 2rem; }
+  .lifestyle-hero > div.relative { min-height: 668px; padding-top: 6.5rem; padding-bottom: 1rem; }
   .lifestyle-hero h1 { font-size: clamp(4rem, 6.4vw, 6.25rem); }
   .lifestyle-hero h1 + p { margin-top: 1rem; font-size: .9rem; }
   .lifestyle-hero .lifestyle-tab { padding: .65rem .8rem; }
@@ -260,6 +266,8 @@ main > section:not(.lifestyle-hero)::before { content: ""; position: absolute; l
   .destination-picker { width: 100%; max-width: 22rem; }
   .destination-picker__menu { max-height: 14rem; }
   .lifestyle-hero .lifestyle-search { max-width: none; justify-self: stretch; padding: .75rem; grid-template-columns: 1fr; gap: 1rem; }
+  .lifestyle-search .property-search form > div { grid-template-columns: 1fr; }
+  .lifestyle-search .property-search form button, .lifestyle-search .property-search form [class*="px-4"] { min-height: 3rem; }
   .lifestyle-hero .lifestyle-search > div:first-child { margin-bottom: 0; }
   .lifestyle-hero .lifestyle-search form { padding: .35rem; }
   main > section:not(.lifestyle-hero)::before { left: 1rem; width: calc(100% - 2rem); }
