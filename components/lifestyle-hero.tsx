@@ -4,13 +4,13 @@ import { useState } from "react"
 import { ArrowDownRight, ChevronDown } from "lucide-react"
 import { PropertySearch } from "@/components/property-search"
 
-const defaultDubai = { name: "Dubai", mood: "City in motion", image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-NY2kQ60SGYyrA9ytfsUoYj51WfWC2n.png" }
+const defaultDubai = { name: "Dubai", mood: "City in motion", image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-HcIO3cYV1ORwdvagZKWJRuDMT5pvEm.png" }
 
 const lifestyles = [
   { name: "Palm Jumeirah", mood: "Island calm", image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-AI3y4QXuwJ8eLcRiwovi1puABIIV4B.png" },
   { name: "Dubai Marina", mood: "Waterfront energy", image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image.png-NPyJrRSDlRw6QoQvr6CXbLTfNUwhEt.jpeg" },
   { name: "Downtown", mood: "City in motion", image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-2Ph1R9p3bCnVo2qf0bNYDb8D57PK6v.png" },
-  { name: "JBR", mood: "Beachside living", image: "/images/property-penthouse.png" },
+  { name: "JBR", mood: "Beachside living", image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-WXMTYwyCSITnClVnyr5MTzQuRuqvrP.png" },
   { name: "Emirates Hills", mood: "Private retreat", image: "/images/hero-villa.png" },
   { name: "Business Bay", mood: "Urban waterfront", image: "/images/property-marina.png" },
   { name: "Dubai Creek Harbour", mood: "Creekside calm", image: "/images/hero-dubai-skyline.jpeg" },
