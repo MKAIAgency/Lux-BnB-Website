@@ -187,7 +187,9 @@
 .lifestyle-hero h1 + p { margin-top: 1.25rem; max-width: 34rem; }
 .lifestyle-hero .grid { grid-template-columns: minmax(0, 1fr); align-items: end; gap: 0; }
 .lifestyle-hero .grid > div:last-child { max-width: 62rem; justify-self: center; }
-.lifestyle-search { display: grid; grid-template-columns: 12rem minmax(0, 1fr); align-items: stretch; gap: 1.25rem; padding: 1rem 1.15rem; border-color: color-mix(in srgb, var(--gold) 34%, transparent); box-shadow: 0 18px 50px rgba(0,0,0,.16); }
+header.fixed { background: oklch(1 0 0) !important; }
+header.fixed > div + div { background: oklch(1 0 0) !important; }
+.lifestyle-search { display: grid; grid-template-columns: 12rem minmax(0, 1fr); align-items: stretch; gap: 1.25rem; padding: 1rem 1.15rem; background: oklch(1 0 0) !important; border-color: color-mix(in srgb, var(--gold) 34%, transparent); box-shadow: 0 18px 50px rgba(0,0,0,.16); }
 .lifestyle-search .property-search form { max-width: none; padding: 0; }
 .lifestyle-search .property-search form > div { grid-template-columns: minmax(0, 1.25fr) minmax(7rem, .7fr) auto; }
 .lifestyle-search .property-search form button, .lifestyle-search .property-search form [class*="px-4"] { min-height: 3.25rem; }
